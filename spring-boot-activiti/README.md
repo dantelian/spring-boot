@@ -1,5 +1,9 @@
 # spring-boot-activiti
+
+## 视图
+
 待办任务视图（v_task_list）：
+````sql
 CREATE VIEW
     v_task_list ( TASK_ID, PROC_INST_ID, ACT_ID, ACT_NAME, ASSIGNEE, DELEGATION_ID, DESCRIPTION, CREATE_TIME, DUE_DATE, CANDIDATE, PRO_NAME ) AS
 SELECT
@@ -104,8 +108,10 @@ WHERE
     )
 ORDER BY
     `a`.`CREATE_TIME_` DESC
+````
 
 已办任务视图（v_task_history）：
+````sql
 CREATE VIEW
     v_task_history ( TASK_ID, PIID, ACT_NAME, EXECUTOR, END_TIME, PRO_NAME, PROC_DEF_ID, STARTER ) AS
 SELECT
@@ -158,8 +164,10 @@ WHERE
             )
         )
     )
+````
 
 审核意见记录视图（v_comment_list）：
+````sql
 CREATE VIEW
     v_comment_list ( ID_, MESSAGE_, TASK_ID_, PROC_INST_ID_, NAME_, TIME_, username ) AS
 SELECT
@@ -188,3 +196,5 @@ ON
         )
     )
     )
+````
+
