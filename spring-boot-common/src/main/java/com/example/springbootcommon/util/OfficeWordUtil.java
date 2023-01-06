@@ -106,7 +106,6 @@ public class OfficeWordUtil {
      * @param infoTable
      * @param heigth 高度
      * @param vertical 表格内容的显示方式：居中、靠右...
-     * @Author Huangxiaocong 2018年12月16日
      */
     public static void setTableHeight(XWPFTable infoTable, int heigth, STVerticalJc.Enum vertical) {
         List<XWPFTableRow> rows = infoTable.getRows();
@@ -129,7 +128,6 @@ public class OfficeWordUtil {
      * @param fromCell    起始列
      * @param toCell    终止列
      * @Description
-     * @Author Huangxiaocong 2018年11月26日 下午9:23:22
      */
     public static void mergeCellsHorizontal(XWPFTable table, int row, int fromCell, int toCell) {
         for(int cellIndex = fromCell; cellIndex <= toCell; cellIndex++ ) {
@@ -148,7 +146,6 @@ public class OfficeWordUtil {
      * @param fromRow    起始行
      * @param toRow    终止行
      * @Description
-     * @Author Huangxiaocong 2018年11月26日 下午9:09:19
      */
     public static void mergeCellsVertically(XWPFTable table, int col, int fromRow, int toRow) {
         for(int rowIndex = fromRow; rowIndex <= toRow; rowIndex++) {
@@ -167,7 +164,6 @@ public class OfficeWordUtil {
      * 往表格中填充数据
      * @param table
      * @param tableData
-     * @Author Huangxiaocong 2018年12月16日
      */
     public static void fillTableData(XWPFTable table, List<List<Object>> tableData) {
         List<XWPFTableRow> rowList = table.getRows();
