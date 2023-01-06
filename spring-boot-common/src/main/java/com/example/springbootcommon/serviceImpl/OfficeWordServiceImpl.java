@@ -7,6 +7,7 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.*;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -111,20 +112,20 @@ public class OfficeWordServiceImpl implements OfficeWordService {
         }
 
         // 返回 response
-        /*OutputStream outputStream = null;
-        try {
-            outputStream = new BufferedOutputStream(response.getOutputStream());
-            doc.write(outputStream);
-            outputStream.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                outputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }*/
+//        OutputStream outputStream = null;
+//        try {
+//            outputStream = new BufferedOutputStream(response.getOutputStream());
+//            doc.write(outputStream);
+//            outputStream.flush();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                outputStream.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
         System.out.println("end");
     }
