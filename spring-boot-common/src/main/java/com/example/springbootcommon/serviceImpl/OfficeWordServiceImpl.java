@@ -2,15 +2,13 @@ package com.example.springbootcommon.serviceImpl;
 
 import com.example.springbootcommon.service.OfficeWordService;
 import com.example.springbootcommon.util.OfficeWordUtil;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xwpf.usermodel.*;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.*;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -100,6 +98,22 @@ public class OfficeWordServiceImpl implements OfficeWordService {
         tableData.add(row);
         // 往表格中填充数据
         OfficeWordUtil.fillTableData(infoTable, tableData);
+
+        // 插入图片
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("static/snow1.jpg");
+        try {
+            OfficeWordUtil.createPicParagraph(doc, inputStream, XWPFDocument.PICTURE_TYPE_JPEG, "snow1.jpg", 200, 200);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InvalidFormatException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         // 保存到本地
         try {

@@ -1,8 +1,12 @@
 package com.example.springbootcommon.util;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.usermodel.*;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.*;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -61,6 +65,22 @@ public class OfficeWordUtil {
         titleFun.setColor("000000"); // 设置颜色
         titleFun.setFontSize(size); // 字体大小
         titleFun.setFontFamily(fontFamily); // 设置字体
+    }
+
+    /**
+     * 创建图片
+     * @param document
+     * @param is
+     * @param pictureType
+     * @param imgFile
+     * @param width
+     * @param height
+     */
+    public static void createPicParagraph(XWPFDocument document, InputStream is, int pictureType, String imgFile, int width, int height) throws IOException, InvalidFormatException {
+        XWPFParagraph titleParagraph = document.createParagraph(); // 新建一个标题段落对象（就是一段文字）
+        titleParagraph.setAlignment(ParagraphAlignment.CENTER); // 样式居中
+        XWPFRun titleFun = titleParagraph.createRun(); // 创建文本对象
+        titleFun.addPicture(is, pictureType, imgFile, Units.toEMU(width), Units.toEMU(height));
     }
 
     /**

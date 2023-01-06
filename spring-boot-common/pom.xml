@@ -67,6 +67,13 @@
 			<version>${ooxml-schemas-version}</version>
 		</dependency>
 
+		<!--apache工具，包含使用程序类、流实现、文件过滤、文件比较器、endian转换类-->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
