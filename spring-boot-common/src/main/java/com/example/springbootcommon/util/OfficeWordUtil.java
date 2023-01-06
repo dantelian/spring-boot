@@ -9,7 +9,6 @@ import java.util.List;
 /**
  * @program: open-ai-center
  * @description:
- * @author: zxb
  * @create: 2021-11-12 15:43
  **/
 public class OfficeWordUtil {
