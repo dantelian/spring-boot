@@ -72,15 +72,15 @@ public class OfficeWordUtil {
      * @param document
      * @param is
      * @param pictureType
-     * @param imgFile
+     * @param filename
      * @param width
      * @param height
      */
-    public static void createPicParagraph(XWPFDocument document, InputStream is, int pictureType, String imgFile, int width, int height) throws IOException, InvalidFormatException {
+    public static void createPicParagraph(XWPFDocument document, InputStream is, int pictureType, String filename, int width, int height) throws IOException, InvalidFormatException {
         XWPFParagraph titleParagraph = document.createParagraph(); // 新建一个标题段落对象（就是一段文字）
         titleParagraph.setAlignment(ParagraphAlignment.CENTER); // 样式居中
         XWPFRun titleFun = titleParagraph.createRun(); // 创建文本对象
-        titleFun.addPicture(is, pictureType, imgFile, Units.toEMU(width), Units.toEMU(height));
+        titleFun.addPicture(is, pictureType, filename, Units.toEMU(width), Units.toEMU(height));
     }
 
     /**

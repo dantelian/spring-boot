@@ -102,7 +102,8 @@ public class OfficeWordServiceImpl implements OfficeWordService {
         // 插入图片
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("static/snow1.jpg");
         try {
-            OfficeWordUtil.createPicParagraph(doc, inputStream, XWPFDocument.PICTURE_TYPE_JPEG, "snow1.jpg", 200, 200);
+            String filename = "snow1.jpg";
+            OfficeWordUtil.createPicParagraph(doc, inputStream, XWPFDocument.PICTURE_TYPE_JPEG, filename, 200, 200);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InvalidFormatException e) {
