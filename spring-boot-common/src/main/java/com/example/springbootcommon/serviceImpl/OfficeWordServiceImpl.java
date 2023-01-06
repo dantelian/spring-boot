@@ -18,7 +18,6 @@ import java.util.List;
 /**
  * @program: spring-boot-common
  * @description:
- * @author: zxb
  * @create: 2023-01-06 09:21
  **/
 @Service
