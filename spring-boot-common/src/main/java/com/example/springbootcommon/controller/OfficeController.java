@@ -94,4 +94,12 @@ public class OfficeController {
         officeService.exportManySheet(response);
     }
 
+    /**
+     * word 转 pdf
+     */
+    @PostMapping("/wold2pdf")
+    public void wold2pdf(@RequestPart("file") MultipartFile file, HttpServletResponse response) {
+        officeService.wold2pdf(file, response);
+    }
+
 }

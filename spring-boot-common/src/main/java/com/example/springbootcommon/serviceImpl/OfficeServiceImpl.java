@@ -8,6 +8,8 @@ import com.example.springbootcommon.model.vo.TestExcelExportVo;
 import com.example.springbootcommon.model.vo.TestExcelImportVo;
 import com.example.springbootcommon.service.OfficeService;
 import com.example.springbootcommon.common.util.WordUtil;
+import fr.opensagres.poi.xwpf.converter.pdf.PdfConverter;
+import fr.opensagres.poi.xwpf.converter.pdf.PdfOptions;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xwpf.usermodel.*;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.*;
@@ -332,5 +334,41 @@ public class OfficeServiceImpl implements OfficeService {
         sheets.put("艺术课", sheet2);
         // 导出数据
         ExcelUtils.exportManySheet(response, "学生成绩表", sheets);
+    }
+
+    @Override
+    public void wold2pdf(MultipartFile file, HttpServletResponse response) {
+
+//        try {
+//            FileInputStream fileInputStream = new FileInputStream("G:\\测试\\测试.docx");
+//            XWPFDocument xwpfDocument = new XWPFDocument(fileInputStream);
+//            PdfOptions pdfOptions = PdfOptions.create();
+//            FileOutputStream fileOutputStream = new FileOutputStream("G:\\poi笔记.pdf");
+//            PdfConverter.getInstance().convert(xwpfDocument,fileOutputStream,pdfOptions);
+//            fileInputStream.close();
+//            fileOutputStream.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+        // 返回 response
+        OutputStream outputStream = null;
+        InputStream inputStream = null;
+        try {
+            outputStream = new BufferedOutputStream(response.getOutputStream());
+            inputStream = file.getInputStream();
+            XWPFDocument xwpfDocument = new XWPFDocument(inputStream);
+            PdfOptions pdfOptions = PdfOptions.create();
+            PdfConverter.getInstance().convert(xwpfDocument, outputStream, pdfOptions);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                inputStream.close();
+                outputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.net.MalformedURLException;
 
 /**
@@ -64,5 +65,12 @@ public interface OfficeService {
      * @param response
      */
     void exportManySheet(HttpServletResponse response);
+
+    /**
+     * word 转 pdf
+     * @param file
+     * @param response
+     */
+    void wold2pdf(MultipartFile file, HttpServletResponse response);
 
 }
