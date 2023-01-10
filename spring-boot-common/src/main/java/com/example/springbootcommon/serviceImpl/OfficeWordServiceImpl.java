@@ -199,6 +199,12 @@ public class OfficeWordServiceImpl implements OfficeWordService {
             e.printStackTrace();
         } finally {
             try {
+                inputStream.close();
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
                 os.close();
             } catch (IOException e) {
                 e.printStackTrace();
