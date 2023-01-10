@@ -1,8 +1,7 @@
 package com.example.springbootcommon.serviceImpl;
 
 import com.deepoove.poi.XWPFTemplate;
-import com.deepoove.poi.data.PictureType;
-import com.deepoove.poi.data.Pictures;
+import com.deepoove.poi.data.*;
 import com.example.springbootcommon.service.OfficeWordService;
 import com.example.springbootcommon.util.OfficeWordUtil;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -165,6 +164,9 @@ public class OfficeWordServiceImpl implements OfficeWordService {
         map.put("sex", "男");
         map.put("national", "汉族");
         map.put("address", "许昌");
+//        map.put("author", Texts.of("Liziba").color("000000").create());
+//        map.put("link", Texts.of("百度").link("https://baidu.com").create());
+//        map.put("anchor", Texts.of("anchortxt").anchor("appendix1").create());
 
         // 图片 针对网络图片、SVG图片、Java图片都有处理
         // 方法一、图片路径（原大小）
@@ -174,6 +176,18 @@ public class OfficeWordServiceImpl implements OfficeWordService {
 //        map.put("header", Pictures.ofLocal(picPath).size(420,350).center().create());
         // 方法三、图片流
         map.put("header", Pictures.ofStream(inputStream, PictureType.JPEG).size(420,350).create());
+
+        // 表格
+        // 表头
+        RowRenderData tableHead = Rows.of("姓名", "性别", "地址", "微信公众号").center().bgColor("4472c4").create();
+        // 第一行
+        RowRenderData row1 = Rows.create("张三", "男", "广东深圳", "liziba_98");
+        // 第二行
+        RowRenderData row2 = Rows.create("李四", "男", "广东深圳", "liziba_98");
+        // 合并第一行和第二行的第二列与第三列
+        MergeCellRule rule = MergeCellRule.builder().map(MergeCellRule.Grid.of(1, 1), MergeCellRule.Grid.of(2, 1))
+                .map(MergeCellRule.Grid.of(1, 2), MergeCellRule.Grid.of(2, 2)).build();
+        map.put("table", Tables.of(tableHead, row1, row2).mergeRule(rule).center().create());
 
         XWPFTemplate template = XWPFTemplate.compile(is).render(map);
         // 保存到本地
