@@ -15,4 +15,6 @@ public interface OfficeWordService {
      */
     void buildApacheWord(HttpServletResponse response);
 
+    void createPoiTlTemplateWorld();
+
 }

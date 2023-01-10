@@ -15,7 +15,7 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>
-		<poi-version>4.0.1</poi-version>
+		<poi-version>4.1.2</poi-version>
 		<ooxml-schemas-version>1.4</ooxml-schemas-version>
 	</properties>
 	<dependencies>
@@ -53,7 +53,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml-schemas</artifactId>
+			<artifactId>poi-ooxml</artifactId>
 			<version>${poi-version}</version>
 		</dependency>
 		<dependency>
@@ -65,6 +65,13 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>ooxml-schemas</artifactId>
 			<version>${ooxml-schemas-version}</version>
+		</dependency>
+
+		<!--poi-tl 基于Apache POI的Word模板引擎-->
+		<dependency>
+			<groupId>com.deepoove</groupId>
+			<artifactId>poi-tl</artifactId>
+			<version>1.10.0</version>
 		</dependency>
 
 		<!--apache工具，包含使用程序类、流实现、文件过滤、文件比较器、endian转换类-->

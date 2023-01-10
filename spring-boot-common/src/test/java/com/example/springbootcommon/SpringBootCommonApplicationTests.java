@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.annotation.Resource;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SpringBootCommonApplicationTests {
@@ -19,9 +17,20 @@ public class SpringBootCommonApplicationTests {
 	public void contextLoads() {
 	}
 
+	/**
+	 * apache.poi 生成wold文档
+	 */
 	@Test
 	public void createApachePoiWorld() {
 		officeWordService.buildApacheWord(null);
+	}
+
+	/**
+	 * poi-tl 根据模板生成wold
+	 */
+	@Test
+	public void createPoiTlTemplateWorld() {
+		officeWordService.createPoiTlTemplateWorld();
 	}
 
 }

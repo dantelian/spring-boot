@@ -1,5 +1,8 @@
 package com.example.springbootcommon.serviceImpl;
 
+import com.deepoove.poi.XWPFTemplate;
+import com.deepoove.poi.data.PictureType;
+import com.deepoove.poi.data.Pictures;
 import com.example.springbootcommon.service.OfficeWordService;
 import com.example.springbootcommon.util.OfficeWordUtil;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -11,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: spring-boot-common
@@ -117,12 +122,19 @@ public class OfficeWordServiceImpl implements OfficeWordService {
         }
 
         // 保存到本地
+        OutputStream os = null;
         try {
-            OutputStream os = new FileOutputStream("e:/wordWrite.docx");
+            os = new FileOutputStream("e:/wordWrite.docx");
             doc.write(os);
             os.close();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                os.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         // 返回 response
@@ -142,5 +154,41 @@ public class OfficeWordServiceImpl implements OfficeWordService {
 //        }
 
         System.out.println("end");
+    }
+
+    @Override
+    public void createPoiTlTemplateWorld() {
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("static/snow1.jpg");
+        InputStream is = this.getClass().getClassLoader().getResourceAsStream("templates/apache_poi_temp.docx");
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", "段然涛");
+        map.put("sex", "男");
+        map.put("national", "汉族");
+        map.put("address", "许昌");
+
+        // 图片 针对网络图片、SVG图片、Java图片都有处理
+        // 方法一、图片路径（原大小）
+//        String picPath =  "D:\\poi-tl\\pic.jpg";
+//        map.put("header", picPath);
+        // 方法二、指定图片大小
+//        map.put("header", Pictures.ofLocal(picPath).size(420,350).center().create());
+        // 方法三、图片流
+        map.put("header", Pictures.ofStream(inputStream, PictureType.JPEG).size(420,350).create());
+
+        XWPFTemplate template = XWPFTemplate.compile(is).render(map);
+        // 保存到本地
+        OutputStream os = null;
+        try {
+            os = new FileOutputStream("e:/wordTemplateWrite.docx");
+            template.writeAndClose(os);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                os.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
