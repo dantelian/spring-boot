@@ -2,8 +2,8 @@ package com.example.springbootcommon.serviceImpl;
 
 import com.deepoove.poi.XWPFTemplate;
 import com.deepoove.poi.data.*;
-import com.example.springbootcommon.service.OfficeWordService;
-import com.example.springbootcommon.util.OfficeWordUtil;
+import com.example.springbootcommon.service.OfficeService;
+import com.example.springbootcommon.common.util.WordUtil;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xwpf.usermodel.*;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.*;
@@ -23,33 +23,33 @@ import java.util.Map;
  * @create: 2023-01-06 09:21
  **/
 @Service
-public class OfficeWordServiceImpl implements OfficeWordService {
+public class OfficeServiceImpl implements OfficeService {
 
     @Override
     public void buildApacheWord(HttpServletResponse response) {
         // 创建word对象并设置页面布局
         XWPFDocument doc = new XWPFDocument();
         // 设置页面大小
-        OfficeWordUtil.setPageSize(doc, 11907, 16840);
+        WordUtil.setPageSize(doc, 11907, 16840);
         // 设置页边距
-        OfficeWordUtil.setPageMar(doc, 720, 1440, 720, 1440);
+        WordUtil.setPageMar(doc, 720, 1440, 720, 1440);
         // 文章题目
-        OfficeWordUtil.createThemeParagraph(doc, "文章题目", null);
+        WordUtil.createThemeParagraph(doc, "文章题目", null);
         // 创建一级标题
-        OfficeWordUtil.createTitleParagraph(doc, "一、一级标题", 18, "宋体");
+        WordUtil.createTitleParagraph(doc, "一、一级标题", 18, "宋体");
 
         // 创建表格
         XWPFTable infoTable = doc.createTable(4, 6);
-        OfficeWordUtil.setTblLayoutType(infoTable);
+        WordUtil.setTblLayoutType(infoTable);
         // 设置表格总宽度与水平对齐方式
-        OfficeWordUtil.setTableWidthAndHAlign(infoTable, "10575", STJc.CENTER);
+        WordUtil.setTableWidthAndHAlign(infoTable, "10575", STJc.CENTER);
         // 设置表格行高
-        OfficeWordUtil.setTableHeight(infoTable, 560, STVerticalJc.CENTER);
+        WordUtil.setTableHeight(infoTable, 560, STVerticalJc.CENTER);
 
         // 合并行（第一列的第一第二行）
-        OfficeWordUtil.mergeCellsVertically(infoTable, 0, 0, 1);
+        WordUtil.mergeCellsVertically(infoTable, 0, 0, 1);
         // 合并列（第三行的第二第三列）
-        OfficeWordUtil.mergeCellsHorizontal(infoTable, 2, 1, 2);
+        WordUtil.mergeCellsHorizontal(infoTable, 2, 1, 2);
 
         //设置表格样式
         Integer[] cW = {1588, 652, 2291, 1372, 2376, 2376}; // 指定每列宽度
@@ -101,13 +101,13 @@ public class OfficeWordServiceImpl implements OfficeWordService {
         row.add(6);
         tableData.add(row);
         // 往表格中填充数据
-        OfficeWordUtil.fillTableData(infoTable, tableData);
+        WordUtil.fillTableData(infoTable, tableData);
 
         // 插入图片
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("static/snow1.jpg");
         try {
             String filename = "snow1.jpg";
-            OfficeWordUtil.createPicParagraph(doc, inputStream, XWPFDocument.PICTURE_TYPE_JPEG, filename, 200, 200);
+            WordUtil.createPicParagraph(doc, inputStream, XWPFDocument.PICTURE_TYPE_JPEG, filename, 200, 200);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InvalidFormatException e) {

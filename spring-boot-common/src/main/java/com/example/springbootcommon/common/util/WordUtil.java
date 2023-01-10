@@ -1,4 +1,4 @@
-package com.example.springbootcommon.util;
+package com.example.springbootcommon.common.util;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.util.Units;
@@ -15,7 +15,7 @@ import java.util.List;
  * @description:
  * @create: 2021-11-12 15:43
  **/
-public class OfficeWordUtil {
+public class WordUtil {
 
     // 设置页面大小
     public static void setPageSize(XWPFDocument doc, Integer w, Integer h) {

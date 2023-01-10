@@ -1,6 +1,6 @@
 package com.example.springbootcommon;
 
-import com.example.springbootcommon.service.OfficeWordService;
+import com.example.springbootcommon.service.OfficeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class SpringBootCommonApplicationTests {
 	@Autowired
-	private OfficeWordService officeWordService;
+	private OfficeService officeService;
 
 	@Test
 	public void contextLoads() {
@@ -22,7 +22,7 @@ public class SpringBootCommonApplicationTests {
 	 */
 	@Test
 	public void createApachePoiWorld() {
-		officeWordService.buildApacheWord(null);
+		officeService.buildApacheWord(null);
 	}
 
 	/**
@@ -30,7 +30,7 @@ public class SpringBootCommonApplicationTests {
 	 */
 	@Test
 	public void createPoiTlTemplateWorld() {
-		officeWordService.createPoiTlTemplateWorld();
+		officeService.createPoiTlTemplateWorld();
 	}
 
 }

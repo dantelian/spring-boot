@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
  * @description:
  * @create: 2023-01-06 09:19
  **/
-public interface OfficeWordService {
+public interface OfficeService {
 
     /**
      * apache.poi 生成word文件
