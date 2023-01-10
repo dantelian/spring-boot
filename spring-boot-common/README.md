@@ -23,5 +23,21 @@
     - 导出excel模板：_/office/exportModel_
     - 导出excel-根据对象导出：_/office/exportVo_
     - 导出多sheet页Excel：_/office/exportManySheet_
-        
+
+    > 参考：<https://blog.csdn.net/sunnyzyq/article/details/121994504>  
+    maven依赖:
+    ````xml
+    <!-- 文件上传 -->
+    <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpmime</artifactId>
+        <version>4.5.7</version>
+    </dependency>
+    <!-- POI -->
+    <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi-ooxml</artifactId>
+        <version>3.16</version>
+    </dependency>
+    ````
         
