@@ -7,14 +7,19 @@
         - 文本
         - 表格(支持行、列合并)
         - 图片
-        > 示例：OfficeWordService>buildApacheWord
+            > 示例：OfficeWordService>buildApacheWord
+        - 加水印
+            > WordUtil.setWordWaterMark(doc, "机密", "#d8d8d8");  
+            WordUtil.makeFullWaterMarkByWordArt(doc, "机密", "#888888", "0.7pt","-30");
     - poi-tl 根据模板生成wold
         - 支持文本
         - 图片
         - 表格
         > 示例：OfficeWordService>buildApacheWord  
-        > poi-tl 基于Apache POI的Word模板引擎，较简单
-        
+        poi-tl 基于Apache POI的Word模板引擎，较简单
+    - apache.poi wold 转 pdf
+        > /office/wold2pdf 仅docx格式    
+    
 - apache.poi excel
     - 导入Excel数据为JSON格式：_/office/importToJSON_
     - 导入Excel数据为指定对象：_/office/importToVo_
@@ -41,8 +46,6 @@
     </dependency>
     ````
 
-- apache.poi wold 转 pdf
-    > /office/wold2pdf 仅docx格式
 
 
 

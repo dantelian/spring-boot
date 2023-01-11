@@ -126,6 +126,12 @@ public class OfficeServiceImpl implements OfficeService {
             }
         }
 
+        // 设置水印
+        // 方案一
+        WordUtil.setWordWaterMark(doc, "机密", "#d8d8d8");
+        // 方案二
+//        WordUtil.makeFullWaterMarkByWordArt(doc, "机密", "#888888", "0.7pt","-30");
+
         // 保存到本地
         OutputStream os = null;
         try {
