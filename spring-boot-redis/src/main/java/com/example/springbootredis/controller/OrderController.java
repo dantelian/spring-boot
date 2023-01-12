@@ -3,6 +3,7 @@ package com.example.springbootredis.controller;
 import com.example.springbootredis.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,8 +20,14 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @GetMapping("tryLock")
+    @GetMapping("/tryLock")
     public void tryLock(String order) {
         orderService.tryLock(order);
     }
+
+    @PostMapping("/publish")
+    public void publish(String msg) {
+        orderService.publish(msg);
+    }
+
 }

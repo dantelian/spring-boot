@@ -3123,4 +3123,20 @@ public class RedisUtil implements ApplicationContextAware {
         }
 
     }
+
+    /**
+     * 消息相关操作
+     */
+    public static class MsgOps {
+
+        /**
+         * 发布消息
+         * @param key
+         * @param value
+         */
+        public static void convertAndSend(final String key, final String value) {
+            log.info("convertAndSend(...) => key -> {}, value -> {}", key, value);
+            redisTemplate.convertAndSend(key, value);
+        }
+    }
 }

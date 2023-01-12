@@ -10,4 +10,7 @@ public interface OrderService {
     // redis 锁
     void tryLock(String order);
 
+    // 发布消息
+    void publish(String msg);
+
 }

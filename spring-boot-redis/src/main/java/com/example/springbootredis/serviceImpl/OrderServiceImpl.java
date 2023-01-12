@@ -1,9 +1,13 @@
 package com.example.springbootredis.serviceImpl;
 
+import com.alibaba.fastjson.JSON;
+import com.example.springbootredis.common.constants.OrderConstants;
 import com.example.springbootredis.common.util.RedisUtil;
+import com.example.springbootredis.model.entity.Order;
 import com.example.springbootredis.service.OrderService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -34,5 +38,16 @@ public class OrderServiceImpl implements OrderService {
         }
 
         RedisUtil.LockOps.releaseLock(lockName, lockValue);
+    }
+
+    @Override
+    public void publish(String msg) {
+//        RedisUtil.MsgOps.convertAndSend(OrderConstants.REDIS_MSG_ORDER, msg);
+
+        Order order = new Order();
+        order.setId("11");
+        order.setNum(1);
+        order.setDay(LocalDateTime.now());
+        RedisUtil.MsgOps.convertAndSend(OrderConstants.REDIS_MSG_ORDER, JSON.toJSONString(order));
     }
 }
