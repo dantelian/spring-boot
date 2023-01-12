@@ -1,6 +1,9 @@
 package com.example.springbootredis;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.example.springbootredis.common.util.RedisUtil;
+import com.example.springbootredis.model.entity.Order;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,8 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
+import java.time.LocalDateTime;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -28,6 +30,23 @@ public class SpringBootRedisApplicationTests {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Test
+	public void tryJson() {
+		Order order = new Order();
+		order.setId("11");
+		order.setNum(1);
+		order.setDay(LocalDateTime.now());
+
+		RedisUtil.StringOps.set("order", JSON.toJSONString(order));
+	}
+
+	@Test
+	public void tryJson1() {
+		String str = RedisUtil.StringOps.get("order");
+		Order order = JSONObject.parseObject(str, Order.class);
+		System.out.println(order.getDay());
 	}
 
 }
