@@ -18,7 +18,7 @@ _常用功能_
 
 - apache.poi wold 自定义文档生成
 - poi-tl 根据模板生成wold
-- easy.poi 根据模板生成wold
+- easy.poi 根据模板生成wold, excel 导入导出
 - apache.poi excel 导入导出
 - apache.poi wold 转 pdf
 
