@@ -24,33 +24,18 @@ public class User implements Serializable {
 
     private String id;
 
-    /**
-     * 用户名
-     */
     @Excel(name = "用户名")
     private String username;
 
-    /**
-     * 姓名
-     */
     @Excel(name = "姓名")
     private String name;
 
-    /**
-     * 年龄
-     */
     @Excel(name = "年龄")
     private Integer age;
 
-    /**
-     * 性别,0表示男，1表示女
-     */
     @Excel(name = "性别",replace = {"男_0", "女_1"})
     private String sex;
 
-    /**
-     * 籍贯
-     */
     @Excel(name = "籍贯")
     private String address;
 
@@ -58,6 +43,9 @@ public class User implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date time;
+
+    @Excel(name = "图片", type = 2)
+    private String photo;
 
 
 

@@ -391,8 +391,8 @@ public class OfficeServiceImpl implements OfficeService {
         map.put("projectName", "A计划");
         map.put("content", "开始执行");
         map.put("tableName", "用户");
-        User user1 = new User("1", "account1", "大娃", 16, "1", "add1", new Date());
-        User user2 = new User("2", "account1", "二娃", 15, "2", "add2", new Date());
+        User user1 = new User("1", "account1", "大娃", 16, "1", "add1", new Date(), null);
+        User user2 = new User("2", "account1", "二娃", 15, "2", "add2", new Date(), null);
         List<User> userList = new ArrayList() {{
             add(user1);
             add(user2);
@@ -454,8 +454,8 @@ public class OfficeServiceImpl implements OfficeService {
 
     @Override
     public void exportEasyPoiExcel(HttpServletResponse response) throws IOException {
-        User user1 = new User("1", "account1", "大娃", 16, "1", "add1", new Date());
-        User user2 = new User("2", "account2", "二娃", 15, "2", "add2", new Date());
+        User user1 = new User("1", "account1", "大娃", 16, "1", "add1", new Date(), this.getClass().getClassLoader().getResource("static/snow1.jpg").getPath());
+        User user2 = new User("2", "account2", "二娃", 15, "2", "add2", new Date(), "");
         List<User> userList = new ArrayList() {{
             add(user1);
             add(user2);

@@ -54,6 +54,7 @@
     - excel
         - 导入：/office/importEasyPoiExcel  
             > 文件示例：templates/easy_poi_import_user.xlsx
-
+        - 导出：/office/exportEasyPoiExcel
+            > 支持图片导出
 
 
