@@ -33,4 +33,12 @@ public class SpringBootCommonApplicationTests {
 		officeService.createPoiTlTemplateWorld();
 	}
 
+	/**
+	 * easy poi 根据模板生成wold
+	 */
+	@Test
+	public void createEasyPoiTemplateWorld() {
+		officeService.createEasyPoiTemplateWorld(null);
+	}
+
 }
