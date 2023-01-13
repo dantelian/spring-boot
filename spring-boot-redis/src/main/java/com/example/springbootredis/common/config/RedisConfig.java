@@ -17,8 +17,8 @@ public class RedisConfig {
         // 方案一
         RedisTemplate<String, Serializable> redisTemplate = new RedisTemplate<>();
         redisTemplate.setKeySerializer(new StringRedisSerializer());
-//        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
-        redisTemplate.setValueSerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+//        redisTemplate.setValueSerializer(new StringRedisSerializer()); // 消息订阅方案一json解析异常使用
         redisTemplate.setConnectionFactory(connectionFactory);
         return redisTemplate;
 

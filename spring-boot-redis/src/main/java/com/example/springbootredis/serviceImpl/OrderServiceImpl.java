@@ -45,9 +45,9 @@ public class OrderServiceImpl implements OrderService {
 //        RedisUtil.MsgOps.convertAndSend(OrderConstants.REDIS_MSG_ORDER, msg);
 
         Order order = new Order();
-        order.setId("11");
+        order.setId(msg);
         order.setNum(1);
         order.setDay(LocalDateTime.now());
-        RedisUtil.MsgOps.convertAndSend(OrderConstants.REDIS_MSG_ORDER, JSON.toJSONString(order));
+        RedisUtil.MsgOps.convertAndSend(OrderConstants.REDIS_MSG_PHONE, JSON.toJSONString(order));
     }
 }

@@ -6,6 +6,7 @@
 
 ## 发布订阅
 
+### 方案一
 - 配置 RedisSubConfig
 - 订阅监听 RedisMsgPubSubListener
 - 发布方法 /order/publish
@@ -15,8 +16,10 @@
 redisTemplate.setValueSerializer(new StringRedisSerializer());
 ````
 
-
-
+### 方案二
+- 配置 RedisSubConfig
+- redis消息接收类 ReceiverRedisMessage
+- 发布方法 /order/publish
 
 
 
