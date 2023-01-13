@@ -2,6 +2,7 @@ package com.example.springbootcommon.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.example.springbootcommon.common.util.ExcelUtils;
+import com.example.springbootcommon.model.entity.User;
 import com.example.springbootcommon.model.vo.TestExcelExportVo;
 import com.example.springbootcommon.model.vo.TestExcelImportVo;
 import com.example.springbootcommon.service.OfficeService;
@@ -10,7 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.List;
 
 /**
  * @program: spring-boot-common
@@ -100,6 +103,14 @@ public class OfficeController {
     @PostMapping("/wold2pdf")
     public void wold2pdf(@RequestPart("file") MultipartFile file, HttpServletResponse response) {
         officeService.wold2pdf(file, response);
+    }
+
+    /**
+     * easy poi excel导入数据
+     */
+    @PostMapping("/importEasyPoiExcel")
+    public List<User> importEasyPoiExcel(@RequestParam("file") MultipartFile file) throws IOException {
+        return officeService.importEasyPoiExcel(file);
     }
 
 }

@@ -3,9 +3,11 @@ package com.example.springbootcommon.serviceImpl;
 import cn.afterturn.easypoi.entity.ImageEntity;
 import cn.afterturn.easypoi.word.WordExportUtil;
 import cn.afterturn.easypoi.word.entity.MyXWPFDocument;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.deepoove.poi.XWPFTemplate;
 import com.deepoove.poi.data.*;
+import com.example.springbootcommon.common.util.EasyPoiUtil;
 import com.example.springbootcommon.common.util.ExcelUtils;
 import com.example.springbootcommon.model.entity.User;
 import com.example.springbootcommon.model.vo.TestExcelExportVo;
@@ -391,9 +393,10 @@ public class OfficeServiceImpl implements OfficeService {
         map.put("tableName", "用户");
         User user1 = new User("1", "account1", "大娃", 16, "1", "add1", new Date());
         User user2 = new User("2", "account1", "二娃", 15, "2", "add2", new Date());
-        List<User> userList = new ArrayList<>();
-        userList.add(user1);
-        userList.add(user2);
+        List<User> userList = new ArrayList() {{
+            add(user1);
+            add(user2);
+        }};
         map.put("userList", userList);
         // 图片
         ImageEntity image = new ImageEntity(this.getClass().getClassLoader().getResource("static/snow1.jpg").getPath(), 500, 500);
@@ -441,7 +444,11 @@ public class OfficeServiceImpl implements OfficeService {
                 e.printStackTrace();
             }
         }
+    }
 
-
+    @Override
+    public List<User> importEasyPoiExcel(MultipartFile file) throws IOException {
+        List<User> list = EasyPoiUtil.importExcel(file, User.class);
+        return list;
     }
 }

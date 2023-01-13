@@ -2,11 +2,13 @@ package com.example.springbootcommon.service;
 
 
 import com.alibaba.fastjson.JSONArray;
+import com.example.springbootcommon.model.entity.User;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.List;
 
 /**
  * @program: spring-boot-common
@@ -78,5 +80,7 @@ public interface OfficeService {
      * @param response
      */
     void createEasyPoiTemplateWorld(HttpServletResponse response);
+
+    List<User> importEasyPoiExcel(MultipartFile file) throws IOException;
 
 }
