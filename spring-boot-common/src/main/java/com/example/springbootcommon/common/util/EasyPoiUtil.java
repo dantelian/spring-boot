@@ -249,7 +249,7 @@ public class EasyPoiUtil {
         params.setTitleRows(titleRows);
         params.setHeadRows(headerRows);
         params.setSaveUrl("/excel/");
-        params.setNeedSave(true);
+        params.setNeedSave(false);
         try {
             return ExcelImportUtil.importExcel(inputStream, pojoClass, params);
         } catch (NoSuchElementException e) {
@@ -335,7 +335,7 @@ public class EasyPoiUtil {
         params.setTitleRows(1);//表格内数据标题行
         params.setHeadRows(1);//表头行
         params.setSaveUrl("/excel/");
-        params.setNeedSave(true);
+        params.setNeedSave(false);
         params.setNeedVerify(true);
         try {
             return ExcelImportUtil.importExcelMore(inputStream, pojoClass, params);
