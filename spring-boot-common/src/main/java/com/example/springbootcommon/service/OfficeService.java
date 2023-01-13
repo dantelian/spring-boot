@@ -81,6 +81,17 @@ public interface OfficeService {
      */
     void createEasyPoiTemplateWorld(HttpServletResponse response);
 
+    /**
+     * easy poi excel导入数据
+     * @param file
+     * @throws IOException
+     */
     List<User> importEasyPoiExcel(MultipartFile file) throws IOException;
+
+    /**
+     * easy poi excel导出数据
+     * @param response
+     */
+    void exportEasyPoiExcel(HttpServletResponse response) throws IOException;
 
 }

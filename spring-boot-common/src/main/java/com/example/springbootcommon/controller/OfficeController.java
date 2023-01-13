@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.example.springbootcommon.common.util.ExcelUtils;
 import com.example.springbootcommon.model.entity.User;
 import com.example.springbootcommon.model.vo.TestExcelExportVo;
-import com.example.springbootcommon.model.vo.TestExcelImportVo;
 import com.example.springbootcommon.service.OfficeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -111,6 +110,14 @@ public class OfficeController {
     @PostMapping("/importEasyPoiExcel")
     public List<User> importEasyPoiExcel(@RequestParam("file") MultipartFile file) throws IOException {
         return officeService.importEasyPoiExcel(file);
+    }
+
+    /**
+     * easy poi excel导出数据
+     */
+    @GetMapping("/exportEasyPoiExcel")
+    public void exportEasyPoiExcel(HttpServletResponse response) throws IOException {
+        officeService.exportEasyPoiExcel(response);
     }
 
 }

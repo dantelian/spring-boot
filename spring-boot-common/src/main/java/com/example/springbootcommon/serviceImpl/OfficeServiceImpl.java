@@ -451,4 +451,16 @@ public class OfficeServiceImpl implements OfficeService {
         List<User> list = EasyPoiUtil.importExcel(file, User.class);
         return list;
     }
+
+    @Override
+    public void exportEasyPoiExcel(HttpServletResponse response) throws IOException {
+        User user1 = new User("1", "account1", "大娃", 16, "1", "add1", new Date());
+        User user2 = new User("2", "account2", "二娃", 15, "2", "add2", new Date());
+        List<User> userList = new ArrayList() {{
+            add(user1);
+            add(user2);
+        }};
+
+        EasyPoiUtil.exportExcel(userList, "标题", "sheetName", User.class, "fileName", response);
+    }
 }
