@@ -2,13 +2,17 @@
 
 ## 功能
 
-附件上传
+- 附件上传
 > 单个：/file/upload  
 > 多个：/file/uploads
 
-附件下载
+- 附件下载
 
 > /file/download  
+> fileName是附件完整路径
+
+- 获取预签名对象Url
+> /file/getFileUrl  
 > fileName是附件完整路径
 
 ## 附件表

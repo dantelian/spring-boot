@@ -96,6 +96,16 @@ public class MinioController {
         minioUtils.download(fileName, response);
     }
 
+    /**
+     * 获取预签名对象Url
+     * @param fileName
+     * @return
+     */
+    @GetMapping("/getFileUrl")
+    public String getFileUrl(String fileName) {
+        return minioUtils.getObjectURL(fileName);
+    }
+
     // 校验文件名是否携带特殊字符
     private Boolean validateFileName(String fileName) {
         Boolean flag = true;
