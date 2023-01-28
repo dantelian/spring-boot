@@ -89,7 +89,38 @@ public class MinioUtils {
     }
 
     /**
-     * description: 上传文件
+     * description: 上传文件-单个
+     *
+     * @param file
+     * @return: java.lang.String
+     */
+    public String upload(MultipartFile file, String fileName) {
+        InputStream in = null;
+        try {
+            in = file.getInputStream();
+            minioClient.putObject(PutObjectArgs.builder()
+                    .bucket(bucketName)
+                    .object(fileName)
+                    .stream(in, in.available(), -1)
+                    .contentType(file.getContentType())
+                    .build()
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return fileName;
+    }
+
+    /**
+     * description: 上传文件-多个
      *
      * @param multipartFile
      * @return: java.lang.String
