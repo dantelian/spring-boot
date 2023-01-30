@@ -36,6 +36,8 @@ public class TransactionListener implements RocketMQLocalTransactionListener {
 
     /**
      * 检查本地事务是否成功
+     * 消息回查时，对于正在进行中的事务不要返回Rollback或Commit结果，应继续保持Unknown的状态。
+     * 一般出现消息回查时事务正在处理的原因为：事务执行较慢，消息回查太快。
      */
     @Override
     public RocketMQLocalTransactionState checkLocalTransaction(Message message) {
@@ -45,7 +47,8 @@ public class TransactionListener implements RocketMQLocalTransactionListener {
         if (order != null) {
             return RocketMQLocalTransactionState.COMMIT;
         } else {
-            return RocketMQLocalTransactionState.ROLLBACK;
+//            return RocketMQLocalTransactionState.ROLLBACK;
+            return RocketMQLocalTransactionState.UNKNOWN;
         }
     }
 }
