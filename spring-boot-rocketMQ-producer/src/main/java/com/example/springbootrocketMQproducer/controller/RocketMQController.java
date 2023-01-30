@@ -1,10 +1,11 @@
 package com.example.springbootrocketMQproducer.controller;
 
 import com.example.springbootrocketMQproducer.model.entity.Order;
-import org.apache.rocketmq.client.producer.SendCallback;
-import org.apache.rocketmq.client.producer.SendResult;
-import org.apache.rocketmq.client.producer.SendStatus;
-import org.apache.rocketmq.client.producer.TransactionSendResult;
+import org.apache.rocketmq.client.exception.MQBrokerException;
+import org.apache.rocketmq.client.exception.MQClientException;
+import org.apache.rocketmq.client.producer.*;
+import org.apache.rocketmq.common.message.Message;
+import org.apache.rocketmq.remoting.exception.RemotingException;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.apache.rocketmq.spring.support.RocketMQHeaders;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +28,8 @@ public class RocketMQController {
 
     @Resource
     private RocketMQTemplate rocketMQTemplate;
+    @Resource
+    private DefaultMQProducer producer;
     @Value("${topic.string}")
     private String stringTopic;
     @Value("${topic.order}")
@@ -35,12 +38,10 @@ public class RocketMQController {
     /**
      * 底层调用的syncSend方法，但是不接受返回结果
      * 异步
-     * @param topic 消息队列
-     * @param msg   消息类型
      * @return
      */
     @GetMapping("/send")
-    public String send(String topic, String msg) {
+    public String send() {
         // 发送异步消息,但是不会确认消息有没有被接收,日志可以这么发,如果是对数据一致性要去比较高的,建议使用下面的方法
         rocketMQTemplate.send(stringTopic, MessageBuilder.withPayload(String.format("test send method")).build());
         return "success!";
@@ -49,12 +50,10 @@ public class RocketMQController {
     /**
      * 发送消息,等待发送消息返回的结果
      * 同步
-     * @param topic
-     * @param msg
      * @return
      */
     @GetMapping("/syncSend")
-    public String syncSend(String topic, String msg) {
+    public String syncSend() {
         // 发送同步消息,等待发送消息返回的结果
         SendResult sendResult = rocketMQTemplate.syncSend(stringTopic, "test syncSend method");
         if (sendResult.getSendStatus() == SendStatus.SEND_OK) {
@@ -66,12 +65,10 @@ public class RocketMQController {
     /**
      * 发送消息,通过回调函数根据发送状态处理相对于逻辑
      * 同步
-     * @param topic
-     * @param msg
      * @return
      */
     @GetMapping("/asyncSend")
-    public String asyncSend(String topic, String msg) {
+    public String asyncSend() {
         // 发送异步消息,回调里处理发送成功或失败逻辑
         for (int j = 1; j < 3; j++) {
             rocketMQTemplate.asyncSend(stringTopic, "test asyncSend method", new SendCallback() {
@@ -96,12 +93,10 @@ public class RocketMQController {
 
     /**
      * 发送事务消息
-     * @param topic
-     * @param msg
      * @return
      */
     @GetMapping("/sendMessageInTransaction")
-    public String sendMessageInTransaction(String topic, String msg) {
+    public String sendMessageInTransaction() {
         Long orderId = System.currentTimeMillis();
         Order order = new Order();
         order.setId(orderId + "");
@@ -116,6 +111,47 @@ public class RocketMQController {
         } else {
             System.out.println("transaction onSucess fail");
         }
+        return "success!";
+    }
+
+    /**
+     * 发送定时/延时消息 方案一
+     * @return
+     */
+    @GetMapping("/sendSchedule")
+    public String sendSchedule() {
+//        /**
+//         * 延迟消息级别设置 delayLevel
+//         * 1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  16  17  18
+//         * 1s 5s 10s30s1m 2m 3m 4m 5m 6m  7m  8m  9m  10m 20m 30m 1h  2h
+//         */
+        SendResult sendResult = rocketMQTemplate.syncSend(stringTopic, MessageBuilder.withPayload(String.format("test sendSchedule method")).build(), 100*1000, 4);
+        if (sendResult.getSendStatus() == SendStatus.SEND_OK) {
+            System.out.println("发送成功...");
+        }
+
+        return "success!";
+    }
+
+    /**
+     * 发送定时/延时消息 方案二
+     * @return
+     */
+    @GetMapping("/sendScheduleProducer")
+    public String sendScheduleProducer() throws InterruptedException, RemotingException, MQClientException, MQBrokerException {
+        String messageText = "test sendScheduleProducer method";
+        Message message = new Message(stringTopic, messageText.getBytes());
+        /**
+         * 延迟消息级别设置 delayTimeLevel
+         * 1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  16  17  18
+         * 1s 5s 10s30s1m 2m 3m 4m 5m 6m  7m  8m  9m  10m 20m 30m 1h  2h
+         */
+        message.setDelayTimeLevel(4);
+        SendResult sendResult = producer.send(message);
+        if (sendResult != null && sendResult.getSendStatus() == SendStatus.SEND_OK) {
+            System.out.println("发送成功...");
+        }
+
         return "success!";
     }
 

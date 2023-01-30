@@ -2,7 +2,9 @@
 
 RocketMQ消息队列（生产者）
 
-## 发布消息
+## 发送消息
+
+### 普通消息
 
 - 底层调用的syncSend方法，但是不接受返回结果
 > /rocketMQ/send
@@ -10,18 +12,15 @@ RocketMQ消息队列（生产者）
 > /rocketMQ/syncSend
 - 发送消息,通过回调函数根据发送状态处理相对于逻辑
 > /rocketMQ/asyncSend
-- 发送事务消息
+
+### 定时/延时消息
+> 方案一: /rocketMQ/sendSchedule  
+> 方案二: /rocketMQ/sendScheduleProducer
+
+### 顺序消息
+
+### 事务消息
 > /rocketMQ/sendMessageInTransaction
-
-## 普通消息
-
-
-## 定时/延时消息
-
-## 顺序消息
-
-## 事务消息
-
 
 
 
@@ -39,5 +38,6 @@ CREATE TABLE `order` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单表';
 ````
 
-
-
+参考：
+<https://blog.csdn.net/ming19951224/article/details/119523197>
+<https://rocketmq.apache.org/zh/docs/featureBehavior/03fifomessage>
