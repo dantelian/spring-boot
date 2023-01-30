@@ -4,6 +4,7 @@ import com.example.springbootrocketMQproducer.model.entity.Order;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.client.producer.SendStatus;
+import org.apache.rocketmq.client.producer.TransactionSendResult;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.apache.rocketmq.spring.support.RocketMQHeaders;
 import org.springframework.beans.factory.annotation.Value;
@@ -105,11 +106,16 @@ public class RocketMQController {
         Order order = new Order();
         order.setId(orderId + "");
         order.setName("酒水订单");
-        rocketMQTemplate.sendMessageInTransaction(orderTopic,
+        TransactionSendResult result = rocketMQTemplate.sendMessageInTransaction(orderTopic,
                 MessageBuilder.withPayload(order)
                         .setHeader(RocketMQHeaders.TRANSACTION_ID, orderId)
                         .build()
                 , order);
+        if (result.getSendStatus() == SendStatus.SEND_OK) {
+            System.out.println("transaction onSucess ok");
+        } else {
+            System.out.println("transaction onSucess fail");
+        }
         return "success!";
     }
 
