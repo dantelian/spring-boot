@@ -10,7 +10,10 @@ RocketMQ消息队列（消费者）
     - 传递string对象
 - TagConsumer
     - 根据tag过滤
-- 
+- SQL92Consummer
+    - 根据SQL92过滤消息
+- ConvertConsumer
+    - convert发送消息，可使用MessageExt进行接收消费
 
 ## @RocketMQMessageListener
 
@@ -38,7 +41,6 @@ RocketMQ消息队列（消费者）
           ②字符, 如：‘abc’, 必须使用单引号;  
           ③NULL，特殊常量  
           ④Boolean, TRUE or FALSE;  
-
 - selectorType  默认值SelectorType.TAG
     - selectorType = SelectorType.TAG   
         指明了消息选择通过tag的方法
