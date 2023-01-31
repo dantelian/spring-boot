@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class StringConsumer implements RocketMQListener<String> {
     @Override
     public void onMessage(String msg) {
-        System.out.println("StringConsumer1开始消费:"+ msg);
+        System.out.println("StringConsumer开始消费:"+ msg);
 //        if(true){
 //            //模拟出现异常,出现异常后这个任务还会被重试消费
 //            System.out.println(1/0);
