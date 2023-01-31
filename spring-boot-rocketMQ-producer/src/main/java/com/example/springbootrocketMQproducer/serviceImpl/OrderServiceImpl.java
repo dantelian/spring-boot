@@ -20,7 +20,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Transactional
     public Boolean save(Order order) {
         Boolean flag = this.insert(order);
-        System.out.println(1/0);
+//        System.out.println(1/0);
         return flag;
     }
 

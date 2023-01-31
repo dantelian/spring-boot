@@ -5,8 +5,6 @@ import org.apache.rocketmq.client.exception.MQBrokerException;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.*;
 import org.apache.rocketmq.common.message.Message;
-import org.apache.rocketmq.common.message.MessageQueue;
-import org.apache.rocketmq.remoting.common.RemotingHelper;
 import org.apache.rocketmq.remoting.exception.RemotingException;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.apache.rocketmq.spring.support.RocketMQHeaders;
@@ -17,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.io.UnsupportedEncodingException;
-import java.util.List;
 
 /**
  * @program: spring-boot-rocketMQ
@@ -47,7 +43,8 @@ public class RocketMQController {
     @GetMapping("/send")
     public String send() {
         // 发送异步消息,但是不会确认消息有没有被接收,日志可以这么发,如果是对数据一致性要去比较高的,建议使用下面的方法
-        rocketMQTemplate.send(stringTopic, MessageBuilder.withPayload(String.format("test send method")).build());
+        // :tag1 是tag，消费端可依此过滤
+        rocketMQTemplate.send(stringTopic + ":tag1", MessageBuilder.withPayload(String.format("test send method")).build());
         return "success!";
     }
 
@@ -121,6 +118,7 @@ public class RocketMQController {
         TransactionSendResult result = rocketMQTemplate.sendMessageInTransaction(orderTopic,
                 MessageBuilder.withPayload(order)
                         .setHeader(RocketMQHeaders.TRANSACTION_ID, orderId)
+                        .setHeader("v", "1")    // 过滤方式：与消费者SQL92配合使用
                         .build()
                 , order);
         if (result.getSendStatus() == SendStatus.SEND_OK) {
@@ -164,7 +162,8 @@ public class RocketMQController {
          * 1s 5s 10s30s1m 2m 3m 4m 5m 6m  7m  8m  9m  10m 20m 30m 1h  2h
          */
         message.setDelayTimeLevel(4);
-
+        // 设置tag，消费端可依此过滤
+        message.setTags("tag1");
         // 方案一
 //        SendResult sendResult = producer.send(message);
         // 方案二
