@@ -59,8 +59,8 @@ CREATE TABLE `order` (
 ````
 
 参考：  
-<https://blog.csdn.net/ming19951224/article/details/119523197>
-<https://rocketmq.apache.org/zh/docs/featureBehavior/03fifomessage>
-<https://blog.csdn.net/qq_43692950/article/details/111827904>
-
+[官方文档]<https://rocketmq.apache.org/zh/docs/featureBehavior/03fifomessage>  
+[发布订阅]<https://blog.csdn.net/ming19951224/article/details/119523197>  
+[发布订阅]<https://blog.csdn.net/qq_43692950/article/details/111827904>  
+[消息过滤]<https://blog.csdn.net/qq_26383975/article/details/125600949>
 
