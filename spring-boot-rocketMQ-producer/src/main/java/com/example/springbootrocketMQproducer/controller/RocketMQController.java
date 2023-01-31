@@ -164,7 +164,12 @@ public class RocketMQController {
          * 1s 5s 10s30s1m 2m 3m 4m 5m 6m  7m  8m  9m  10m 20m 30m 1h  2h
          */
         message.setDelayTimeLevel(4);
-        SendResult sendResult = producer.send(message);
+
+        // 方案一
+//        SendResult sendResult = producer.send(message);
+        // 方案二
+        SendResult sendResult = rocketMQTemplate.getProducer().send(message);
+
         if (sendResult != null && sendResult.getSendStatus() == SendStatus.SEND_OK) {
             System.out.println("发送成功...");
         }

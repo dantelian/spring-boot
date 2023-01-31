@@ -1,6 +1,7 @@
 rocketmq:
   #namesrv访问地址
-  name-server: 10.35.11.23:9876
+#  name-server: 192.168.40.128:9876;192.168.40.130:9876;  #集群方式
+  name-server: 10.35.11.23:9876 #单机方式
   producer:
     #消息生产者组名
     group: ddd-group

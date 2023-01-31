@@ -22,7 +22,7 @@ RocketMQ消息队列（生产者）
 
 - 顺序消息  
     顺序消息消费失败，rocketmq会不断进行重试，直至消费成功。  
-    要注意重复消费的问题，详见 spring-boot-rocketMQ-consumer
+    要注意重复消费的问题，可在消费端消费时进行重复判断。
     - 同步顺序发送
         - public SendResult syncSendOrderly(String destination, Object payload, String hashKey) {
         - public SendResult syncSendOrderly(String destination, Object payload, String hashKey, long timeout) {
@@ -41,9 +41,12 @@ RocketMQ消息队列（生产者）
     配合TransactionListener类使用
     > /rocketMQ/sendMessageInTransaction
 
-
-
-
+## 消息重试和死信队列
+  
+- 当消费者消费时，如果抛出了异常，则会重新再次投递给该消费者。  
+- 但消息不是一直就可以重新投递的，当重试次数达到默认的16次后（可以通过配置文件修改）如果对应的消息还没被成功消费的话，该消息就会投递到DLQ死信队列。
+- 可以在控制台Topic列表中看到“DLQ”相关的Topic，默认命名是：%RETRY%消费组名称（重试Topic）%DLQ%消费组名称（死信Topic）。  
+- 死信队列也可以被订阅和消费，并且也会过期。有效期与正常消息相同，均为 3 天，3 天后会被自动删除。因此，请在死信消息产生后的 3天内及时处理。
 
 
 ## 表sql
@@ -58,3 +61,6 @@ CREATE TABLE `order` (
 参考：  
 <https://blog.csdn.net/ming19951224/article/details/119523197>
 <https://rocketmq.apache.org/zh/docs/featureBehavior/03fifomessage>
+<https://blog.csdn.net/qq_43692950/article/details/111827904>
+
+
