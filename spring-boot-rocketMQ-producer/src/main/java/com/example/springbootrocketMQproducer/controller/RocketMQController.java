@@ -5,6 +5,8 @@ import org.apache.rocketmq.client.exception.MQBrokerException;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.*;
 import org.apache.rocketmq.common.message.Message;
+import org.apache.rocketmq.common.message.MessageQueue;
+import org.apache.rocketmq.remoting.common.RemotingHelper;
 import org.apache.rocketmq.remoting.exception.RemotingException;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.apache.rocketmq.spring.support.RocketMQHeaders;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 /**
  * @program: spring-boot-rocketMQ
@@ -92,6 +96,19 @@ public class RocketMQController {
     }
 
     /**
+     * 单向消息
+     * 异步
+     * @return
+     */
+    @GetMapping("/sendOneWay")
+    public String sendOneWay() {
+        // 发送同步消息,等待发送消息返回的结果
+        rocketMQTemplate.sendOneWay(stringTopic, "test sendOneWay method");
+
+        return "success!";
+    }
+
+    /**
      * 发送事务消息
      * @return
      */
@@ -154,5 +171,36 @@ public class RocketMQController {
 
         return "success!";
     }
+
+    /**
+     * 发送顺序消息
+     * @return
+     */
+    @GetMapping("/sendSequence")
+    public String sendSequence() {
+        String hashkey = "ddd"; // 用于选择队列
+        rocketMQTemplate.asyncSendOrderly(stringTopic, "test asyncSendOrderly method", hashkey, new SendCallback() {
+            @Override
+            public void onSuccess(SendResult sr) {
+                if (sr.getSendStatus() == SendStatus.SEND_OK) {
+                    System.out.println("async asyncSendOrderly ok");
+                } else {
+                    System.out.println("async asyncSendOrderly fail");
+                }
+            }
+            @Override
+            public void onException(Throwable var1) {
+                System.out.printf("asyncSendOrderly onException Throwable=%s %n", var1);
+            }
+        });
+
+        return "success!";
+    }
+
+
+
+
+
+
 
 }
