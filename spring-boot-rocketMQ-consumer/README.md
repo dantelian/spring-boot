@@ -49,7 +49,8 @@ RocketMQ消息队列（消费者）
         指明了消息过滤使用SQL92方式
         > 参考：SQL92Consummer
 
-
+参考：  
+消费者：<https://blog.csdn.net/UnicornRe/article/details/117849396>
 
 
 
