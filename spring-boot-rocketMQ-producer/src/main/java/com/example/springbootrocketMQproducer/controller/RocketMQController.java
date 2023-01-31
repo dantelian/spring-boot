@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @program: spring-boot-rocketMQ
@@ -34,6 +36,8 @@ public class RocketMQController {
     private String stringTopic;
     @Value("${topic.order}")
     private String orderTopic;
+    @Value("${topic.convert}")
+    private String convertTopic;
 
     /**
      * 底层调用的syncSend方法，但是不接受返回结果
@@ -201,8 +205,30 @@ public class RocketMQController {
         return "success!";
     }
 
+    /**
+     * convertAndSend 发送消息，配合 SQL92过滤
+     * selectorExpression = "v=1"
+     * @return
+     */
+    @GetMapping("/convertAndSend")
+    public String convertAndSend() {
+        //设置消息的属性（header）信息，消费者sql92方式过滤
+        Map<String,Object> headers = new HashMap<>();
+        headers.put("v", 1);
 
+        Long orderId = System.currentTimeMillis();
+        Order order = new Order();
+        order.setId(orderId + "");
+        order.setName("酒水订单");
 
+        rocketMQTemplate.convertAndSend(
+                convertTopic,
+                MessageBuilder.withPayload(order).setHeader(RocketMQHeaders.TRANSACTION_ID, orderId).build(),
+                headers
+        );
+
+        return "success!";
+    }
 
 
 

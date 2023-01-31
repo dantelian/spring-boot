@@ -9,6 +9,7 @@ rocketmq:
 topic:
   string: stringTopic
   order: orderTopic
+  convert: convertTopic
 
 spring:
   application:
