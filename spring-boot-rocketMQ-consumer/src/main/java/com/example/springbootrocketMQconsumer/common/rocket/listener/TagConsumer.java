@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
         topic = "${topic.string}"
         ,consumerGroup = "${spring.application.name}-${topic.string}-consumer2"
         ,selectorType = SelectorType.TAG
-        ,selectorExpression = "tag1||tag2"
+        ,selectorExpression = "tag1||tag2" // 多个tag用||分隔
 )
 public class TagConsumer implements RocketMQListener<String> {
     @Override

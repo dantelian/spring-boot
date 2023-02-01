@@ -22,11 +22,17 @@ RocketMQ消息队列（消费者）
 - consumerGroup = "${consumerGroup}"    
     消费者组，如果consumerGroup的名称不同, 则会产生重复消费的情况
 - consumeMode  
-    消费方式
+    消费模式
     - consumeMode = ConsumeMode.CONCURRENTLY  
-        同时消费
+        并行消费
     - consumeMode = ConsumeMode.ORDERLY  
         有序消费
+- messageModel  
+    消息模型
+    - messageModel = MessageModel.CLUSTERING  
+        集群
+    - messageModel = MessageModel.BROADCASTING  
+        广播
 - selectorType  
     过滤方式，默认值SelectorType.TAG
     - selectorType = SelectorType.TAG   
@@ -51,6 +57,25 @@ RocketMQ消息队列（消费者）
           ②字符, 如：‘abc’, 必须使用单引号;  
           ③NULL，特殊常量  
           ④Boolean, TRUE or FALSE;  
+- consumeThreadMax  
+    最大线程数，默认值64
+- consumeTimeout  
+    超时时间，默认值30000ms
+- accessKey  
+    默认值${rocketmq.consumer.access-key:}
+- secretKey  
+    默认值${rocketmq.consumer.secret-key:}
+- enableMsgTrace    
+    启用消息轨迹，默认值 true
+- customizedTraceTopic  
+    自定义的消息轨迹主题；     
+    默认值${rocketmq.consumer.customized_trace_topic:}     
+    没有配置此配置则使用默认的主题 
+- nameServer    
+    命名服务器地址，默认值${rocketmq.name-server:}
+- accessChannel  
+    默认值${rocketmq.access_channel}
+
 
 
 参考：  
