@@ -4,14 +4,6 @@
 
 _activiti流程引擎，包含模型设计、发起、单人任务、多人任务功能。_
   
-## spring-boot-redis
-
-_redis创建链接及使用_
-
-## spring-boot-mybatis
-
-_支持功能：增删改查，分页，jpa_
-
 ## spring-boot-common
 
 _常用功能_
@@ -22,9 +14,21 @@ _常用功能_
 - apache.poi excel 导入导出
 - apache.poi wold 转 pdf
 
+## spring-boot-design-pattern
+
+_设计模式_
+
 ## spring-boot-minio
 
 _附件上传下载_
+
+## spring-boot-mybatis
+
+_支持功能：增删改查，分页，jpa_
+
+## spring-boot-redis
+
+_redis创建链接及使用_
 
 ## spring-boot-rocketMQ-producer
 _apache-rocketMQ 生产者_
@@ -33,6 +37,7 @@ _apache-rocketMQ 生产者_
 _apache-rocketMQ 消费者_
 
 [RocketMQ 添加监控和系统告警通知]<http://www.hunt007.com/wiki/97554.html>
+
 
 
 
