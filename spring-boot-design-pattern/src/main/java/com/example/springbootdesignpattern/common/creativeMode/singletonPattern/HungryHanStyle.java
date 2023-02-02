@@ -1,19 +1,22 @@
 package com.example.springbootdesignpattern.common.creativeMode.singletonPattern;
 
-import com.example.springbootdesignpattern.common.holder.SpringContextHolder;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * @program: spring-boot-design-pattern
- * @description: 单例模式-枚举
+ * @description: 单例模式-饿汉式
  * @author: ddd
- * @create: 2023-02-02 15:30
+ * @create: 2023-02-02 15:41
  **/
 @Slf4j
-public enum Enumeration {
-    INSTANCE;
+public class HungryHanStyle {
+    private static HungryHanStyle instance = new HungryHanStyle();
+    private HungryHanStyle (){}
+    public static HungryHanStyle getInstance() {
+        return instance;
+    }
 
-//    private static XXService xxService = SpringContextHolder.getBean(XXService.class);
+
     private static int i = 0;
 
     public static int getInt() {

@@ -1,6 +1,9 @@
 package com.example.springbootdesignpattern.controller;
 
+import com.example.springbootdesignpattern.common.creativeMode.singletonPattern.DCL;
 import com.example.springbootdesignpattern.common.creativeMode.singletonPattern.Enumeration;
+import com.example.springbootdesignpattern.common.creativeMode.singletonPattern.HungryHanStyle;
+import com.example.springbootdesignpattern.common.creativeMode.singletonPattern.Registration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +27,7 @@ public class PatternController {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    log.info("int:{}", Enumeration.getInt());
+                    log.info("int:{}", HungryHanStyle.getInt());
                 }
             }).start();
 
