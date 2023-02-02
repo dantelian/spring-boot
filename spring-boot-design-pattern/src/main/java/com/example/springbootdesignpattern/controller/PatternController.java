@@ -1,5 +1,7 @@
 package com.example.springbootdesignpattern.controller;
 
+import com.example.springbootdesignpattern.common.creativeMode.factoryPattern.Animal;
+import com.example.springbootdesignpattern.common.creativeMode.factoryPattern.AnimalFactory;
 import com.example.springbootdesignpattern.common.creativeMode.singletonPattern.DCL;
 import com.example.springbootdesignpattern.common.creativeMode.singletonPattern.Enumeration;
 import com.example.springbootdesignpattern.common.creativeMode.singletonPattern.HungryHanStyle;
@@ -20,13 +22,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/pattern")
 public class PatternController {
 
-    @GetMapping("/test")
-    public String test() {
+    @GetMapping("/singletonPattern")
+    public String testSingletonPattern() {
         long t1 = System.currentTimeMillis();
         for (int i = 0; i < 10; i++) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+//                    log.info("int:{}", Enumeration.getInt());
+//                    log.info("int:{}", Registration.getInt());
+//                    log.info("int:{}", DCL.getInt());
                     log.info("int:{}", HungryHanStyle.getInt());
                 }
             }).start();
@@ -34,6 +39,20 @@ public class PatternController {
         }
         long t2 = System.currentTimeMillis();
         log.info("time:{}", t2 - t1);
+
+        return "success!";
+    }
+
+
+    @GetMapping("/factoryPattern")
+    public String test() {
+        AnimalFactory factory = new AnimalFactory();
+
+        Animal animal1 = factory.getAnimal("cuckoo");
+        animal1.call();
+
+        Animal animal2 = factory.getAnimal("dog");
+        animal2.call();
 
         return "success!";
     }
