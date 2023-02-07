@@ -148,7 +148,7 @@ public class PatternController {
         return "success!";
     }
 
-    // 策略模式
+    // 观察者模式
     @GetMapping("/observerPattern")
     public String observerPattern() {
         Subject subject = new Subject();
