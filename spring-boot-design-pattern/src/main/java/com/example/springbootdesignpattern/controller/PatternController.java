@@ -1,5 +1,9 @@
 package com.example.springbootdesignpattern.controller;
 
+import com.example.springbootdesignpattern.common.behavioralModel.chainOfResponsibilityPattern.AbstractLogger;
+import com.example.springbootdesignpattern.common.behavioralModel.chainOfResponsibilityPattern.ConsoleLogger;
+import com.example.springbootdesignpattern.common.behavioralModel.chainOfResponsibilityPattern.ErrorLogger;
+import com.example.springbootdesignpattern.common.behavioralModel.chainOfResponsibilityPattern.FileLogger;
 import com.example.springbootdesignpattern.common.behavioralModel.observerPattern.BinaryObserver;
 import com.example.springbootdesignpattern.common.behavioralModel.observerPattern.HexaObserver;
 import com.example.springbootdesignpattern.common.behavioralModel.observerPattern.OctalObserver;
@@ -161,6 +165,27 @@ public class PatternController {
         subject.setState(15);
         System.out.println("Second state change: 10");
         subject.setState(10);
+
+        return "success!";
+    }
+
+    // 责任链模式
+    @GetMapping("/chainOfResponsibilityPattern")
+    public String chainOfResponsibilityPattern() {
+        AbstractLogger errorLogger = new ErrorLogger(AbstractLogger.ERROR);
+        AbstractLogger fileLogger = new FileLogger(AbstractLogger.DEBUG);
+        AbstractLogger consoleLogger = new ConsoleLogger(AbstractLogger.INFO);
+
+        errorLogger.setNextLogger(fileLogger);
+        fileLogger.setNextLogger(consoleLogger);
+
+        AbstractLogger loggerChain = errorLogger;
+
+        loggerChain.logMessage(AbstractLogger.INFO, "This is an information.");
+
+        loggerChain.logMessage(AbstractLogger.DEBUG, "This is a debug level information.");
+
+        loggerChain.logMessage(AbstractLogger.ERROR, "This is an error information.");
 
         return "success!";
     }
