@@ -7,6 +7,8 @@ import com.example.springbootdesignpattern.common.creativeMode.singletonPattern.
 import com.example.springbootdesignpattern.common.creativeMode.singletonPattern.HungryHanStyle;
 import com.example.springbootdesignpattern.common.creativeMode.singletonPattern.Registration;
 import com.example.springbootdesignpattern.common.structuralMode.decoratorPattern.*;
+import com.example.springbootdesignpattern.common.structuralMode.proxyPattern.Image;
+import com.example.springbootdesignpattern.common.structuralMode.proxyPattern.ProxyImage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -75,6 +77,20 @@ public class PatternController {
 
         System.out.println("\nRectangle of red border");
         redRectangle.draw();
+
+        return "success!";
+    }
+
+    // 代理模式
+    @GetMapping("/proxyPattern")
+    public String proxyPattern() {
+        Image image = new ProxyImage("proxyPattern.jpg");
+
+        // 图像将从磁盘加载
+        image.display();
+        System.out.println("");
+        // 图像不需要从磁盘加载
+        image.display();
 
         return "success!";
     }
