@@ -150,7 +150,8 @@
     ___测试方法：/pattern/chainOfResponsibilityPattern___
 
 - 访问者模式：不改变数据结构的前提下，增加作用于一组对象元素的新功能。
-
+    
+    略.
 
 参考：  
 <https://blog.csdn.net/guorui_java/article/details/104026988>  
