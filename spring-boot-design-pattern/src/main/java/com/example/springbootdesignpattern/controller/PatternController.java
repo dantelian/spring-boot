@@ -1,5 +1,9 @@
 package com.example.springbootdesignpattern.controller;
 
+import com.example.springbootdesignpattern.common.behavioralModel.observerPattern.BinaryObserver;
+import com.example.springbootdesignpattern.common.behavioralModel.observerPattern.HexaObserver;
+import com.example.springbootdesignpattern.common.behavioralModel.observerPattern.OctalObserver;
+import com.example.springbootdesignpattern.common.behavioralModel.observerPattern.Subject;
 import com.example.springbootdesignpattern.common.behavioralModel.strategyPattern.Context;
 import com.example.springbootdesignpattern.common.behavioralModel.strategyPattern.OperationAdd;
 import com.example.springbootdesignpattern.common.behavioralModel.strategyPattern.OperationMultiply;
@@ -140,6 +144,23 @@ public class PatternController {
 
         context = new Context(new OperationMultiply());
         System.out.println("10 * 5 = " + context.executeStrategy(10, 5));
+
+        return "success!";
+    }
+
+    // 策略模式
+    @GetMapping("/observerPattern")
+    public String observerPattern() {
+        Subject subject = new Subject();
+
+        new HexaObserver(subject);
+        new OctalObserver(subject);
+        new BinaryObserver(subject);
+
+        System.out.println("First state change: 15");
+        subject.setState(15);
+        System.out.println("Second state change: 10");
+        subject.setState(10);
 
         return "success!";
     }

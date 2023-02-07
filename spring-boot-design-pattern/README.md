@@ -99,10 +99,33 @@
 类和对象如何交互，及划分责任和算法。
 
 - 策略模式：定义一系列算法，把他们封装起来，并且使它们可以相互替换。
+
+    1. 策略接口（Strategy）
+    2. 实现策略类（OperationAdd、OperationSubtract、OperationMultiply）
+    3. 创建 Context 类（Context）
+    
+    ___测试方法：/pattern/strategyPattern___
+
 - 模板模式：定义一个算法结构，而将一些步骤延迟到子类实现。
+    
+    略.
+
 - 命令模式：将命令请求封装为一个对象，使得可以用不同的请求来进行参数化。
+    
+    略.
+
 - 迭代器模式：一种遍历访问聚合对象中各个元素的方法，不暴露该对象的内部结构。
+    
+    略.
+
 - 观察者模式：对象间的一对多的依赖关系。
+
+    1. 创建 Subject 类(Subject)
+    2. 创建 Observer 类(Observer)
+    3. 创建实体观察者类(HexaObserver、OctalObserver、BinaryObserver)
+    
+    ___测试方法：/pattern/observerPattern___
+
 - 仲裁者模式：用一个中介对象来封装一系列的对象交互。
 - 备忘录模式：在不破坏封装的前提下，保持对象的内部状态。
 - 解释器模式：给定一个语言，定义它的文法的一种表示，并定义一个解释器。
