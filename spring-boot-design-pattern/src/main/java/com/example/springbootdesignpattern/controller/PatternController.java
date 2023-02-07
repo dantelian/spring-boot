@@ -6,6 +6,7 @@ import com.example.springbootdesignpattern.common.creativeMode.singletonPattern.
 import com.example.springbootdesignpattern.common.creativeMode.singletonPattern.Enumeration;
 import com.example.springbootdesignpattern.common.creativeMode.singletonPattern.HungryHanStyle;
 import com.example.springbootdesignpattern.common.creativeMode.singletonPattern.Registration;
+import com.example.springbootdesignpattern.common.structuralMode.adapterPattern.AudioPlayer;
 import com.example.springbootdesignpattern.common.structuralMode.bridgePattern.Circle1;
 import com.example.springbootdesignpattern.common.structuralMode.bridgePattern.GreenCircle;
 import com.example.springbootdesignpattern.common.structuralMode.bridgePattern.RedCircle;
@@ -107,6 +108,19 @@ public class PatternController {
 
         redCircle.draw();
         greenCircle.draw();
+
+        return "success!";
+    }
+
+    // 适配器模式
+    @GetMapping("/adapterPattern")
+    public String adapterPattern() {
+        AudioPlayer audioPlayer = new AudioPlayer();
+
+        audioPlayer.play("mp3", "beyond the horizon.mp3");
+        audioPlayer.play("mp4", "alone.mp4");
+        audioPlayer.play("vlc", "far far away.vlc");
+        audioPlayer.play("avi", "mind me.avi");
 
         return "success!";
     }

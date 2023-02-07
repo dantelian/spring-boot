@@ -73,6 +73,14 @@
     ___测试方法：/pattern/bridgePattern___
 
 - 适配器模式：将一个类的方法接口转换成客户希望的另一个接口。
+    
+    1. 两套不同的接口（MediaPlayer、AdvancedMediaPlayer）
+    2. 实现了 AdvancedMediaPlayer 接口的实体类（VlcPlayer、Mp4Player）
+    3. 实现了 MediaPlayer 接口的适配器类（MediaAdapter）
+    4. 实现了 MediaPlayer 接口的实体类（AudioPlayer）
+    
+    ___测试方法：/pattern/adapterPattern___
+
 - 组合模式：将对象组合成树形结构以表示“部分-整体”的层次结构。
 - 外观模式：对外提供一个统一的方法，来访问子系统中的一群接口。
 - 享元模式：通过共享技术来有效的支持大量细粒度的对象。
