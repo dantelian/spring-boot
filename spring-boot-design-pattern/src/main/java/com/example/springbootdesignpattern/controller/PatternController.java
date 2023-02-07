@@ -1,5 +1,9 @@
 package com.example.springbootdesignpattern.controller;
 
+import com.example.springbootdesignpattern.common.behavioralModel.strategyPattern.Context;
+import com.example.springbootdesignpattern.common.behavioralModel.strategyPattern.OperationAdd;
+import com.example.springbootdesignpattern.common.behavioralModel.strategyPattern.OperationMultiply;
+import com.example.springbootdesignpattern.common.behavioralModel.strategyPattern.OperationSubtract;
 import com.example.springbootdesignpattern.common.creativeMode.factoryPattern.Animal;
 import com.example.springbootdesignpattern.common.creativeMode.factoryPattern.AnimalFactory;
 import com.example.springbootdesignpattern.common.creativeMode.singletonPattern.DCL;
@@ -121,6 +125,21 @@ public class PatternController {
         audioPlayer.play("mp4", "alone.mp4");
         audioPlayer.play("vlc", "far far away.vlc");
         audioPlayer.play("avi", "mind me.avi");
+
+        return "success!";
+    }
+
+    // 策略模式
+    @GetMapping("/strategyPattern")
+    public String strategyPattern() {
+        Context context = new Context(new OperationAdd());
+        System.out.println("10 + 5 = " + context.executeStrategy(10, 5));
+
+        context = new Context(new OperationSubtract());
+        System.out.println("10 - 5 = " + context.executeStrategy(10, 5));
+
+        context = new Context(new OperationMultiply());
+        System.out.println("10 * 5 = " + context.executeStrategy(10, 5));
 
         return "success!";
     }
