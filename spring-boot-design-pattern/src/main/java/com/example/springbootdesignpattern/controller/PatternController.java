@@ -6,6 +6,10 @@ import com.example.springbootdesignpattern.common.creativeMode.singletonPattern.
 import com.example.springbootdesignpattern.common.creativeMode.singletonPattern.Enumeration;
 import com.example.springbootdesignpattern.common.creativeMode.singletonPattern.HungryHanStyle;
 import com.example.springbootdesignpattern.common.creativeMode.singletonPattern.Registration;
+import com.example.springbootdesignpattern.common.structuralMode.bridgePattern.Circle1;
+import com.example.springbootdesignpattern.common.structuralMode.bridgePattern.GreenCircle;
+import com.example.springbootdesignpattern.common.structuralMode.bridgePattern.RedCircle;
+import com.example.springbootdesignpattern.common.structuralMode.bridgePattern.Shape1;
 import com.example.springbootdesignpattern.common.structuralMode.decoratorPattern.*;
 import com.example.springbootdesignpattern.common.structuralMode.proxyPattern.Image;
 import com.example.springbootdesignpattern.common.structuralMode.proxyPattern.ProxyImage;
@@ -91,6 +95,18 @@ public class PatternController {
         System.out.println("");
         // 图像不需要从磁盘加载
         image.display();
+
+        return "success!";
+    }
+
+    // 桥接模式
+    @GetMapping("/bridgePattern")
+    public String bridgePattern() {
+        Shape1 redCircle = new Circle1(100,100, 10, new RedCircle());
+        Shape1 greenCircle = new Circle1(100,100, 10, new GreenCircle());
+
+        redCircle.draw();
+        greenCircle.draw();
 
         return "success!";
     }
