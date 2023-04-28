@@ -20,8 +20,8 @@ public class RabbitMQController {
     private RabbitMQService rabbitMQService;
 
     @GetMapping("/send")
-    public String send() {
-        if (rabbitMQService.sendMessage()) {
+    public String send(String type) {
+        if (rabbitMQService.sendMessage(type)) {
             return "success!";
         }
         return "fail!";

@@ -17,11 +17,26 @@ public class RabbitMQServiceImpl implements RabbitMQService {
 
     // 需要使用Spring容器来管理，否则获取的rabbitTemplate会为null
     @Resource
-    private RabbitMQSender rabbitMQSender ;
+    private RabbitMQSender rabbitMQSender;
 
     @Override
-    public boolean sendMessage() {
-        rabbitMQSender.sendDirectMessage();
-        return true;
+    public boolean sendMessage(String type) {
+        boolean flag = true;
+
+        switch (type) {
+            case "direct":
+                rabbitMQSender.sendDirectMessage();
+                break;
+            case "topicMan":
+                rabbitMQSender.sendTopicMessageMan();
+                break;
+            case "topicWoman":
+                rabbitMQSender.sendTopicMessageWoman();
+                break;
+            default:
+                flag = false;
+        }
+
+        return flag;
     }
 }

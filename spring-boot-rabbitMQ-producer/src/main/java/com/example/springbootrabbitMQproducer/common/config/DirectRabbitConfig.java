@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @program: spring-boot-rabbitMQ-producer
- * @description:
+ * @description: 直连型交换机
  * @author: ddd
  * @create: 2023-04-17 09:58
  **/

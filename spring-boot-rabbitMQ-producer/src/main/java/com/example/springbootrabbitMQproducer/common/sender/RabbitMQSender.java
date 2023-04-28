@@ -34,5 +34,27 @@ public class RabbitMQSender {
         rabbitTemplate.convertAndSend("TestDirectExchange", "TestDirectRouting", map);
     }
 
+    public void sendTopicMessageMan() {
+        String messageId = String.valueOf(UUID.randomUUID());
+        String messageData = "message: M A N ";
+        String createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        Map<String, Object> manMap = new HashMap<>();
+        manMap.put("messageId", messageId);
+        manMap.put("messageData", messageData);
+        manMap.put("createTime", createTime);
+        rabbitTemplate.convertAndSend("topicExchange", "topic.man", manMap);
+    }
+
+    public void sendTopicMessageWoman() {
+        String messageId = String.valueOf(UUID.randomUUID());
+        String messageData = "message: woman is all ";
+        String createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        Map<String, Object> womanMap = new HashMap<>();
+        womanMap.put("messageId", messageId);
+        womanMap.put("messageData", messageData);
+        womanMap.put("createTime", createTime);
+        rabbitTemplate.convertAndSend("topicExchange", "topic.woman", womanMap);
+    }
+
 
 }
