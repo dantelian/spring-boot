@@ -13,7 +13,7 @@ import java.util.Map;
  * @create: 2023-04-17 10:41
  **/
 @Component
-@RabbitListener(queues = "TestDirectQueue")//监听的队列名称 TestDirectQueue
+@RabbitListener(queues = "TestDirectQueue") //监听的队列名称 TestDirectQueue
 public class DirectReceiver {
 
     @RabbitHandler

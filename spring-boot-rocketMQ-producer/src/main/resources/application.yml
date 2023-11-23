@@ -1,3 +1,5 @@
+server:
+  port: 9007
 rocketmq:
   #namesrv访问地址
   #  name-server: 192.168.40.128:9876;192.168.40.130:9876  #集群方式
