@@ -34,5 +34,6 @@ RabbitMQ消息队列（生产者）
 
 
 参考：  
-[发布订阅]<https://blog.csdn.net/qq_35387940/article/details/100514134>
+[发布订阅]<https://blog.csdn.net/qq_35387940/article/details/100514134>  
+[安装延时队列插件（CustomExchange）]<https://blog.csdn.net/javaee_gao/article/details/128614439>
 
