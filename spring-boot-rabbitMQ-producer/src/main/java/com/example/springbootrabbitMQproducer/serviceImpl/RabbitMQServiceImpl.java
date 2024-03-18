@@ -33,6 +33,9 @@ public class RabbitMQServiceImpl implements RabbitMQService {
             case "topicWoman":
                 rabbitMQSender.sendTopicMessageWoman();
                 break;
+            case "customDelayed": // 延时消息
+                rabbitMQSender.sendCustomDelayed();
+                break;
             default:
                 flag = false;
         }

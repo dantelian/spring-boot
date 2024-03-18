@@ -1,5 +1,6 @@
 package com.example.springbootrabbitMQproducer.common.sender;
 
+import com.example.springbootrabbitMQproducer.common.config.CustomRabbitConfig;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
@@ -54,6 +55,20 @@ public class RabbitMQSender {
         womanMap.put("messageData", messageData);
         womanMap.put("createTime", createTime);
         rabbitTemplate.convertAndSend("topicExchange", "topic.woman", womanMap);
+    }
+
+    public void sendCustomDelayed() {
+        String messageId = String.valueOf(UUID.randomUUID());
+        String messageData = "message: custom delayed ";
+        String createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        Map<String, Object> delayedMap = new HashMap<>();
+        delayedMap.put("messageId", messageId);
+        delayedMap.put("messageData", messageData);
+        delayedMap.put("createTime", createTime);
+        rabbitTemplate.convertAndSend(CustomRabbitConfig.DELAY_EXCHANGE, CustomRabbitConfig.DELAY_ROUTING_KEY, delayedMap, message -> {
+            message.getMessageProperties().setDelay(1000 * 10); // 设置延时时长
+            return message;
+        });
     }
 
 
