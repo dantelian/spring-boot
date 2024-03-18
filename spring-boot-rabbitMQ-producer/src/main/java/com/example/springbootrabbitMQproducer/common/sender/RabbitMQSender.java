@@ -1,6 +1,7 @@
 package com.example.springbootrabbitMQproducer.common.sender;
 
 import com.example.springbootrabbitMQproducer.common.config.CustomRabbitConfig;
+import com.example.springbootrabbitMQproducer.common.config.DeadDelayRabbitConfig;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
@@ -71,5 +72,32 @@ public class RabbitMQSender {
         });
     }
 
+    // 发送的消息会顺序执行，即使后发的消息延时时间短也会等之前的消息消费了才会消费
+    public void sendDeadDelayed() {
+        String messageId = String.valueOf(UUID.randomUUID());
+        String messageData = "message: dead delay ";
+        String createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        Map<String, Object> deadMap = new HashMap<>();
+        deadMap.put("messageId", messageId);
+        deadMap.put("messageData", messageData);
+        deadMap.put("createTime", createTime);
+
+        // 方案一 ： 配置x-message-ttl
+//        rabbitTemplate.convertAndSend(DeadDelayRabbitConfig.FORMAL_EXCHANGE, DeadDelayRabbitConfig.FORMAL_ROUNTE_KEY, deadMap);
+
+        // 方案二 ： 手动指定时长
+        rabbitTemplate.convertAndSend(
+                //发送至订单交换机
+                DeadDelayRabbitConfig.FORMAL_EXCHANGE,
+                //routingKey
+                DeadDelayRabbitConfig.FORMAL_ROUNTE_KEY,
+                deadMap
+                , message -> {
+                    // 如果配置了 params.put("x-message-ttl", 5 * 1000);
+                    // 那么这一句也可以省略,具体根据业务需要是声明 Queue 的时候就指定好延迟时间还是在发送自己控制时间
+                    message.getMessageProperties().setExpiration("10000"); // 延时时长（毫秒）
+                    return message;
+                });
+    }
 
 }

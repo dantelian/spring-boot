@@ -30,10 +30,16 @@ RabbitMQ消息队列（生产者）
 如果一条消息携带的路由键为 A.TT.B，那么队列Q1将会收到；  
 如果一条消息携带的路由键为TT.AA.BB，那么队列Q2将会收到；
 
+### Custom Exchange
 
+自定义交换机，可实现动态定时任务。是一对一消费，如果配置多台监听绑定到同一个直连交互的同一个队列，会以轮询的方式对消息进行消费，而且不存在重复消费。会根据延时时长，及时消费。
 
+### 死信队列
+
+可以实现定时任务，发送的消息会顺序执行，即使后发的消息延时时间短也会等之前的消息消费了才会消费
+实例：[DeadDelayRabbitConfig.java](src%2Fmain%2Fjava%2Fcom%2Fexample%2FspringbootrabbitMQproducer%2Fcommon%2Fconfig%2FDeadDelayRabbitConfig.java)
 
 参考：  
-[发布订阅]<https://blog.csdn.net/qq_35387940/article/details/100514134>  
-[安装延时队列插件（CustomExchange）]<https://blog.csdn.net/javaee_gao/article/details/128614439>
+[发布订阅] <https://blog.csdn.net/qq_35387940/article/details/100514134>  
+[安装延时队列插件（CustomExchange）] <https://blog.csdn.net/javaee_gao/article/details/128614439>
 

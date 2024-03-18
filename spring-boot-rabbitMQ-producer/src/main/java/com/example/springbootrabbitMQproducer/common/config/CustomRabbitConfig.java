@@ -10,6 +10,7 @@ import java.util.Map;
 /**
  * 延时队列
  * 需安装CustomExchange插件
+ * 会根据延时时长，及时消费
  */
 @Configuration
 public class CustomRabbitConfig {
