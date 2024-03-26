@@ -8,6 +8,15 @@
 
 > jdk自带的一个类；是基于线程池设计的定时任务类,每个调度任务都会分配到线程池中的一个线程去执行,也就是说,任务是并发执行,互不影响。
 
+## Spring Task
+
+> Spring3.0以后自带的task，可以将它看成一个轻量级的Quartz。  
+> 启动类配合@EnableScheduling使用。  
+> 多个任务会使同一个线程串行执行，可能会造成堵塞，可以使用异步执行。@EnableAsync @Async
+
+
+
+
 > 参考：<https://www.jb51.net/program/304716axu.htm>
 
 
