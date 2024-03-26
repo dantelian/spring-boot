@@ -26,19 +26,31 @@ _附件上传下载_
 
 _支持功能：增删改查，分页，jpa_
 
+## spring-boot-rabbitMQ-consumer
+
+_rabbitMQ消费者_
+
+## spring-boot-rabbitMQ-producer
+
+_rabbitMQ生产者_
+
 ## spring-boot-redis
 
 _redis创建链接及使用_
 
 ## spring-boot-rocketMQ-producer
+
 _apache-rocketMQ 生产者_
 
 ## spring-boot-rocketMQ-consumer
+
 _apache-rocketMQ 消费者_
 
-[RocketMQ 添加监控和系统告警通知]<http://www.hunt007.com/wiki/97554.html>
+[RocketMQ 添加监控和系统告警通知] <http://www.hunt007.com/wiki/97554.html>
 
+## spring-boot-schedule
 
+_定时任务_
 
 
 
