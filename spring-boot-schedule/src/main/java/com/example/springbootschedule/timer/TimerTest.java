@@ -55,6 +55,14 @@ public class TimerTest {
             }
         }, new Date(System.currentTimeMillis() + 3000));
 
+
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        // 在需要的时候关闭计时器
+        timer.cancel();
     }
 
 }
