@@ -1,29 +1,20 @@
-# spring-boot-redis
+# spring-boot-thread
 
-## redis tool
+## 创建线程
 
-> 工具类：RedisUtil
+### 继承Thread类
 
-## 发布订阅
+> [ThreadTest.java](src%2Fmain%2Fjava%2Fcom%2Fexample%2Fspringbootthread%2Fcommon%2FbuildThread%2FThreadTest.java)  
+> [ThreadParamTest.java](src%2Fmain%2Fjava%2Fcom%2Fexample%2Fspringbootthread%2Fcommon%2FbuildThread%2FThreadParamTest.java)
 
-### 方案一
 
-- 配置 RedisSubConfig
-- 订阅监听 RedisMsgPubSubListener
-- 发布方法 /order/publish
 
-````
-// 反序列化配置使用的这个
-redisTemplate.setValueSerializer(new StringRedisSerializer());
-````
 
-### 方案二
 
-- 配置 RedisSubConfig
-- redis消息接收类 ReceiverRedisMessage
-- 发布方法 /order/publish
 
-> 参考：<https://blog.csdn.net/printf88/article/details/122337464>
+
+> 参考：  
+> <https://www.cnblogs.com/ZhangHao-Study/p/16971276.html>
 
 
 
