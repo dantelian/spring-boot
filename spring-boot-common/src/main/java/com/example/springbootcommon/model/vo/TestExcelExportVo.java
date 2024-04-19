@@ -11,16 +11,16 @@ import lombok.Data;
 @Data
 public class TestExcelExportVo {
 
-    @ExcelExport(value = "序号", sort = 1)
+    @ExcelExport(value = "序号", sort = 1, example = "1")
     private String num;
 
-    @ExcelExport(value = "名称")
+    @ExcelExport(value = "名称", example = "夏弥")
     private String name;
 
-    @ExcelExport(value = "电话")
+    @ExcelExport(value = "电话", example = "13612345678")
     private String phone;
 
-    @ExcelExport(value = "性别", kv = "1-男;2-女")
+    @ExcelExport(value = "性别", kv = "1-男;2-女", example = "女")
     private Integer sex;
 
 }

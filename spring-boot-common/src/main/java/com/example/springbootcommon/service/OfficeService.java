@@ -94,4 +94,10 @@ public interface OfficeService {
      */
     void exportEasyPoiExcel(HttpServletResponse response) throws IOException;
 
+    /**
+     * easy poi excel 导出下拉 级联下拉
+     * @param response
+     */
+    void exportEasyPoiExcelSelect(HttpServletResponse response) throws IOException;
+
 }

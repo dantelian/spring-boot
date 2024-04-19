@@ -463,4 +463,10 @@ public class OfficeServiceImpl implements OfficeService {
 
         EasyPoiUtil.exportExcel(userList, "标题", "sheetName", User.class, "fileName", response);
     }
+
+    @Override
+    public void exportEasyPoiExcelSelect(HttpServletResponse response) throws IOException {
+
+    }
+
 }

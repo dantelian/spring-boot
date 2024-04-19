@@ -27,7 +27,7 @@ public class OfficeController {
     private OfficeService officeService;
 
     /**
-     * 导入excel数据
+     * poi 导入excel数据
      * @param file
      * @return
      * @throws Exception
@@ -38,7 +38,7 @@ public class OfficeController {
     }
 
     /**
-     * 导入excel数据并转换为特定对象
+     * poi 导入excel数据并转换为特定对象
      * @param file
      * @return
      * @throws Exception
@@ -49,7 +49,7 @@ public class OfficeController {
     }
 
     /**
-     * 导入多Sheet页
+     * poi 导入多Sheet页
      * @param file
      * @throws Exception
      */
@@ -59,7 +59,7 @@ public class OfficeController {
     }
 
     /**
-     * 导出excel
+     * poi 导出excel
      * @param response
      */
     @GetMapping("/export")
@@ -68,19 +68,19 @@ public class OfficeController {
     }
 
     /**
-     * 导出excel模板
+     * poi 导出excel模板
      * @param response
      */
     @GetMapping("/exportModel")
     public void exportModel(HttpServletResponse response) throws MalformedURLException {
-        ExcelUtils.exportTemplate(response, "测试模板", TestExcelExportVo.class);
+//        ExcelUtils.exportTemplate(response, "测试模板", TestExcelExportVo.class);
 
         // 导出模板包含样本数据
-//        ExcelUtils.exportTemplate(response, "测试模板", TestExcelExportVo.class, true);
+        ExcelUtils.exportTemplate(response, "测试模板", TestExcelExportVo.class, true);
     }
 
     /**
-     * 导出excel-根据对象导出
+     * poi 导出excel-根据对象导出
      * @param response
      */
     @GetMapping("/exportVo")
@@ -89,7 +89,7 @@ public class OfficeController {
     }
 
     /**
-     * 导出多 Sheet 页Excel
+     * poi 导出多 Sheet 页Excel
      */
     @GetMapping("/exportManySheet")
     public void exportManySheet(HttpServletResponse response) {
@@ -118,6 +118,14 @@ public class OfficeController {
     @GetMapping("/exportEasyPoiExcel")
     public void exportEasyPoiExcel(HttpServletResponse response) throws IOException {
         officeService.exportEasyPoiExcel(response);
+    }
+
+    /**
+     * easy poi excel 导出下拉 级联下拉
+     */
+    @GetMapping("/exportEasyPoiExcelSelect")
+    public void exportEasyPoiExcelSelect(HttpServletResponse response) throws IOException {
+        officeService.exportEasyPoiExcelSelect(response);
     }
 
 }
