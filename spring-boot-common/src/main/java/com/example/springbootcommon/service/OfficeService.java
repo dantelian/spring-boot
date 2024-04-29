@@ -73,7 +73,7 @@ public interface OfficeService {
      * @param file
      * @param response
      */
-    void wold2pdf(MultipartFile file, HttpServletResponse response);
+    void word2pdf(MultipartFile file, HttpServletResponse response);
 
     /**
      * easy poi 根据模板生成wold

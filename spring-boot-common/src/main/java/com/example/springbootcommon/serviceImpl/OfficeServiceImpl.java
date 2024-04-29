@@ -349,7 +349,7 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     @Override
-    public void wold2pdf(MultipartFile file, HttpServletResponse response) {
+    public void word2pdf(MultipartFile file, HttpServletResponse response) {
 
 //        try {
 //            FileInputStream fileInputStream = new FileInputStream("G:\\测试\\测试.docx");

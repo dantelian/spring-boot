@@ -11,8 +11,8 @@
         - 加水印
             > WordUtil.setWordWaterMark(doc, "机密", "#d8d8d8");  
             WordUtil.makeFullWaterMarkByWordArt(doc, "机密", "#888888", "0.7pt","-30");
-        - apache.poi wold 转 pdf
-            > /office/wold2pdf 仅docx格式 
+        - apache.poi word 转 pdf
+            > /office/word2pdf 仅docx格式 
     - poi-tl 根据模板生成wold
         - 文本
         - 图片
@@ -31,7 +31,7 @@
 
     > 参考：<https://blog.csdn.net/sunnyzyq/article/details/121994504>  
     maven依赖:
-    ````xml
+    ````
     <!-- 文件上传 -->
     <dependency>
         <groupId>org.apache.httpcomponents</groupId>

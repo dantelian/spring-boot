@@ -99,9 +99,9 @@ public class OfficeController {
     /**
      * word 转 pdf
      */
-    @PostMapping("/wold2pdf")
+    @PostMapping("/word2pdf")
     public void wold2pdf(@RequestPart("file") MultipartFile file, HttpServletResponse response) {
-        officeService.wold2pdf(file, response);
+        officeService.word2pdf(file, response);
     }
 
     /**
