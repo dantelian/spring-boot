@@ -25,6 +25,7 @@ redisTemplate.setValueSerializer(new StringRedisSerializer());
 
 > 参考：<https://blog.csdn.net/printf88/article/details/122337464>
 
-
+## 加锁
+> /order/tryLock
 
 
