@@ -128,4 +128,12 @@ public class OfficeController {
         officeService.exportEasyPoiExcelSelect(response);
     }
 
+    /**
+     * easyexcel 导出多级表头
+     */
+    @GetMapping("/exportEasyExcelMultistageHeader")
+    public void exportEasyExcelMultistageHeader(HttpServletResponse response) throws IOException {
+        officeService.exportEasyExcelMultistageHeader(response);
+    }
+
 }

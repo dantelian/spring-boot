@@ -58,3 +58,17 @@
             > 支持图片导出
         > 参考：<https://blog.csdn.net/blueberrya/article/details/123008148>
 
+- easyexcel
+    - 导出多级表头excel
+    > 示例：/office/exportEasyExcelMultistageHeader
+
+    > 参考：<https://blog.csdn.net/qq_43301206/article/details/131844772>
+    ````
+    <!--easyexcel-->
+    <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>easyexcel</artifactId>
+        <version>3.2.0</version>
+    </dependency>
+    ````
+

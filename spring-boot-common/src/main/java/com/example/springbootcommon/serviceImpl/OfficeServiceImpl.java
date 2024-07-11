@@ -3,10 +3,11 @@ package com.example.springbootcommon.serviceImpl;
 import cn.afterturn.easypoi.entity.ImageEntity;
 import cn.afterturn.easypoi.word.WordExportUtil;
 import cn.afterturn.easypoi.word.entity.MyXWPFDocument;
-import com.alibaba.fastjson.JSON;
+import com.alibaba.excel.util.ListUtils;
 import com.alibaba.fastjson.JSONArray;
 import com.deepoove.poi.XWPFTemplate;
 import com.deepoove.poi.data.*;
+import com.example.springbootcommon.common.util.EasyExcelUtil;
 import com.example.springbootcommon.common.util.EasyPoiUtil;
 import com.example.springbootcommon.common.util.ExcelUtils;
 import com.example.springbootcommon.model.entity.User;
@@ -467,6 +468,28 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     public void exportEasyPoiExcelSelect(HttpServletResponse response) throws IOException {
 
+    }
+
+    @Override
+    public void exportEasyExcelMultistageHeader(HttpServletResponse response) throws IOException {
+        List<List<String>> headTitles = ListUtils.newArrayList();
+        //表头可以根据实际情况进行修改, 相邻列同名自动合并
+        headTitles.add(ListUtils.newArrayList( "测点编号"));
+        headTitles.add(ListUtils.newArrayList( "历史最高渗压水位", "渗压水位 (m)"));
+        headTitles.add(ListUtils.newArrayList( "历史最高渗压水位", "日期"));
+        headTitles.add(ListUtils.newArrayList( "历史最高渗压水位", "库水位 (m)"));
+        headTitles.add(ListUtils.newArrayList( "历史最低渗压水位", "渗压水位 (m)"));
+        headTitles.add(ListUtils.newArrayList( "历史最低渗压水位", "日期"));
+        headTitles.add(ListUtils.newArrayList( "历史最低渗压水位", "库水位 (m)"));
+        headTitles.add(ListUtils.newArrayList("变化量 (m)"));
+
+        List<List<Object>> contentList = ListUtils.newArrayList();
+        //这里一个List<Object>才代表一行数据，需要映射成每行数据填充，横向填充（把实体数据的字段设置成一个List<Object>）
+        //数据根据实际获取进行填充
+        contentList.add(ListUtils.newArrayList("0001", "190.76", "2023-05-10", "null", "6.78", "2023-02-15","null","183.97"));
+        contentList.add(ListUtils.newArrayList("0001", "190.76", "2023-05-10", "null", "6.78", "2023-02-15","null","183.97"));
+
+        EasyExcelUtil.exportMultistageHeaderExcel("fileName", "sheetName", headTitles, contentList, response);
     }
 
 }
