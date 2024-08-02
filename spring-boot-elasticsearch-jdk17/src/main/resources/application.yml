@@ -4,3 +4,8 @@ server:
 spring:
   application:
     name: spring-boot-elasticsearch-jdk17
+  elasticsearch:
+    uris: http://10.150.1.24:9200
+    username:
+    password:
+
