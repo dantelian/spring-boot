@@ -4,4 +4,14 @@ public interface ElasticsearchService {
 
     String createIndex();
 
+    String getMapping();
+
+    String putMapping();
+
+    String getIndexInfo();
+
+    String bulkInsert();
+
+    String search();
+
 }

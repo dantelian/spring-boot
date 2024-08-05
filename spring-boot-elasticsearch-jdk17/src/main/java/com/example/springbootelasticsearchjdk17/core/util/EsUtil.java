@@ -246,50 +246,6 @@ public class EsUtil {
     }
 
     /**
-     * completion suggest
-     *
-     * @param suggestField
-     * @param suggestValue
-     * @param suggestMaxCount
-     * @param indexName
-     * @return
-     */
-    public List<String> listSuggestCompletion(String indexName, String suggestField, String suggestValue, Integer suggestMaxCount) throws IOException {
-        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        CompletionSuggestionBuilder suggestionBuilderDistrict =
-                new CompletionSuggestionBuilder(suggestField + ".suggest").prefix(suggestValue).size(suggestMaxCount);
-        SuggestBuilder suggestBuilder = new SuggestBuilder();
-        suggestBuilder.addSuggestion(suggestField + ".suggest", suggestionBuilderDistrict);
-        searchSourceBuilder.suggest(suggestBuilder);
-        SearchRequest searchRequest = new SearchRequest(indexName);
-        searchRequest.source(searchSourceBuilder);
-        SearchResponse response = null;
-        response = client.search(searchRequest, RequestOptions.DEFAULT);
-        Suggest suggest = response.getSuggest();
-        List<String> keywords = null;
-        if (suggest != null) {
-            keywords = new ArrayList<>();
-            List<? extends Suggest.Suggestion.Entry<? extends Suggest.Suggestion.Entry.Option>> entries =
-                    suggest.getSuggestion(suggestField + ".suggest").getEntries();
-            for (Suggest.Suggestion.Entry<? extends Suggest.Suggestion.Entry.Option> entry : entries) {
-                for (Suggest.Suggestion.Entry.Option option : entry.getOptions()) {
-                    String keyword = option.getText().string();
-                    if (StrUtil.isNotBlank(keyword)) {
-                        if (keywords.contains(keyword)) {
-                            continue;
-                        }
-                        keywords.add(keyword);
-                        if (keywords.size() >= suggestMaxCount) {
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        return keywords;
-    }
-
-    /**
      * 设置es空间字段
      **/
     public JSONObject getGeometry() {
@@ -352,4 +308,49 @@ public class EsUtil {
             }
         }
     }
+
+    /**
+     * completion suggest
+     *
+     * @param suggestField
+     * @param suggestValue
+     * @param suggestMaxCount
+     * @param indexName
+     * @return
+     */
+    public List<String> listSuggestCompletion(String indexName, String suggestField, String suggestValue, Integer suggestMaxCount) throws IOException {
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        CompletionSuggestionBuilder suggestionBuilderDistrict =
+                new CompletionSuggestionBuilder(suggestField + ".suggest").prefix(suggestValue).size(suggestMaxCount);
+        SuggestBuilder suggestBuilder = new SuggestBuilder();
+        suggestBuilder.addSuggestion(suggestField + ".suggest", suggestionBuilderDistrict);
+        searchSourceBuilder.suggest(suggestBuilder);
+        SearchRequest searchRequest = new SearchRequest(indexName);
+        searchRequest.source(searchSourceBuilder);
+        SearchResponse response = null;
+        response = client.search(searchRequest, RequestOptions.DEFAULT);
+        Suggest suggest = response.getSuggest();
+        List<String> keywords = null;
+        if (suggest != null) {
+            keywords = new ArrayList<>();
+            List<? extends Suggest.Suggestion.Entry<? extends Suggest.Suggestion.Entry.Option>> entries =
+                    suggest.getSuggestion(suggestField + ".suggest").getEntries();
+            for (Suggest.Suggestion.Entry<? extends Suggest.Suggestion.Entry.Option> entry : entries) {
+                for (Suggest.Suggestion.Entry.Option option : entry.getOptions()) {
+                    String keyword = option.getText().string();
+                    if (StrUtil.isNotBlank(keyword)) {
+                        if (keywords.contains(keyword)) {
+                            continue;
+                        }
+                        keywords.add(keyword);
+                        if (keywords.size() >= suggestMaxCount) {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return keywords;
+    }
+
 }
