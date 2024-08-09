@@ -8,6 +8,8 @@ public interface ElasticsearchService {
 
     String putMapping();
 
+    String delIndex();
+
     String getIndexInfo();
 
     String bulkInsert();

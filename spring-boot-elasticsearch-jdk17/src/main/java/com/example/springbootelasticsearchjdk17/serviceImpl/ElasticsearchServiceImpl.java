@@ -64,6 +64,18 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
     }
 
     @Override
+    public String delIndex() {
+        try {
+            if (esUtil.delIndex(indexName)) {
+                return "success!";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "fail!";
+    }
+
+    @Override
     public String getIndexInfo() {
         try {
             return JSONUtil.toJsonStr(esUtil.getIndexInfo(indexName));
@@ -79,7 +91,7 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
 
         Map<String, Object> row1 = new HashMap<>();
         row1.put("id", "1");
-        row1.put("type", "夏弥");
+        row1.put("name", "夏弥");
         row1.put("gender", "女");
         row1.put("age", 19);
         data.add(row1);
@@ -95,7 +107,16 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
 
     @Override
     public String search() {
-        return null;
+        try {
+//            List<String> list = esUtil.listSuggestCompletion(indexName, "title", "夏", 10);
+//            return JSONUtil.toJsonStr(list);
+
+            List<String> list = esUtil.search(indexName);
+            return JSONUtil.toJsonStr(list);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "fail!";
     }
 
 }

@@ -31,6 +31,12 @@ public class ElasticsearchController {
         return elasticsearchService.putMapping();
     }
 
+    // 删除索引
+    @GetMapping(value = "/delIndex")
+    public String delIndex() {
+        return elasticsearchService.delIndex();
+    }
+
     // 获取索引信息
     @GetMapping(value = "/getIndexInfo")
     public String getIndexInfo() {

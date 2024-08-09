@@ -23,7 +23,9 @@ import org.elasticsearch.client.indices.*;
 import org.elasticsearch.cluster.metadata.AliasMetadata;
 import org.elasticsearch.cluster.metadata.MappingMetadata;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.rest.RestRequest;
+import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.suggest.Suggest;
 import org.elasticsearch.search.suggest.SuggestBuilder;
@@ -307,6 +309,23 @@ public class EsUtil {
                 log.debug("插入失败的文档id：{}", itemResponse.getId());
             }
         }
+    }
+
+    public List<String> search(String indexName) throws IOException {
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        // 设置查询条件，例如匹配所有文档
+        searchSourceBuilder.query(QueryBuilders.matchAllQuery());
+
+        SearchRequest searchRequest = new SearchRequest(indexName);
+        searchRequest.source(searchSourceBuilder);
+        SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+
+        SearchHits hits = searchResponse.getHits();
+//        hits.forEach(p -> System.out.println("文档原生信息：" + p.getSourceAsString()));
+
+        List<String> hitList = new ArrayList<>();
+        hits.forEach(p -> hitList.add(p.getSourceAsString()));
+        return hitList;
     }
 
     /**
