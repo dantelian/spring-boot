@@ -23,13 +23,12 @@ import org.elasticsearch.client.indices.*;
 import org.elasticsearch.cluster.metadata.AliasMetadata;
 import org.elasticsearch.cluster.metadata.MappingMetadata;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.rest.RestRequest;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.elasticsearch.search.suggest.Suggest;
-import org.elasticsearch.search.suggest.SuggestBuilder;
-import org.elasticsearch.search.suggest.completion.CompletionSuggestionBuilder;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 
 import java.io.IOException;
 import java.util.*;
@@ -311,6 +310,12 @@ public class EsUtil {
         }
     }
 
+    /**
+     * 查询全部
+     * @param indexName
+     * @return
+     * @throws IOException
+     */
     public List<String> search(String indexName) throws IOException {
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         // 设置查询条件，例如匹配所有文档
@@ -329,47 +334,97 @@ public class EsUtil {
     }
 
     /**
-     * completion suggest
-     *
-     * @param suggestField
-     * @param suggestValue
-     * @param suggestMaxCount
+     * 匹配查询
      * @param indexName
+     * @param fieldName     匹配字段
+     * @param queryString   关键词
      * @return
+     * @throws IOException
      */
-    public List<String> listSuggestCompletion(String indexName, String suggestField, String suggestValue, Integer suggestMaxCount) throws IOException {
+    public List<String> matchQuery(String indexName, String fieldName, String queryString) throws IOException {
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        CompletionSuggestionBuilder suggestionBuilderDistrict =
-                new CompletionSuggestionBuilder(suggestField + ".suggest").prefix(suggestValue).size(suggestMaxCount);
-        SuggestBuilder suggestBuilder = new SuggestBuilder();
-        suggestBuilder.addSuggestion(suggestField + ".suggest", suggestionBuilderDistrict);
-        searchSourceBuilder.suggest(suggestBuilder);
+        // 设置查询条件
+        searchSourceBuilder.query(QueryBuilders.matchQuery(fieldName, queryString));
+
         SearchRequest searchRequest = new SearchRequest(indexName);
         searchRequest.source(searchSourceBuilder);
-        SearchResponse response = null;
-        response = client.search(searchRequest, RequestOptions.DEFAULT);
-        Suggest suggest = response.getSuggest();
-        List<String> keywords = null;
-        if (suggest != null) {
-            keywords = new ArrayList<>();
-            List<? extends Suggest.Suggestion.Entry<? extends Suggest.Suggestion.Entry.Option>> entries =
-                    suggest.getSuggestion(suggestField + ".suggest").getEntries();
-            for (Suggest.Suggestion.Entry<? extends Suggest.Suggestion.Entry.Option> entry : entries) {
-                for (Suggest.Suggestion.Entry.Option option : entry.getOptions()) {
-                    String keyword = option.getText().string();
-                    if (StrUtil.isNotBlank(keyword)) {
-                        if (keywords.contains(keyword)) {
-                            continue;
-                        }
-                        keywords.add(keyword);
-                        if (keywords.size() >= suggestMaxCount) {
-                            break;
-                        }
-                    }
-                }
-            }
+        SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+
+        SearchHits hits = searchResponse.getHits();
+//        hits.forEach(p -> System.out.println("文档原生信息：" + p.getSourceAsString()));
+
+        List<String> hitList = new ArrayList<>();
+        hits.forEach(p -> hitList.add(p.getSourceAsString()));
+        return hitList;
+    }
+
+    /**
+     * 条件查询
+     * @param indexName
+     * @param query     条件
+     * @return
+     * @throws IOException
+     */
+    public List<String> conditionQuery(String indexName, QueryBuilder query) throws IOException {
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        // 设置查询条件
+        searchSourceBuilder.query(query);
+
+        SearchRequest searchRequest = new SearchRequest(indexName);
+        searchRequest.source(searchSourceBuilder);
+        SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+
+        SearchHits hits = searchResponse.getHits();
+//        hits.forEach(p -> System.out.println("文档原生信息：" + p.getSourceAsString()));
+
+        List<String> hitList = new ArrayList<>();
+        hits.forEach(p -> hitList.add(p.getSourceAsString()));
+        return hitList;
+    }
+
+    /**
+     * 高亮查询
+     * @param indexName
+     * @param query     条件
+     * @param fields    字段
+     * @return
+     * @throws IOException
+     */
+    public List<String> highlightQuery(String indexName, QueryBuilder query, String... fields) throws IOException {
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        // 设置查询条件
+        searchSourceBuilder.query(query);
+
+        //加载已经设置好的高亮配置
+        //设置高亮
+        HighlightBuilder highlighter = new HighlightBuilder();
+        //设置三要素
+        for (String field: fields) {
+            highlighter.field(field);
         }
-        return keywords;
+        //设置前后缀标签
+        highlighter.preTags("<font color='red'>");
+        highlighter.postTags("</font>");
+        searchSourceBuilder.highlighter(highlighter);
+
+        SearchRequest searchRequest = new SearchRequest(indexName);
+        searchRequest.source(searchSourceBuilder);
+        SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+
+        SearchHits hits = searchResponse.getHits();
+//        hits.forEach(p -> System.out.println("文档原生信息：" + p.getSourceAsString()));
+//        hits.forEach(p -> System.out.println("文档原生信息：" + p.getHighlightFields().get(fields[0])));
+
+        List<String> hitList = new ArrayList<>();
+//        hits.forEach(p -> hitList.add(p.getSourceAsString()));
+        hits.forEach(p -> {
+            JSONObject object = JSONUtil.parseObj(p.getSourceAsString());
+            for (String field: fields) {
+                object.set(field, p.getHighlightFields().get(field).fragments()[0].toString());
+            }
+            hitList.add(JSONUtil.toJsonStr(object));
+        });
+        return hitList;
     }
 
 }
