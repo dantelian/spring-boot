@@ -420,7 +420,9 @@ public class EsUtil {
         hits.forEach(p -> {
             JSONObject object = JSONUtil.parseObj(p.getSourceAsString());
             for (String field: fields) {
-                object.set(field, p.getHighlightFields().get(field).fragments()[0].toString());
+                if (p.getHighlightFields().containsKey(field)) {
+                    object.set(field, p.getHighlightFields().get(field).fragments()[0].toString());
+                }
             }
             hitList.add(JSONUtil.toJsonStr(object));
         });

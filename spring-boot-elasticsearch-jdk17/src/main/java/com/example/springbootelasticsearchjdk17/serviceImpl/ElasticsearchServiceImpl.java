@@ -152,9 +152,9 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
             // 方式四：高亮查询
             BoolQueryBuilder query = QueryBuilders.boolQuery();
             MatchQueryBuilder matchQuery = QueryBuilders.matchQuery("name", "弥");
-            query.filter(matchQuery);
+            query.should(matchQuery);
             MatchQueryBuilder matchQuery1 = QueryBuilders.matchQuery("describe", "弥");
-            query.filter(matchQuery1);
+            query.should(matchQuery1);
             List<String> list = esUtil.highlightQuery(indexName, query, "name", "describe");
 
             return JSONUtil.toJsonStr(list);
