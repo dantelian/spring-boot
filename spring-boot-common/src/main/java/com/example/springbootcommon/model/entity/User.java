@@ -22,6 +22,7 @@ import java.util.Date;
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    // 自增序号
     @Excel(name = "序号", format = "isAddIndex")
     private Integer index = 1;
 
