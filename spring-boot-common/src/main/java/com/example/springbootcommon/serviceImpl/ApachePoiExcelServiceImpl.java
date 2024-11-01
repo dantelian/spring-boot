@@ -2,8 +2,8 @@ package com.example.springbootcommon.serviceImpl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.example.springbootcommon.common.util.ApachePoiExcelUtils;
-import com.example.springbootcommon.model.vo.ApachePoiExcelExportVo;
-import com.example.springbootcommon.model.vo.ApachePoiExcelImportVo;
+import com.example.springbootcommon.model.apachePoi.ApachePoiExcelExportVo;
+import com.example.springbootcommon.model.apachePoi.ApachePoiExcelImportVo;
 import com.example.springbootcommon.service.ApachePoiExcelService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
