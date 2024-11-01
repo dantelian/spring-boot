@@ -1,7 +1,7 @@
 package com.example.springbootcommon.serviceImpl;
 
 import com.alibaba.fastjson.JSONArray;
-import com.example.springbootcommon.common.util.ExcelUtils;
+import com.example.springbootcommon.common.util.ApachePoiExcelUtils;
 import com.example.springbootcommon.model.vo.ApachePoiExcelExportVo;
 import com.example.springbootcommon.model.vo.ApachePoiExcelImportVo;
 import com.example.springbootcommon.service.ApachePoiExcelService;
@@ -19,7 +19,7 @@ public class ApachePoiExcelServiceImpl implements ApachePoiExcelService {
     @Override
     public void exportMap(HttpServletResponse response) throws MalformedURLException {
         // 表头数据
-        List<Object> head = Arrays.asList("姓名","年龄","性别","头像", "城市", ExcelUtils.COLUMN_MERGE); // ExcelUtils.COLUMN_MERGE 合并列
+        List<Object> head = Arrays.asList("姓名","年龄","性别","头像", "城市", ApachePoiExcelUtils.COLUMN_MERGE); // ExcelUtils.COLUMN_MERGE 合并列
         // 用户1数据
         List<Object> user1 = new ArrayList<>();
         user1.add("诸葛亮");
@@ -35,7 +35,7 @@ public class ApachePoiExcelServiceImpl implements ApachePoiExcelService {
         user2.add("女");
         user2.add(new URL("https://pic2.zhimg.com/v2-8d3f288feae0e511dee5c3d6735ca999_1440w.jpg"));
         user2.add("上海");
-        user2.add(ExcelUtils.ROW_MERGE); // 合并行
+        user2.add(ApachePoiExcelUtils.ROW_MERGE); // 合并行
         // 将数据汇总
         List<List<Object>> sheetDataList = new ArrayList<>();
         sheetDataList.add(head);
@@ -49,7 +49,7 @@ public class ApachePoiExcelServiceImpl implements ApachePoiExcelService {
         Map<Integer, List<String>> selectMap = new HashMap<>(1);
         selectMap.put(2, Arrays.asList("男", "女"));
         selectMap.put(4, Arrays.asList("北京", "上海"));
-        ExcelUtils.export(response,"用户表", sheetDataList, selectMap);
+        ApachePoiExcelUtils.export(response,"用户表", sheetDataList, selectMap);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class ApachePoiExcelServiceImpl implements ApachePoiExcelService {
         test1.setSex(1);
         list.add(test1);
 
-        ExcelUtils.export(response, "测试", list, ApachePoiExcelExportVo.class);
+        ApachePoiExcelUtils.export(response, "测试", list, ApachePoiExcelExportVo.class);
     }
 
     @Override
@@ -106,20 +106,20 @@ public class ApachePoiExcelServiceImpl implements ApachePoiExcelService {
         sheets.put("文化课", sheet1);
         sheets.put("艺术课", sheet2);
         // 导出数据
-        ExcelUtils.exportManySheet(response, "学生成绩表", sheets);
+        ApachePoiExcelUtils.exportManySheet(response, "学生成绩表", sheets);
     }
 
 
     @Override
     public JSONArray importToJSON(MultipartFile file) throws Exception {
-        JSONArray array = ExcelUtils.readMultipartFile(file);
+        JSONArray array = ApachePoiExcelUtils.readMultipartFile(file);
         System.out.println("导入数据为:" + array);
         return array;
     }
 
     @Override
     public void importToVo(MultipartFile file) throws Exception {
-        List<ApachePoiExcelImportVo> list = ExcelUtils.readMultipartFile(file, ApachePoiExcelImportVo.class);
+        List<ApachePoiExcelImportVo> list = ApachePoiExcelUtils.readMultipartFile(file, ApachePoiExcelImportVo.class);
         for (ApachePoiExcelImportVo vo : list) {
             System.out.println(vo.toString());
         }
@@ -127,7 +127,7 @@ public class ApachePoiExcelServiceImpl implements ApachePoiExcelService {
 
     @Override
     public void importManySheet(MultipartFile file) throws Exception {
-        Map<String, JSONArray> map = ExcelUtils.readFileManySheet(file);
+        Map<String, JSONArray> map = ApachePoiExcelUtils.readFileManySheet(file);
         map.forEach((key, value) -> {
             System.out.println("Sheet名称：" + key);
             System.out.println("Sheet数据：" + value);

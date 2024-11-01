@@ -23,9 +23,9 @@ import java.util.stream.Stream;
  * @create: 2021-11-12 15:43
  **/
 @Slf4j
-public class WordUtil {
+public class ApachePoiWordUtil {
 
-     static Logger logger = LoggerFactory.getLogger(WordUtil.class);
+     static Logger logger = LoggerFactory.getLogger(ApachePoiWordUtil.class);
 
     /**
      * 水印字体字体

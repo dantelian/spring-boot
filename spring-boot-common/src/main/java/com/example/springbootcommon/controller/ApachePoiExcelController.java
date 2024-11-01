@@ -1,7 +1,7 @@
 package com.example.springbootcommon.controller;
 
 import com.alibaba.fastjson.JSONArray;
-import com.example.springbootcommon.common.util.ExcelUtils;
+import com.example.springbootcommon.common.util.ApachePoiExcelUtils;
 import com.example.springbootcommon.model.vo.ApachePoiExcelExportVo;
 import com.example.springbootcommon.service.ApachePoiExcelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +51,7 @@ public class ApachePoiExcelController {
 //        ExcelUtils.exportTemplate(response, "测试模板", TestExcelExportVo.class);
 
         // 导出模板包含样本数据
-        ExcelUtils.exportTemplate(response, "测试模板", ApachePoiExcelExportVo.class, true);
+        ApachePoiExcelUtils.exportTemplate(response, "测试模板", ApachePoiExcelExportVo.class, true);
     }
 
     /**

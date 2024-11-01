@@ -37,7 +37,7 @@ import java.util.regex.Pattern;
  * @create: 2023-01-10 15:09
  **/
 @SuppressWarnings("unused")
-public class ExcelUtils {
+public class ApachePoiExcelUtils {
     private static final String XLSX = ".xlsx";
     private static final String XLS = ".xls";
     public static final String ROW_MERGE = "row_merge";

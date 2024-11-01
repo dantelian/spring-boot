@@ -2,7 +2,7 @@ package com.example.springbootcommon.serviceImpl;
 
 import com.deepoove.poi.XWPFTemplate;
 import com.deepoove.poi.data.*;
-import com.example.springbootcommon.common.util.WordUtil;
+import com.example.springbootcommon.common.util.ApachePoiWordUtil;
 import com.example.springbootcommon.service.ApachePoiWordService;
 import fr.opensagres.poi.xwpf.converter.pdf.PdfConverter;
 import fr.opensagres.poi.xwpf.converter.pdf.PdfOptions;
@@ -30,26 +30,26 @@ public class ApachePoiWordServiceImpl implements ApachePoiWordService {
         // 创建word对象并设置页面布局
         XWPFDocument doc = new XWPFDocument();
         // 设置页面大小
-        WordUtil.setPageSize(doc, 11907, 16840);
+        ApachePoiWordUtil.setPageSize(doc, 11907, 16840);
         // 设置页边距
-        WordUtil.setPageMar(doc, 720, 1440, 720, 1440);
+        ApachePoiWordUtil.setPageMar(doc, 720, 1440, 720, 1440);
         // 文章题目
-        WordUtil.createThemeParagraph(doc, "文章题目", null);
+        ApachePoiWordUtil.createThemeParagraph(doc, "文章题目", null);
         // 创建一级标题
-        WordUtil.createTitleParagraph(doc, "一、一级标题", 18, "宋体");
+        ApachePoiWordUtil.createTitleParagraph(doc, "一、一级标题", 18, "宋体");
 
         // 创建表格
         XWPFTable infoTable = doc.createTable(4, 6);
-        WordUtil.setTblLayoutType(infoTable);
+        ApachePoiWordUtil.setTblLayoutType(infoTable);
         // 设置表格总宽度与水平对齐方式
-        WordUtil.setTableWidthAndHAlign(infoTable, "10575", STJc.CENTER);
+        ApachePoiWordUtil.setTableWidthAndHAlign(infoTable, "10575", STJc.CENTER);
         // 设置表格行高
-        WordUtil.setTableHeight(infoTable, 560, STVerticalJc.CENTER);
+        ApachePoiWordUtil.setTableHeight(infoTable, 560, STVerticalJc.CENTER);
 
         // 合并行（第一列的第一第二行）
-        WordUtil.mergeCellsVertically(infoTable, 0, 0, 1);
+        ApachePoiWordUtil.mergeCellsVertically(infoTable, 0, 0, 1);
         // 合并列（第三行的第二第三列）
-        WordUtil.mergeCellsHorizontal(infoTable, 2, 1, 2);
+        ApachePoiWordUtil.mergeCellsHorizontal(infoTable, 2, 1, 2);
 
         //设置表格样式
         Integer[] cW = {1588, 652, 2291, 1372, 2376, 2376}; // 指定每列宽度
@@ -101,13 +101,13 @@ public class ApachePoiWordServiceImpl implements ApachePoiWordService {
         row.add(6);
         tableData.add(row);
         // 往表格中填充数据
-        WordUtil.fillTableData(infoTable, tableData);
+        ApachePoiWordUtil.fillTableData(infoTable, tableData);
 
         // 插入图片
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("static/snow1.jpg");
         try {
             String filename = "snow1.jpg";
-            WordUtil.createPicParagraph(doc, inputStream, XWPFDocument.PICTURE_TYPE_JPEG, filename, 200, 200);
+            ApachePoiWordUtil.createPicParagraph(doc, inputStream, XWPFDocument.PICTURE_TYPE_JPEG, filename, 200, 200);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InvalidFormatException e) {
@@ -122,7 +122,7 @@ public class ApachePoiWordServiceImpl implements ApachePoiWordService {
 
         // 设置水印
         // 方式一
-        WordUtil.setWordWaterMark(doc, "机密", "#d8d8d8");
+        ApachePoiWordUtil.setWordWaterMark(doc, "机密", "#d8d8d8");
         // 方式二
 //        WordUtil.makeFullWaterMarkByWordArt(doc, "机密", "#888888", "0.7pt","-30");
 
