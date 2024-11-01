@@ -77,4 +77,8 @@
         <version>3.2.0</version>
     </dependency>
     ````
+- 图片压缩
+    > 示例：_/image/compressImage_
+
+
 

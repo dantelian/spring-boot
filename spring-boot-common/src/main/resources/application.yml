@@ -1,2 +1,9 @@
 server:
   port: 9701
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+
+
