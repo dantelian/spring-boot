@@ -9,7 +9,7 @@ import lombok.Data;
  * @create: 2023-01-10 15:32
  **/
 @Data
-public class TestExcelImportVo {
+public class ApachePoiExcelImportVo {
 
     // 行号
     private Integer rowNum;

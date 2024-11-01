@@ -1,4 +1,4 @@
-package com.example.springbootcommon.model.entity;
+package com.example.springbootcommon.model.easyPoi;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.fasterxml.jackson.annotation.JsonFormat;

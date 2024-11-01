@@ -9,7 +9,7 @@ import lombok.Data;
  * @create: 2023-01-10 16:16
  **/
 @Data
-public class TestExcelExportVo {
+public class ApachePoiExcelExportVo {
 
     @ExcelExport(value = "序号", sort = 1, example = "1")
     private String num;
