@@ -56,14 +56,13 @@ public class EasyExcelUtil {
     //配置字体，表头背景等
     private static HorizontalCellStyleStrategy setConfigure() {
         // 头的策略
-
         WriteCellStyle headWriteCellStyle = new WriteCellStyle();
         // 背景色
-        headWriteCellStyle.setFillForegroundColor(IndexedColors.YELLOW1.getIndex()); // 黄色背景
+        headWriteCellStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex()); // 黄色背景
         WriteFont headWriteFont = new WriteFont();
         // 加粗
         headWriteFont.setBold(true);
-//        headWriteFont.setFontHeightInPoints((short) 14); // 设置行高，不重要
+        headWriteFont.setFontHeightInPoints((short) 15); // 设置行高
         headWriteCellStyle.setWriteFont(headWriteFont);
 
 
@@ -79,10 +78,10 @@ public class EasyExcelUtil {
         contentWriteCellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
         //导出数据水平居中
         contentWriteCellStyle.setHorizontalAlignment(HorizontalAlignment.CENTER);
-        contentWriteCellStyle.setBorderLeft(BorderStyle.NONE);
-        contentWriteCellStyle.setBorderTop(BorderStyle.NONE);
-        contentWriteCellStyle.setBorderRight(BorderStyle.NONE);
-        contentWriteCellStyle.setBorderBottom(BorderStyle.NONE);
+        contentWriteCellStyle.setBorderLeft(BorderStyle.THIN);
+        contentWriteCellStyle.setBorderTop(BorderStyle.THIN);
+        contentWriteCellStyle.setBorderRight(BorderStyle.THIN);
+        contentWriteCellStyle.setBorderBottom(BorderStyle.THIN);
 
         //设置 自动换行
         contentWriteCellStyle.setWrapped(true);
