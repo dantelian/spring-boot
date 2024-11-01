@@ -3,9 +3,9 @@ package com.example.springbootcommon.common.util;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.example.springbootcommon.common.office.ExcelClassField;
-import com.example.springbootcommon.common.office.ExcelExport;
-import com.example.springbootcommon.common.office.ExcelImport;
+import com.example.springbootcommon.common.apachePoi.ExcelClassField;
+import com.example.springbootcommon.common.apachePoi.ExcelExport;
+import com.example.springbootcommon.common.apachePoi.ExcelImport;
 import org.apache.poi.hssf.usermodel.HSSFDataValidation;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;

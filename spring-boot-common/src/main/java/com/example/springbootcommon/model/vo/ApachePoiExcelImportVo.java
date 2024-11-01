@@ -1,6 +1,6 @@
 package com.example.springbootcommon.model.vo;
 
-import com.example.springbootcommon.common.office.ExcelImport;
+import com.example.springbootcommon.common.apachePoi.ExcelImport;
 import lombok.Data;
 
 /**
