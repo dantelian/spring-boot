@@ -58,7 +58,7 @@ public class EasyExcelUtil {
         // 头的策略
         WriteCellStyle headWriteCellStyle = new WriteCellStyle();
         // 背景色
-        headWriteCellStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex()); // 黄色背景
+        headWriteCellStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex()); // 灰色背景
         WriteFont headWriteFont = new WriteFont();
         // 加粗
         headWriteFont.setBold(true);
