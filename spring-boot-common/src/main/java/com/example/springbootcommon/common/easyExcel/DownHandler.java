@@ -11,9 +11,7 @@ import java.lang.reflect.Field;
 import java.util.Map;
 
 /**
- * @author admin
- * @date 2020/5/17
- * @desc
+ * 下拉处理器
  */
 public class DownHandler implements SheetWriteHandler {
 
