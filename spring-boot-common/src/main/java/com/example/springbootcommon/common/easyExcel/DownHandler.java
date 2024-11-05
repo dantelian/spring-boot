@@ -33,11 +33,13 @@ public class DownHandler implements SheetWriteHandler {
         Sheet sheet = writeSheetHolder.getSheet();
         ///开始设置下拉框 HSSFWorkbook
         DataValidationHelper helper = sheet.getDataValidationHelper();
-        Field[] fields = writeWorkbookHolder.getClazz().getDeclaredFields();
-        int length = fields.length;
-        for (int i = 0; i < length; i++) {
-            if(fields[i].isAnnotationPresent(DropDown.class)){
-                dropDown(helper, sheet, i, fields[i].getDeclaredAnnotation(DropDown.class).value());
+        if (null != writeWorkbookHolder.getClazz()) {
+            Field[] fields = writeWorkbookHolder.getClazz().getDeclaredFields();
+            int length = fields.length;
+            for (int i = 0; i < length; i++) {
+                if(fields[i].isAnnotationPresent(DropDown.class)){
+                    dropDown(helper, sheet, i, fields[i].getDeclaredAnnotation(DropDown.class).value());
+                }
             }
         }
         if (dropDownMap == null) {
