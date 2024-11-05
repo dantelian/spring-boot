@@ -12,4 +12,11 @@ public interface EasyExcelService {
      */
     void exportExcelMultistageHeader(HttpServletResponse response) throws IOException;
 
+    /**
+     * easyexcel 导出下拉
+     * @param response
+     * @throws IOException
+     */
+    void exportExcelSelect(HttpServletResponse response) throws IOException;
+
 }

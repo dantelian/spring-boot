@@ -27,5 +27,13 @@ public class EasyExcelController {
         easyExcelService.exportExcelMultistageHeader(response);
     }
 
+    /**
+     * easyexcel 导出下拉
+     */
+    @GetMapping("/exportExcelSelect")
+    public void exportExcelSelect(HttpServletResponse response) throws IOException {
+        easyExcelService.exportExcelSelect(response);
+    }
+
 
 }

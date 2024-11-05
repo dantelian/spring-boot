@@ -77,6 +77,12 @@
         <version>3.2.0</version>
     </dependency>
     ````
+
+    - 导出下拉
+    > 示例：_/easyExcel/exportExcelSelect_
+  
+    > 参考：<https://blog.csdn.net/weixin_42653892/article/details/122618138>
+
 - 图片压缩
     > 示例：_/image/compressImage_
 

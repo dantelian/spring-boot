@@ -2,12 +2,16 @@ package com.example.springbootcommon.serviceImpl;
 
 import com.alibaba.excel.util.ListUtils;
 import com.example.springbootcommon.common.util.EasyExcelUtil;
+import com.example.springbootcommon.model.easyexcel.UserModel;
 import com.example.springbootcommon.service.EasyExcelService;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class EasyExcelServiceImpl implements EasyExcelService {
@@ -31,7 +35,21 @@ public class EasyExcelServiceImpl implements EasyExcelService {
         contentList.add(ListUtils.newArrayList("0001", "190.76", "2024-05-10", "12", "6.78", "2024-02-15","11","183.97"));
         contentList.add(ListUtils.newArrayList("0001", "190.77", "2024-05-10", "13", "6.88", "2024-02-15","14","183.97"));
 
-        EasyExcelUtil.exportMultistageHeaderExcel("fileName", "sheetName", headTitles, contentList, response);
+        EasyExcelUtil.exportExcelMultistageHeader("fileName", "sheetName", headTitles, contentList, response);
+    }
+
+    @Override
+    public void exportExcelSelect(HttpServletResponse response) throws IOException {
+        List<UserModel> contentData = new ArrayList<UserModel>() {{
+            add(new UserModel(1, "夏弥", "女", "13612345678", null, null));
+            add(new UserModel(2, "夏达", "女", "13912345678", "管理员", null));
+        }};
+
+        Map<Integer, String[]> dropDownMap = new HashMap<>();
+//        dropDownMap.put(2, "男,女".split(","));
+        dropDownMap.put(4, "普通用户,管理员".split(","));
+
+        EasyExcelUtil.exportExcelSelect("exportExcelSelect", "sheetName", contentData, dropDownMap, response, UserModel.class);
     }
 
 }
