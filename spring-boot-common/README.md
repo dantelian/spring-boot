@@ -25,7 +25,7 @@
         poi-tl 基于Apache POI的Word模板引擎，较简单
     
     - apache.poi excel
-        - 导出excel-Map(支持下拉)：_/apachePoiExcel/exportMap_
+        - 导出excel-Map(支持下拉、合并单元格)：_/apachePoiExcel/exportMap_
         - 导出excel-根据对象导出：_/apachePoiExcel/exportVo_
         - 导出excel-导出模板：_/apachePoiExcel/exportModel_
         - 导出excel-多sheet页：_/apachePoiExcel/exportManySheet_
