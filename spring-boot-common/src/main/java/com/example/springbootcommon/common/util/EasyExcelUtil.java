@@ -9,7 +9,9 @@ import com.alibaba.excel.write.metadata.WriteTable;
 import com.alibaba.excel.write.metadata.style.WriteCellStyle;
 import com.alibaba.excel.write.metadata.style.WriteFont;
 import com.alibaba.excel.write.style.HorizontalCellStyleStrategy;
+import com.example.springbootcommon.common.easyExcel.CascadeSelectWriteHandler;
 import com.example.springbootcommon.common.easyExcel.DownHandler;
+import com.example.springbootcommon.common.easyExcel.SelectItem;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -79,6 +81,23 @@ public class EasyExcelUtil {
         EasyExcel.write(getOutputStream(fileName, response), clazz)
                 .excelType(ExcelTypeEnum.XLSX).sheet(sheetName)
                 .registerWriteHandler(new DownHandler(dropDownMap))
+                .registerWriteHandler(getCellStyle()).doWrite(contentData);
+    }
+
+    /**
+     * 级联下拉
+     * @param fileName      文件名称
+     * @param sheetName     工作表名称
+     * @param contentData   表内容
+     * @param selectItems   级联选项
+     * @param response
+     * @param clazz
+     * @throws IOException
+     */
+    public static void exportExcelCascadeSelect(String fileName, String sheetName, List<?> contentData, List<SelectItem> selectItems, HttpServletResponse response, Class<?> clazz) throws IOException {
+        EasyExcel.write(getOutputStream(fileName, response), clazz)
+                .excelType(ExcelTypeEnum.XLSX).sheet(sheetName)
+                .registerWriteHandler(new CascadeSelectWriteHandler(selectItems))
                 .registerWriteHandler(getCellStyle()).doWrite(contentData);
     }
 

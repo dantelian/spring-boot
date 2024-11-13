@@ -83,6 +83,11 @@
   
     > 参考：<https://blog.csdn.net/weixin_42653892/article/details/122618138>
 
+    - 导出级联下拉
+    > 示例：_/easyExcel/exportExcelCascadeSelect_
+
+    > 参考：<https://www.cnblogs.com/lcy2020/p/18494495>
+
 - 图片压缩
     > 示例：_/image/compressImage_
 

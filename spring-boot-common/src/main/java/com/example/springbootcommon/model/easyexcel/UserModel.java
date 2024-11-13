@@ -13,7 +13,6 @@ import java.io.Serializable;
  * 用户信息
  */
 @Data
-@AllArgsConstructor
 @ColumnWidth(20)
 public class UserModel implements Serializable {
 
@@ -36,5 +35,22 @@ public class UserModel implements Serializable {
     // 忽略字段
     @ExcelIgnore
     private String ignore;
+
+    @ExcelProperty(value = "省", index = 5)
+    private String province;
+
+    @ExcelProperty(value = "市", index = 6)
+    private String city;
+
+    @ExcelProperty(value = "区", index = 7)
+    private String area;
+
+    public UserModel(Integer index, String username, String gender, String phone, String role) {
+        this.index = index;
+        this.username = username;
+        this.gender = gender;
+        this.phone = phone;
+        this.role = role;
+    }
 
 }

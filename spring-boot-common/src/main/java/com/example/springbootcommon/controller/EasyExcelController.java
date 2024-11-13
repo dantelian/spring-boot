@@ -35,5 +35,12 @@ public class EasyExcelController {
         easyExcelService.exportExcelSelect(response);
     }
 
+    /**
+     * easyexcel 导出级联下拉
+     */
+    @GetMapping("/exportExcelCascadeSelect")
+    public void exportExcelCascadeSelect(HttpServletResponse response) throws IOException {
+        easyExcelService.exportExcelCascadeSelect(response);
+    }
 
 }

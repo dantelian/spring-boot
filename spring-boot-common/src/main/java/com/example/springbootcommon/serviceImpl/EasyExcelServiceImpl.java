@@ -1,6 +1,7 @@
 package com.example.springbootcommon.serviceImpl;
 
 import com.alibaba.excel.util.ListUtils;
+import com.example.springbootcommon.common.easyExcel.SelectItem;
 import com.example.springbootcommon.common.util.EasyExcelUtil;
 import com.example.springbootcommon.model.easyexcel.UserModel;
 import com.example.springbootcommon.service.EasyExcelService;
@@ -41,8 +42,8 @@ public class EasyExcelServiceImpl implements EasyExcelService {
     @Override
     public void exportExcelSelect(HttpServletResponse response) throws IOException {
         List<UserModel> contentData = new ArrayList<UserModel>() {{
-            add(new UserModel(1, "夏弥", "女", "13612345678", null, null));
-            add(new UserModel(2, "夏达", "女", "13912345678", "管理员", null));
+            add(new UserModel(1, "夏弥", "女", "13612345678", null));
+            add(new UserModel(2, "夏达", "女", "13912345678", "管理员"));
         }};
 
         Map<Integer, String[]> dropDownMap = new HashMap<>();
@@ -50,6 +51,37 @@ public class EasyExcelServiceImpl implements EasyExcelService {
         dropDownMap.put(4, "普通用户,管理员".split(","));
 
         EasyExcelUtil.exportExcelSelect("exportExcelSelect", "sheetName", contentData, dropDownMap, response, UserModel.class);
+    }
+
+    @Override
+    public void exportExcelCascadeSelect(HttpServletResponse response) throws IOException {
+        // 准备数据
+        // 数据
+        List<UserModel> contentData = new ArrayList<UserModel>() {{
+            add(new UserModel(1, "夏弥", "女", "13612345678", null));
+            add(new UserModel(2, "夏达", "女", "13912345678", "管理员"));
+        }};
+
+        // 一级下拉
+        SelectItem selectItem = new SelectItem(5);
+        selectItem.addDataItem(ListUtils.newArrayList("浙江省","河南省"));
+        // 二级下拉
+        SelectItem subSelectItem = new SelectItem(6);
+        subSelectItem.addDataItem("浙江省",ListUtils.newArrayList("杭州市","宁波市"));
+        subSelectItem.addDataItem("河南省",ListUtils.newArrayList("郑州市","洛阳市","开封市"));
+        selectItem.setSubSelect(subSelectItem);
+        // 三级下拉
+        SelectItem selectItem3 = new SelectItem(7);
+        selectItem3.addDataItem("杭州市",ListUtils.newArrayList("滨江区","西湖区"));
+        selectItem3.addDataItem("宁波市",ListUtils.newArrayList("宁波市1","宁波市2"));
+        selectItem3.addDataItem("郑州市",ListUtils.newArrayList("金水区","二七区"));
+        selectItem3.addDataItem("洛阳市",ListUtils.newArrayList("洛阳市1","洛阳市2"));
+        selectItem3.addDataItem("开封市",ListUtils.newArrayList("开封市1","开封市2"));
+        subSelectItem.setSubSelect(selectItem3);
+
+        List<SelectItem> selectItems = ListUtils.newArrayList(selectItem);
+
+        EasyExcelUtil.exportExcelCascadeSelect("exportExcelCascadeSelect", "sheetName", contentData, selectItems, response, UserModel.class);
     }
 
 }
