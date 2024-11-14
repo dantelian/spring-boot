@@ -1,14 +1,19 @@
 package com.example.springbootcommon.serviceImpl;
 
+import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.excel.util.ListUtils;
+import com.example.springbootcommon.common.easyExcel.CascadeSelectWriteHandler;
 import com.example.springbootcommon.common.easyExcel.SelectItem;
 import com.example.springbootcommon.common.util.EasyExcelUtil;
+import com.example.springbootcommon.model.easyexcel.ImageModel;
 import com.example.springbootcommon.model.easyexcel.UserModel;
 import com.example.springbootcommon.service.EasyExcelService;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -82,6 +87,20 @@ public class EasyExcelServiceImpl implements EasyExcelService {
         List<SelectItem> selectItems = ListUtils.newArrayList(selectItem);
 
         EasyExcelUtil.exportExcelCascadeSelect("exportExcelCascadeSelect", "sheetName", contentData, selectItems, response, UserModel.class);
+    }
+
+    @Override
+    public void exportExcelImage(HttpServletResponse response) throws IOException {
+        List<ImageModel> contentData = new ArrayList<ImageModel>() {{
+            add(new ImageModel("夏弥", new URL("https://picx.zhimg.com/v2-5ff9fb52f7607b5ec1648ee16049e8e5_1440w.jpg")));
+            add(new ImageModel("夏达", new URL("https://pic2.zhimg.com/v2-8d3f288feae0e511dee5c3d6735ca999_1440w.jpg")));
+        }};
+
+        String fileName = "exportExcelImage";
+        String sheetName = "sheetName";
+        EasyExcel.write(EasyExcelUtil.getOutputStream(fileName, response), ImageModel.class)
+                .excelType(ExcelTypeEnum.XLSX).sheet(sheetName)
+                .registerWriteHandler(EasyExcelUtil.getCellStyle()).doWrite(contentData);
     }
 
 }

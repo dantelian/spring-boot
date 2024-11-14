@@ -105,7 +105,7 @@ public class EasyExcelUtil {
      * 配置字体，表头背景等
      * @return
      */
-    private static HorizontalCellStyleStrategy getCellStyle() {
+    public static HorizontalCellStyleStrategy getCellStyle() {
         // 头的策略
         WriteCellStyle headWriteCellStyle = new WriteCellStyle();
         // 背景色
@@ -142,7 +142,7 @@ public class EasyExcelUtil {
     /**
      * 设置请求
      */
-    private static OutputStream getOutputStream(String fileName, HttpServletResponse response) throws IOException {
+    public static OutputStream getOutputStream(String fileName, HttpServletResponse response) throws IOException {
         fileName = URLEncoder.encode(fileName, "UTF-8");
         // 告诉浏览器用什么软件可以打开此文件
         response.setHeader("content-Type", "application/vnd.ms-excel");

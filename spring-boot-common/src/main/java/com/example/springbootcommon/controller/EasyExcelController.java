@@ -43,4 +43,14 @@ public class EasyExcelController {
         easyExcelService.exportExcelCascadeSelect(response);
     }
 
+    /**
+     * 导出图片
+     * @param response
+     * @throws IOException
+     */
+    @GetMapping("/exportExcelImage")
+    public void exportExcelImage(HttpServletResponse response) throws IOException {
+        easyExcelService.exportExcelImage(response);
+    }
+
 }

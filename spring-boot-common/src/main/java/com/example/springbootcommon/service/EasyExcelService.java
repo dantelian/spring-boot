@@ -26,4 +26,11 @@ public interface EasyExcelService {
      */
     void exportExcelCascadeSelect(HttpServletResponse response) throws IOException;
 
+    /**
+     * easyexcel 导出图片
+     * @param response
+     * @throws IOException
+     */
+    void exportExcelImage(HttpServletResponse response) throws IOException;
+
 }

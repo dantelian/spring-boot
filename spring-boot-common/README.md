@@ -88,6 +88,11 @@
 
     > 参考：<https://www.cnblogs.com/lcy2020/p/18494495>
 
+    - 导出图片
+    > 示例：_/easyExcel/exportExcelImage_
+
+    > 参考：<https://blog.csdn.net/xhmico/article/details/137724425>
+
 - 图片压缩
     > 示例：_/image/compressImage_
 
