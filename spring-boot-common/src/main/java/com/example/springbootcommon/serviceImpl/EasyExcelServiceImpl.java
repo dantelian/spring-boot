@@ -3,12 +3,19 @@ package com.example.springbootcommon.serviceImpl;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.excel.util.ListUtils;
+import com.alibaba.excel.write.metadata.style.WriteCellStyle;
+import com.alibaba.excel.write.metadata.style.WriteFont;
+import com.alibaba.excel.write.style.HorizontalCellStyleStrategy;
 import com.example.springbootcommon.common.easyExcel.CascadeSelectWriteHandler;
+import com.example.springbootcommon.common.easyExcel.CustomRowHeightStyleStrategy;
 import com.example.springbootcommon.common.easyExcel.SelectItem;
 import com.example.springbootcommon.common.util.EasyExcelUtil;
 import com.example.springbootcommon.model.easyexcel.ImageModel;
 import com.example.springbootcommon.model.easyexcel.UserModel;
 import com.example.springbootcommon.service.EasyExcelService;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
@@ -100,7 +107,29 @@ public class EasyExcelServiceImpl implements EasyExcelService {
         String sheetName = "sheetName";
         EasyExcel.write(EasyExcelUtil.getOutputStream(fileName, response), ImageModel.class)
                 .excelType(ExcelTypeEnum.XLSX).sheet(sheetName)
-                .registerWriteHandler(EasyExcelUtil.getCellStyle()).doWrite(contentData);
+                .registerWriteHandler(EasyExcelUtil.getCellStyle())
+                .doWrite(contentData);
+    }
+
+    @Override
+    public void exportExcelTemplate(HttpServletResponse response) throws IOException {
+        List<ImageModel> contentData = new ArrayList<ImageModel>() {{
+            add(new ImageModel("夏弥", new URL("https://picx.zhimg.com/v2-5ff9fb52f7607b5ec1648ee16049e8e5_1440w.jpg")));
+            add(new ImageModel("夏达", new URL("https://pic2.zhimg.com/v2-8d3f288feae0e511dee5c3d6735ca999_1440w.jpg")));
+        }};
+
+        // 模板文件路径
+//        String templatePath = "C:\\Users\\ddd\\Desktop\\easy_excel_temp.xlsx";
+        String templatePath = this.getClass().getClassLoader().getResource("templates/easy_excel_temp.xlsx").getPath();;
+        String fileName = "exportExcelTemplate";
+        String sheetName = "sheetName";
+
+        EasyExcel.write(EasyExcelUtil.getOutputStream(fileName, response))
+                .withTemplate(templatePath)
+                .sheet(sheetName)
+                .registerWriteHandler(new CustomRowHeightStyleStrategy(100))
+                .registerWriteHandler(EasyExcelUtil.getCellStyle())
+                .doWrite(contentData);
     }
 
 }

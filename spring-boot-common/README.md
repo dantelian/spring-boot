@@ -65,11 +65,7 @@
         > 参考：<https://blog.csdn.net/blueberrya/article/details/123008148>
 
 - easyexcel
-    - 导出多级表头excel
-    > 示例：_/easyExcel/exportExcelMultistageHeader_
-
-    > 参考：<https://blog.csdn.net/qq_43301206/article/details/131844772>
-    ````
+  ````
     <!--easyexcel-->
     <dependency>
         <groupId>com.alibaba</groupId>
@@ -77,6 +73,17 @@
         <version>3.2.0</version>
     </dependency>
     ````
+
+    - 导出多级表头excel
+    > 方式一：  
+    动态表头  
+    示例：_/easyExcel/exportExcelMultistageHeader_  
+    参考：<https://blog.csdn.net/qq_43301206/article/details/131844772>  
+    方式二：  
+    或者使用注解实现  
+    @ExcelProperty(value = {"表头一","表头二"})  
+    参考：<https://blog.csdn.net/lol19950605/article/details/135776897>  
+    该文档还支持：批注、公式、合并单元格、自定义样式、超链接、设置密码等
 
     - 导出下拉
     > 示例：_/easyExcel/exportExcelSelect_
@@ -92,6 +99,9 @@
     > 示例：_/easyExcel/exportExcelImage_
 
     > 参考：<https://blog.csdn.net/xhmico/article/details/137724425>
+
+    - 根据模板导出
+    > 示例：_/easyExcel/exportExcelTemplate_
 
 - 图片压缩
     > 示例：_/image/compressImage_

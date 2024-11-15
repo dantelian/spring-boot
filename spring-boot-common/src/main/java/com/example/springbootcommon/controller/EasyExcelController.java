@@ -53,4 +53,14 @@ public class EasyExcelController {
         easyExcelService.exportExcelImage(response);
     }
 
+    /**
+     * 导出-根据模板
+     * @param response
+     * @throws IOException
+     */
+    @GetMapping("/exportExcelTemplate")
+    public void exportExcelTemplate(HttpServletResponse response) throws IOException {
+        easyExcelService.exportExcelTemplate(response);
+    }
+
 }
