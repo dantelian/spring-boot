@@ -2,22 +2,13 @@ package com.example.springbootcommon.model.easyexcel;
 
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
-import com.alibaba.excel.annotation.write.style.ColumnWidth;
 import com.example.springbootcommon.common.easyExcel.DropDown;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-/**
- * 用户信息
- */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@ColumnWidth(20)
-public class UserModel implements Serializable {
+public class UserCascadeSelectModel implements Serializable {
 
     @ExcelProperty(value = "序号", index = 0)
     private Integer index;
@@ -35,4 +26,24 @@ public class UserModel implements Serializable {
     @ExcelProperty(value = "角色", index = 4)
     private String role;
 
+    // 忽略字段
+    @ExcelIgnore
+    private String ignore;
+
+    @ExcelProperty(value = "省", index = 5)
+    private String province;
+
+    @ExcelProperty(value = "市", index = 6)
+    private String city;
+
+    @ExcelProperty(value = "区", index = 7)
+    private String area;
+
+    public UserCascadeSelectModel(Integer index, String username, String gender, String phone, String role) {
+        this.index = index;
+        this.username = username;
+        this.gender = gender;
+        this.phone = phone;
+        this.role = role;
+    }
 }

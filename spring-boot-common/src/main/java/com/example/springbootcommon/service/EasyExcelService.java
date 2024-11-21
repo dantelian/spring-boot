@@ -1,7 +1,11 @@
 package com.example.springbootcommon.service;
 
+import com.example.springbootcommon.model.easyexcel.UserModel;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 public interface EasyExcelService {
 
@@ -46,5 +50,7 @@ public interface EasyExcelService {
      * @throws IOException
      */
     void exportExcelParamsTemplate(HttpServletResponse response) throws IOException;
+
+    List<UserModel> importExcelClass(MultipartFile file) throws IOException;
 
 }

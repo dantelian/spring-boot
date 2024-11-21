@@ -2,6 +2,7 @@ package com.example.springbootcommon.serviceImpl;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
+import com.alibaba.excel.converters.string.StringStringConverter;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.excel.util.DateUtils;
 import com.alibaba.excel.util.ListUtils;
@@ -16,12 +17,14 @@ import com.example.springbootcommon.common.easyExcel.ImageModifyHandler;
 import com.example.springbootcommon.common.easyExcel.SelectItem;
 import com.example.springbootcommon.common.util.EasyExcelUtil;
 import com.example.springbootcommon.model.easyexcel.ImageModel;
+import com.example.springbootcommon.model.easyexcel.UserCascadeSelectModel;
 import com.example.springbootcommon.model.easyexcel.UserModel;
 import com.example.springbootcommon.service.EasyExcelService;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -71,9 +74,9 @@ public class EasyExcelServiceImpl implements EasyExcelService {
     public void exportExcelCascadeSelect(HttpServletResponse response) throws IOException {
         // 准备数据
         // 数据
-        List<UserModel> contentData = new ArrayList<UserModel>() {{
-            add(new UserModel(1, "夏弥", "女", "13612345678", null));
-            add(new UserModel(2, "夏达", "女", "13912345678", "管理员"));
+        List<UserCascadeSelectModel> contentData = new ArrayList<UserCascadeSelectModel>() {{
+            add(new UserCascadeSelectModel(1, "夏弥", "女", "13612345678", null));
+            add(new UserCascadeSelectModel(2, "夏达", "女", "13912345678", "管理员"));
         }};
 
         // 一级下拉
@@ -95,7 +98,7 @@ public class EasyExcelServiceImpl implements EasyExcelService {
 
         List<SelectItem> selectItems = ListUtils.newArrayList(selectItem);
 
-        EasyExcelUtil.exportExcelCascadeSelect("exportExcelCascadeSelect", "sheetName", contentData, selectItems, response, UserModel.class);
+        EasyExcelUtil.exportExcelCascadeSelect("exportExcelCascadeSelect", "sheetName", contentData, selectItems, response, UserCascadeSelectModel.class);
     }
 
     @Override
@@ -180,6 +183,17 @@ public class EasyExcelServiceImpl implements EasyExcelService {
 
         //填充完成
         excelWriter.finish();
+    }
+
+    @Override
+    public List<UserModel> importExcelClass(MultipartFile file) throws IOException {
+        List<UserModel> list = EasyExcel.read(file.getInputStream())
+//                .registerConverter(new StringStringConverter())
+                .head(UserModel.class)
+                .sheet()
+                .headRowNumber(1)
+                .doReadSync();
+        return list;
     }
 
 }

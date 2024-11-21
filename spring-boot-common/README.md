@@ -108,6 +108,10 @@
     <https://blog.csdn.net/xhmico/article/details/137461979>  
     <https://blog.csdn.net/weixin_36340729/article/details/128705280>
 
+    - 导入Excel数据为指定对象：_/easyExcel/importExcelClass_
+
+    > 参考：<https://www.jianshu.com/p/1ef3b30c5bea>
+
 - 图片压缩
     > 示例：_/image/compressImage_
 

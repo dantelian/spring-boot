@@ -1,13 +1,14 @@
 package com.example.springbootcommon.controller;
 
+import com.example.springbootcommon.model.easyexcel.UserModel;
 import com.example.springbootcommon.service.EasyExcelService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * easyexcel
@@ -44,7 +45,7 @@ public class EasyExcelController {
     }
 
     /**
-     * 导出图片
+     * easyexcel 导出图片
      * @param response
      * @throws IOException
      */
@@ -54,7 +55,7 @@ public class EasyExcelController {
     }
 
     /**
-     * 导出-根据模板
+     * easyexcel 导出-根据模板
      * @param response
      * @throws IOException
      */
@@ -64,13 +65,22 @@ public class EasyExcelController {
     }
 
     /**
-     * 导出-根据模板-根据参数填充
+     * easyexcel 导出-根据模板-根据参数填充
      * @param response
      * @throws IOException
      */
     @GetMapping("/exportExcelParamsTemplate")
     public void exportExcelParamsTemplate(HttpServletResponse response) throws IOException {
         easyExcelService.exportExcelParamsTemplate(response);
+    }
+
+
+    /**
+     * easyexcel导入数据-根据实体
+     */
+    @PostMapping("/importExcelClass")
+    public List<UserModel> importExcelClass(@RequestParam("file") MultipartFile file) throws IOException {
+        return easyExcelService.importExcelClass(file);
     }
 
 }
