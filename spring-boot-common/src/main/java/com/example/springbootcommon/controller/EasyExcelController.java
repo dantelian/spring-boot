@@ -63,4 +63,14 @@ public class EasyExcelController {
         easyExcelService.exportExcelTemplate(response);
     }
 
+    /**
+     * 导出-根据模板-根据参数填充
+     * @param response
+     * @throws IOException
+     */
+    @GetMapping("/exportExcelParamsTemplate")
+    public void exportExcelParamsTemplate(HttpServletResponse response) throws IOException {
+        easyExcelService.exportExcelParamsTemplate(response);
+    }
+
 }

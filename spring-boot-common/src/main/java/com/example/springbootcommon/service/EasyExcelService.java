@@ -40,4 +40,11 @@ public interface EasyExcelService {
      */
     void exportExcelTemplate(HttpServletResponse response) throws IOException;
 
+    /**
+     * 导出-根据模板-根据参数填充
+     * @param response
+     * @throws IOException
+     */
+    void exportExcelParamsTemplate(HttpServletResponse response) throws IOException;
+
 }

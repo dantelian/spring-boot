@@ -101,7 +101,12 @@
     > 参考：<https://blog.csdn.net/xhmico/article/details/137724425>
 
     - 根据模板导出
-    > 示例：_/easyExcel/exportExcelTemplate_
+    > 示例：根据模板导出excel表格 _/easyExcel/exportExcelTemplate_  
+  > 示例：根据模板字段填充信息(支持表单、表格、图片) _/easyExcel/exportExcelParamsTemplate_
+
+  > 参考：<https://developer.aliyun.com/article/914369>  
+    <https://blog.csdn.net/xhmico/article/details/137461979>  
+    <https://blog.csdn.net/weixin_36340729/article/details/128705280>
 
 - 图片压缩
     > 示例：_/image/compressImage_

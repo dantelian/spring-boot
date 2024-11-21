@@ -1,13 +1,18 @@
 package com.example.springbootcommon.serviceImpl;
 
 import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.support.ExcelTypeEnum;
+import com.alibaba.excel.util.DateUtils;
 import com.alibaba.excel.util.ListUtils;
+import com.alibaba.excel.write.metadata.WriteSheet;
+import com.alibaba.excel.write.metadata.fill.FillConfig;
 import com.alibaba.excel.write.metadata.style.WriteCellStyle;
 import com.alibaba.excel.write.metadata.style.WriteFont;
 import com.alibaba.excel.write.style.HorizontalCellStyleStrategy;
 import com.example.springbootcommon.common.easyExcel.CascadeSelectWriteHandler;
 import com.example.springbootcommon.common.easyExcel.CustomRowHeightStyleStrategy;
+import com.example.springbootcommon.common.easyExcel.ImageModifyHandler;
 import com.example.springbootcommon.common.easyExcel.SelectItem;
 import com.example.springbootcommon.common.util.EasyExcelUtil;
 import com.example.springbootcommon.model.easyexcel.ImageModel;
@@ -21,10 +26,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class EasyExcelServiceImpl implements EasyExcelService {
@@ -130,6 +132,54 @@ public class EasyExcelServiceImpl implements EasyExcelService {
                 .registerWriteHandler(new CustomRowHeightStyleStrategy(100))
                 .registerWriteHandler(EasyExcelUtil.getCellStyle())
                 .doWrite(contentData);
+    }
+
+    @Override
+    public void exportExcelParamsTemplate(HttpServletResponse response) throws IOException {
+        // 表单信息
+        Map<String, Object> data = new HashMap<>();
+        data.put("name", "夏弥");
+        data.put("age", "16");
+        data.put("phone", "13912345678");
+        data.put("date", DateUtils.format(new Date()));
+        data.put("pic", new URL("https://pic2.zhimg.com/v2-8d3f288feae0e511dee5c3d6735ca999_1440w.jpg"));
+
+        // 表格信息
+        List<Map<String, Object>> titles = new ArrayList<Map<String, Object>>() {{
+            add(new HashMap<String, Object>(3) {{
+                put("title1", "t1");
+                put("title2", "t2");
+                put("title3", "t3");
+            }});
+            add(new HashMap<String, Object>(3) {{
+                put("title1", "t11");
+                put("title2", "t22");
+                put("title3", "t33");
+            }});
+        }};
+
+        // 模板文件路径
+//        String templatePath = "C:\\Users\\ddd\\Desktop\\easy_excel_params_temp.xlsx";
+        String templatePath = this.getClass().getClassLoader().getResource("templates/easy_excel_params_temp.xlsx").getPath();;
+        String fileName = "exportExcelParamsTemplate";
+        ExcelWriter excelWriter = EasyExcel.write(EasyExcelUtil.getOutputStream(fileName, response))
+                .withTemplate(templatePath)
+                .build();
+
+        WriteSheet writeSheet = EasyExcel.writerSheet()
+                .registerWriteHandler(new ImageModifyHandler()) // 图片展示处理
+                .build();
+        // 填充普通占位符
+        // 填入表单信息 这里 data 使用对象或者 Map 都可以
+        excelWriter.fill(data, writeSheet);
+
+        // 填充配置，开启组合填充换行
+        FillConfig fillConfig = FillConfig.builder().forceNewRow(true).build();
+        // 填入表格信息
+        excelWriter.fill(titles, fillConfig, writeSheet);
+
+        //填充完成
+        excelWriter.finish();
     }
 
 }
