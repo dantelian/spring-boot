@@ -29,6 +29,12 @@ public interface ApachePoiExcelService {
      */
     void exportManySheet(HttpServletResponse response);
 
+    /**
+     * apache-poi 导出级联下拉
+     * @param response
+     */
+    void exportExcelCascadeSelect(HttpServletResponse response);
+
 
     /**
      * apache-poi 导入Excel数据为JSON格式

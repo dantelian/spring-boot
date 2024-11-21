@@ -2,6 +2,7 @@ package com.example.springbootcommon.serviceImpl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.example.springbootcommon.common.util.ApachePoiExcelUtils;
+import com.example.springbootcommon.common.util.PoiUtil;
 import com.example.springbootcommon.model.apachePoi.ApachePoiExcelExportVo;
 import com.example.springbootcommon.model.apachePoi.ApachePoiExcelImportVo;
 import com.example.springbootcommon.service.ApachePoiExcelService;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -107,6 +109,27 @@ public class ApachePoiExcelServiceImpl implements ApachePoiExcelService {
         sheets.put("艺术课", sheet2);
         // 导出数据
         ApachePoiExcelUtils.exportManySheet(response, "学生成绩表", sheets);
+    }
+
+    @Override
+    public void exportExcelCascadeSelect(HttpServletResponse response) {
+        //文件名称
+        String fileName = "exportExcelCascadeSelect";
+        //excel 表头
+        List<String> headers = Arrays.asList("序号","省","市", "区", "无", "属性");
+        //所有一级
+        List<String> mapOneList = new ArrayList<String>();
+        mapOneList.add("广东省");
+        mapOneList.add("湖北省");
+        //关系map
+        Map<String, List<String>> map = new HashMap<String, List<String>>();
+        map.put("广东省", Arrays.asList("广州市", "佛山市"));
+        map.put("湖北省", Arrays.asList("武汉市", "荆州市"));
+        map.put("广州市", Arrays.asList("白云区", "越秀区"));
+        map.put("佛山市", Arrays.asList("顺德区", "南海区"));
+        //需要显示在excel的信息
+        List list = new ArrayList();
+        PoiUtil.export(response, fileName, headers, mapOneList, map, list);
     }
 
 

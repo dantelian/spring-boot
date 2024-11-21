@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.net.MalformedURLException;
 
 /**
@@ -60,6 +61,14 @@ public class ApachePoiExcelController {
     @GetMapping("/exportManySheet")
     public void exportManySheet(HttpServletResponse response) {
         apachePoiExcelService.exportManySheet(response);
+    }
+
+    /**
+     * apache-poi 导出级联下拉
+     */
+    @GetMapping("/exportExcelCascadeSelect")
+    public void exportExcelCascadeSelect(HttpServletResponse response) throws IOException {
+        apachePoiExcelService.exportExcelCascadeSelect(response);
     }
 
 
