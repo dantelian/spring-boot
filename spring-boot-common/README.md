@@ -102,7 +102,7 @@
 
     - 根据模板导出
     > 示例：根据模板导出excel表格 _/easyExcel/exportExcelTemplate_  
-  > 示例：根据模板字段填充信息(支持表单、表格、图片) _/easyExcel/exportExcelParamsTemplate_
+  > 示例：根据模板字段填充信息(支持表单、表格【表格字段前需加“.”】、图片) _/easyExcel/exportExcelParamsTemplate_
 
   > 参考：<https://developer.aliyun.com/article/914369>  
     <https://blog.csdn.net/xhmico/article/details/137461979>  
