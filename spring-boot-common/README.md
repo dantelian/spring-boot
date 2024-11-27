@@ -29,7 +29,7 @@
         - 导出excel-根据对象导出：_/apachePoiExcel/exportVo_
         - 导出excel-导出模板：_/apachePoiExcel/exportModel_
         - 导出excel-多sheet页：_/apachePoiExcel/exportManySheet_
-        - 导出excel-级联下拉：_/apachePoiExcel/exportExcelCascadeSelect_
+        - 导出excel-级联下拉：_/apachePoiExcel/exportExcelCascadeSelect_ _/apachePoiExcel/exportExcelCascadeSelect2_
         - 导入Excel数据为JSON格式：_/office/importToJSON_
         - 导入Excel数据为指定对象：_/office/importToVo_
         - 导入多Sheet页：_/office/importManySheet_

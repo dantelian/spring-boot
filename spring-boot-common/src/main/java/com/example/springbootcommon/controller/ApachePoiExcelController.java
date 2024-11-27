@@ -64,11 +64,21 @@ public class ApachePoiExcelController {
     }
 
     /**
-     * apache-poi 导出级联下拉
+     * apache-poi 导出级联下拉 方式一
      */
     @GetMapping("/exportExcelCascadeSelect")
     public void exportExcelCascadeSelect(HttpServletResponse response) throws IOException {
         apachePoiExcelService.exportExcelCascadeSelect(response);
+    }
+
+    /**
+     * apache-poi 导出级联下拉 方式二
+     * @param response
+     * @throws IOException
+     */
+    @GetMapping("/exportExcelCascadeSelect2")
+    public void exportExcelCascadeSelect2(HttpServletResponse response) throws IOException {
+        apachePoiExcelService.exportExcelCascadeSelect2(response);
     }
 
 

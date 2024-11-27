@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.net.MalformedURLException;
 
 public interface ApachePoiExcelService {
@@ -34,6 +35,12 @@ public interface ApachePoiExcelService {
      * @param response
      */
     void exportExcelCascadeSelect(HttpServletResponse response);
+
+    /**
+     * apache-poi 导出级联下拉
+     * @param response
+     */
+    void exportExcelCascadeSelect2(HttpServletResponse response) throws IOException;
 
 
     /**

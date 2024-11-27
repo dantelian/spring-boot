@@ -6,10 +6,13 @@ import com.example.springbootcommon.common.util.PoiUtil;
 import com.example.springbootcommon.model.apachePoi.ApachePoiExcelExportVo;
 import com.example.springbootcommon.model.apachePoi.ApachePoiExcelImportVo;
 import com.example.springbootcommon.service.ApachePoiExcelService;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -130,6 +133,38 @@ public class ApachePoiExcelServiceImpl implements ApachePoiExcelService {
         //需要显示在excel的信息
         List list = new ArrayList();
         PoiUtil.export(response, fileName, headers, mapOneList, map, list);
+    }
+
+    @Override
+    public void exportExcelCascadeSelect2(HttpServletResponse response) throws IOException {
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet excelSheet = workbook.createSheet("excel");
+
+        //excel 表头
+        List<String> headers = Arrays.asList("级联一级","级联二级","单独下拉", "填充下拉", "填充", "内容");
+        PoiUtil.initHeaders(workbook, excelSheet, headers);
+
+        //demo 单独下拉列表
+        PoiUtil.addValidationToSheet(workbook, excelSheet, new String[]{"百度", "阿里巴巴"}, 'C', 1, 200);
+
+        //demo 级联下拉列表
+        Map<String, List<String>> data = new HashMap<>();
+        data.put("百度系列", Arrays.asList("百度地图", "百度知道", "百度音乐"));
+        data.put("阿里系列", Arrays.asList("淘宝", "支付宝", "钉钉"));
+        PoiUtil.addValidationToSheet(workbook, excelSheet, data, 'A', 'B', 1, 200);
+
+        //demo 自动填充
+        Map<String, String> kvs = new HashMap<>();
+        kvs.put("百度", "www.baidu.com");
+        kvs.put("阿里", "www.taobao.com");
+        PoiUtil.addAutoMatchValidationToSheet(workbook, excelSheet, kvs, 'D', 'E', 1, 200);
+
+        // 隐藏存储下拉列表数据的sheet；可以注释掉该行以便查看、理解存储格式
+        //hideTempDataSheet(workbook, 1);
+
+        //文件名称
+        String fileName = "exportExcelCascadeSelect2";
+        PoiUtil.write(response, workbook, fileName);
     }
 
 
