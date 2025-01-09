@@ -121,5 +121,5 @@
 
 ## database document
 
-> mysql 生成数据库文档：[MysqlScrewMain.java](src%2Fmain%2Fjava%2Fcom%2Fexample%2Fspringbootcommon%2Fcommon%2Fdocument%2FMysqlScrewMain.java)
-
+> mysql 生成数据库文档：[MysqlScrewMain.java](src%2Fmain%2Fjava%2Fcom%2Fexample%2Fspringbootcommon%2Fcommon%2Fdocument%2FMysqlScrewMain.java)  
+> 参考：<https://www.jb51.net/article/212076.htm>
