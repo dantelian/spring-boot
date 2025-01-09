@@ -119,5 +119,7 @@
 - 图片压缩
     > 示例：_/image/compressImage_
 
+## database document
 
+> mysql 生成数据库文档：[MysqlScrewMain.java](src%2Fmain%2Fjava%2Fcom%2Fexample%2Fspringbootcommon%2Fcommon%2Fdocument%2FMysqlScrewMain.java)
 

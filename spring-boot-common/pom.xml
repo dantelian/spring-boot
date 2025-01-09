@@ -30,7 +30,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!--apache.poi-->
+		<!--依赖一：apache.poi-->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
@@ -61,6 +61,13 @@
 			<artifactId>ooxml-schemas</artifactId>
 			<version>${ooxml-schemas-version}</version>
 		</dependency>
+
+		<!--依赖二：apache.pdfbox-->
+<!--		<dependency>-->
+<!--			<groupId>org.apache.pdfbox</groupId>-->
+<!--			<artifactId>pdfbox</artifactId>-->
+<!--			<version>2.0.24</version>-->
+<!--		</dependency>-->
 
 		<!--poi-tl 基于Apache POI的Word模板引擎-->
 		<dependency>
@@ -125,6 +132,30 @@
 			<groupId>com.alibaba</groupId>
 			<artifactId>easyexcel</artifactId>
 			<version>3.2.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>cn.smallbun.screw</groupId>
+			<artifactId>screw-core</artifactId>
+			<version>1.0.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.21</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.dameng</groupId>
+			<artifactId>DmJdbcDriver18</artifactId>
+			<version>8.1.2.192</version>
 		</dependency>
 
 	</dependencies>
