@@ -78,10 +78,21 @@ public class ApachePoiWordUtil {
     // 创建标题
     public static void createTitleParagraph(XWPFDocument document, String text, int size, String fontFamily) {
         XWPFParagraph titleParagraph = document.createParagraph(); // 新建一个标题段落对象（就是一段文字）
-        titleParagraph.setAlignment(ParagraphAlignment.LEFT); // 样式居中
+        titleParagraph.setAlignment(ParagraphAlignment.LEFT); // 样式居左
         XWPFRun titleFun = titleParagraph.createRun(); // 创建文本对象
         titleFun.setText(text); // 设置标题的名字
         titleFun.setBold(true); // 加粗
+        titleFun.setColor("000000"); // 设置颜色
+        titleFun.setFontSize(size); // 字体大小
+        titleFun.setFontFamily(fontFamily); // 设置字体
+    }
+
+    // 创建文字内容
+    public static void createTextParagraph(XWPFDocument document, String text, int size, String fontFamily) {
+        XWPFParagraph titleParagraph = document.createParagraph(); // 新建一个标题段落对象（就是一段文字）
+        titleParagraph.setAlignment(ParagraphAlignment.LEFT); // 样式居左
+        XWPFRun titleFun = titleParagraph.createRun(); // 创建文本对象
+        titleFun.setText(text); // 设置标题的名字
         titleFun.setColor("000000"); // 设置颜色
         titleFun.setFontSize(size); // 字体大小
         titleFun.setFontFamily(fontFamily); // 设置字体

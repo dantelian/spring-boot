@@ -13,17 +13,17 @@ import javax.sql.DataSource;
 import java.util.Arrays;
 import java.util.Collections;
 public class MysqlScrewMain {
-    private static final String DB_URL = "jdbc:mysql://10.150.1.15:3306";
-    private static final String DB_NAME = "gxhj_zhgl_dev?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai";
+    private static final String DB_CLASS_NAME = "com.mysql.jdbc.Driver";
+    private static final String DB_URL = "jdbc:mysql://10.150.1.15:3306/gxhj_zhgl_dev?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai";
     private static final String DB_USERNAME = "root";
     private static final String DB_PASSWORD = "zzyt@123";
 
-    private static final String FILE_OUTPUT_DIR = "C:\\Users\\ddd\\Desktop\\java\\";
-    // 可以设置 Word 或者 Markdown 格式
-    private static final EngineFileType FILE_OUTPUT_TYPE = EngineFileType.WORD;
+    // 可以设置 Word、html、Markdown 格式
+    private static final EngineFileType FILE_OUTPUT_TYPE = EngineFileType.HTML;
     private static final String DOC_FILE_NAME = "数据库表设计文档";
     private static final String DOC_VERSION = "V1.0.0";
     private static final String DOC_DESCRIPTION = "数据库表设计描述";
+    private static final String FILE_OUTPUT_DIR = "C:\\Users\\ddd\\Desktop\\java\\";
 
     public static void main(String[] args) {
         // 创建 screw 的配置
@@ -50,12 +50,14 @@ public class MysqlScrewMain {
     private static DataSource buildDataSource() {
         // 创建 HikariConfig 配置类
         HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setDriverClassName("com.mysql.jdbc.Driver");
-        hikariConfig.setJdbcUrl(DB_URL + "/" + DB_NAME);
+        hikariConfig.setDriverClassName(DB_CLASS_NAME);
+        hikariConfig.setJdbcUrl(DB_URL);
         hikariConfig.setUsername(DB_USERNAME);
         hikariConfig.setPassword(DB_PASSWORD);
         // 设置可以获取 tables remarks 信息
         hikariConfig.addDataSourceProperty("useInformationSchema", "true");
+        hikariConfig.setMinimumIdle(2);
+        hikariConfig.setMaximumPoolSize(5);
         // 创建数据源
         return new HikariDataSource(hikariConfig);
     }
@@ -91,7 +93,7 @@ public class MysqlScrewMain {
                 // 根据表后缀生成
                 .designatedTableSuffix(Collections.<String>emptyList())
                 // 忽略表名
-                .ignoreTableName(Arrays.asList("test", "mytable","role","t_role","t_user"))
+                .ignoreTableName(Arrays.asList("test"))
                 // 忽略表前缀
                 //.ignoreTablePrefix(Collections.singletonList("t_"))
                 // 忽略表后缀
