@@ -4,11 +4,14 @@ import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.write.style.ColumnWidth;
 import com.example.springbootcommon.common.easyExcel.DropDown;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 用户信息
@@ -34,5 +37,10 @@ public class UserModel implements Serializable {
 
     @ExcelProperty(value = "角色", index = 4)
     private String role;
+
+//    @ExcelProperty(value = "时间", format = "yyyy-MM-dd")
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+//    @JsonFormat(pattern = "yyyy-MM-dd")
+//    private Date time;
 
 }
