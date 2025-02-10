@@ -38,6 +38,7 @@ public class UserModel implements Serializable {
     @ExcelProperty(value = "角色", index = 4)
     private String role;
 
+    // 导出可结合DateConverter实现格式化
 //    @ExcelProperty(value = "时间", format = "yyyy-MM-dd")
 //    @DateTimeFormat(pattern = "yyyy-MM-dd")
 //    @JsonFormat(pattern = "yyyy-MM-dd")

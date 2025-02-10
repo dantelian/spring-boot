@@ -11,10 +11,7 @@ import com.alibaba.excel.write.metadata.fill.FillConfig;
 import com.alibaba.excel.write.metadata.style.WriteCellStyle;
 import com.alibaba.excel.write.metadata.style.WriteFont;
 import com.alibaba.excel.write.style.HorizontalCellStyleStrategy;
-import com.example.springbootcommon.common.easyExcel.CascadeSelectWriteHandler;
-import com.example.springbootcommon.common.easyExcel.CustomRowHeightStyleStrategy;
-import com.example.springbootcommon.common.easyExcel.ImageModifyHandler;
-import com.example.springbootcommon.common.easyExcel.SelectItem;
+import com.example.springbootcommon.common.easyExcel.*;
 import com.example.springbootcommon.common.util.EasyExcelUtil;
 import com.example.springbootcommon.model.easyexcel.ImageModel;
 import com.example.springbootcommon.model.easyexcel.UserCascadeSelectModel;
@@ -189,6 +186,7 @@ public class EasyExcelServiceImpl implements EasyExcelService {
     public List<UserModel> importExcelClass(MultipartFile file) throws IOException {
         List<UserModel> list = EasyExcel.read(file.getInputStream())
 //                .registerConverter(new StringStringConverter())
+//                .registerConverter(new DateConverter())
                 .head(UserModel.class)
                 .sheet()
                 .headRowNumber(1)
