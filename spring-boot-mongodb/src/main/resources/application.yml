@@ -1,0 +1,18 @@
+server:
+  port: 9012
+
+spring:
+  application:
+    name: spring-boot-mongodb
+  # MongoDB????
+  data:
+    mongodb:
+#      uri: mongodb://10.35.11.23:27017/ddd
+      uri: mongodb://ddd:123456@10.35.11.23:27017/ddd
+#      host: 10.35.11.23
+#      port: 27017
+#      database: ddd
+#      auto-index-creation: true
+#      username: ddd
+#      password: 123456
+
