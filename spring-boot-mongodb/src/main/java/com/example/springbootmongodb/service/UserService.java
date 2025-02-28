@@ -3,6 +3,7 @@ package com.example.springbootmongodb.service;
 import com.example.springbootmongodb.model.entity.User;
 import com.example.springbootmongodb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -48,7 +49,11 @@ public class UserService {
     }
 
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+//        return userRepository.findAll();
+
+        // 排序
+        Sort sort = Sort.by(Sort.Direction.ASC, "age");
+        return userRepository.findAll(sort);
     }
 
     public User getUserByName(String name) {
