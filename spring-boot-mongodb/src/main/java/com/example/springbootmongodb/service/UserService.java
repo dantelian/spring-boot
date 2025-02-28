@@ -22,9 +22,9 @@ public class UserService {
 
     public User saveUser(User user) {
         // 方式一：
-//        return userRepository.save(user);
+        return userRepository.save(user); // 可新增和修改
         // 方式二：
-        return userRepository.insert(user);
+//        return userRepository.insert(user);
     }
 
     public User editUser(User user) {
