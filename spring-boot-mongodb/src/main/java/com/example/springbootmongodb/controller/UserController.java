@@ -22,8 +22,8 @@ public class UserController {
 
     // 修改
     @PostMapping("/editUser")
-    public User editUser(@RequestBody User user) {
-        return userService.editUser(user);
+    public void editUser(@RequestBody User user) {
+        userService.editUser(user);
     }
 
     @GetMapping("/delete/{id}")
