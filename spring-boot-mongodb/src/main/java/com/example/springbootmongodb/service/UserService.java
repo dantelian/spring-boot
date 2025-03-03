@@ -4,6 +4,7 @@ import com.example.springbootmongodb.model.entity.User;
 import com.example.springbootmongodb.repository.UserRepository;
 import com.mongodb.client.result.DeleteResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -80,9 +81,24 @@ public class UserService {
     public List<User> getList(User user) {
 //        return userRepository.findByNameLike(user.getName());
         return userRepository.findUsersByNameAndAgeGreaterThan(user.getName(), user.getAge());
-
-//        return null;
     }
+
+    public Object getPage(Integer current, Integer size, User user) {
+        // 方式一：
+//        Sort sort = Sort.by(Sort.Direction.ASC, "age");
+//        int skip = (current - 1) * size;
+//        Query query = new Query();
+//        query.with(sort).skip(skip).limit(size);
+//        return mongoTemplate.find(query, User.class);
+
+        // 方式二：
+        Sort sort = Sort.by(Sort.Direction.ASC, "age");
+        PageRequest pageRequest = PageRequest.of(current - 1, size); // current 0是第一页 1是第二页
+        Query query = new Query();
+        query.with(pageRequest).with(sort);
+        return mongoTemplate.find(query, User.class);
+    }
+
 
 
 

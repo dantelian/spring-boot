@@ -3,6 +3,7 @@ package com.example.springbootmongodb.controller;
 import com.example.springbootmongodb.model.entity.User;
 import com.example.springbootmongodb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,6 +45,18 @@ public class UserController {
     @GetMapping("/getList")
     public List<User> getList(User user) {
         return userService.getList(user);
+    }
+
+    @GetMapping("/getPage")
+    public Object getPage(Integer current, Integer size, User user) {
+        if (null == current) {
+            current = 1;
+        }
+        if (null == size) {
+            size = 10;
+        }
+
+        return userService.getPage(current, size, user);
     }
 
 
