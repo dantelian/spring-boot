@@ -80,7 +80,20 @@ public class UserService {
 
     public List<User> getList(User user) {
 //        return userRepository.findByNameLike(user.getName());
-        return userRepository.findUsersByNameAndAgeGreaterThan(user.getName(), user.getAge());
+//        return userRepository.findUsersByNameAndAgeGreaterThan(user.getName(), user.getAge());
+
+//        Criteria criteria = Criteria.where("age").is(user.getAge());
+//        Query query = Query.query(criteria);
+//        return mongoTemplate.find(query, User.class);
+
+        Criteria criteria = new Criteria().orOperator(
+                Criteria.where("age").is(user.getAge()),
+//                Criteria.where("name").is(user.getName()),
+//                new Criteria().and("name").regex(".*?" + user.getName() + ".*", "i") // 后面的【，"i"】表示不区分大小写
+                Criteria.where("name").regex(".*?" + user.getName() + ".*", "i") // 后面的【，"i"】表示不区分大小写
+        );
+        Query query = Query.query(criteria);
+        return mongoTemplate.find(query, User.class);
     }
 
     public Object getPage(Integer current, Integer size, User user) {
