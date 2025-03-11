@@ -385,6 +385,13 @@ public class ApachePoiExcelUtils {
         if (cell.getCellTypeEnum() == CellType.BOOLEAN) {
             return cell.getBooleanCellValue() + "";
         }
+        if (cell.getCellTypeEnum() == CellType.FORMULA) {
+            try {
+                return String.valueOf(cell.getNumericCellValue());
+            } catch (IllegalStateException e) {
+                return String.valueOf(cell.getRichStringCellValue());
+            }
+        }
         // 错误类型
         return cell.getCellFormula();
     }
