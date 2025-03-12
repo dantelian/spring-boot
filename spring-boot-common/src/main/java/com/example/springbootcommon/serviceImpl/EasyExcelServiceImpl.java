@@ -10,6 +10,7 @@ import com.alibaba.excel.write.metadata.WriteSheet;
 import com.alibaba.excel.write.metadata.fill.FillConfig;
 import com.example.springbootcommon.common.easyExcel.*;
 import com.example.springbootcommon.common.util.EasyExcelUtil;
+import com.example.springbootcommon.common.util.ReflectionUtil;
 import com.example.springbootcommon.model.easyexcel.ImageModel;
 import com.example.springbootcommon.model.easyexcel.UserCascadeSelectModel;
 import com.example.springbootcommon.model.easyexcel.UserModel;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class EasyExcelServiceImpl implements EasyExcelService {
@@ -184,7 +186,12 @@ public class EasyExcelServiceImpl implements EasyExcelService {
                 .head(UserModel.class)
                 .sheet()
                 .headRowNumber(1)
+//                .registerReadListener(new EmptyRowFilterListener<>()) // 注册监听器以过滤空行
                 .doReadSync();
+
+        // 排除空行 （不建议手动判断）
+//        list = list.stream().filter(s -> !ReflectionUtil.areAllFieldsEmpty(s)).collect(Collectors.toList());
+
         return list;
     }
 
