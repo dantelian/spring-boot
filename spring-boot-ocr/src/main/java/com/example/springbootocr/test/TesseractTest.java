@@ -26,10 +26,10 @@ public class TesseractTest {
             Tesseract tesseract = new Tesseract();
             tesseract.setDatapath(tessDataPath);
 
-//            可以选择设置 OCR 语言模型
-//            chi_sim  中文简体
-//            chi_tra  中文繁体
-//            eng  英文
+            // 可以选择设置 OCR 语言模型
+            // chi_sim  中文简体
+            // chi_tra  中文繁体
+            // eng  英文
 //            tesseract.setLanguage("chi_sim+eng");
             tesseract.setLanguage("chi_sim");
 
