@@ -1,0 +1,7 @@
+server:
+  port: 9702
+
+spring:
+  application:
+    name: spring-boot-ocr
+
