@@ -16,20 +16,31 @@ public class IceblueSpireOCR {
         ocr2();
     }
 
-    private static void ocr1(MultipartFile file) throws OcrException, IOException {
+    private static void ocr1(MultipartFile file) {
         // 创建临时文件
-        File tfile = File.createTempFile("tempfile", file.getOriginalFilename());
-        // 写入数据
-        file.transferTo(tfile);
-        String imageFile = tfile.getPath();
+        File tfile = null;
+        try {
+            tfile = File.createTempFile("tempfile", file.getOriginalFilename());
+            // 写入数据
+            file.transferTo(tfile);
+            String imageFile = tfile.getPath();
 
-        URL resourceURL = ClassLoader.getSystemResource("dependencies");
-        String dependence = resourceURL.getPath();
-        OcrScanner scanner = new OcrScanner();
-        scanner.setDependencies(dependence);
-        scanner.scan(imageFile);
-        String ret = scanner.getText().toString();
-        System.out.println(ret);
+            URL resourceURL = ClassLoader.getSystemResource("dependencies");
+            String dependence = resourceURL.getPath();
+            OcrScanner scanner = new OcrScanner();
+            scanner.setDependencies(dependence);
+            scanner.scan(imageFile);
+            String ret = scanner.getText().toString();
+            System.out.println(ret);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (OcrException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (tfile.exists()) {
+                tfile.delete();
+            }
+        }
     }
 
     private static void ocr2() throws IOException, OcrException {
