@@ -12,6 +12,8 @@ import com.alibaba.excel.write.style.HorizontalCellStyleStrategy;
 import com.example.springbootcommon.common.easyExcel.CascadeSelectWriteHandler;
 import com.example.springbootcommon.common.easyExcel.DownHandler;
 import com.example.springbootcommon.common.easyExcel.SelectItem;
+import com.example.springbootcommon.model.easyexcel.EasyExcelSheet;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -25,6 +27,7 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 public class EasyExcelUtil {
 
     /**
@@ -99,6 +102,28 @@ public class EasyExcelUtil {
                 .excelType(ExcelTypeEnum.XLSX).sheet(sheetName)
                 .registerWriteHandler(new CascadeSelectWriteHandler(selectItems))
                 .registerWriteHandler(getCellStyle()).doWrite(contentData);
+    }
+
+    public static void exportManySheet(HttpServletResponse response, String fileName, List<EasyExcelSheet> sheets) throws IOException {
+        try {
+
+            ExcelWriter excelWriter = EasyExcel.write(getOutputStream(fileName, response))
+                    .excelType(ExcelTypeEnum.XLSX).build();
+            sheets.forEach(sheet -> {
+                // sheet页位置，sheet页名称
+                WriteSheet writeSheet = EasyExcel.writerSheet(sheet.getSheetIndex(), sheet.getSheetName())
+                        // 表头实体
+                        .head(sheet.getHeadClass())
+                        .registerWriteHandler(EasyExcelUtil.getCellStyle())
+                        .build();
+                excelWriter.write(sheet.getDataset(), writeSheet);
+            });
+            excelWriter.finish();
+            response.flushBuffer();
+        } catch (Exception e) {
+            log.error("文件【{}】下载失败", fileName);
+            log.error(e.getMessage(), e);
+        }
     }
 
     /**

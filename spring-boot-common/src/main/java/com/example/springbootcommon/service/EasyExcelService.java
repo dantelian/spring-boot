@@ -51,6 +51,13 @@ public interface EasyExcelService {
      */
     void exportExcelParamsTemplate(HttpServletResponse response) throws IOException;
 
+    /**
+     * 导出-导出多 Sheet 页Excel
+     * @param response
+     * @throws IOException
+     */
+    void exportManySheet(HttpServletResponse response) throws IOException;
+
     List<UserModel> importExcelClass(MultipartFile file) throws IOException;
 
 }

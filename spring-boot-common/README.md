@@ -104,6 +104,11 @@
 
     > 参考：<https://blog.csdn.net/xhmico/article/details/137724425>
 
+    - 导出多sheet页
+  > 示例：_/easyExcel/exportManySheet_
+
+  > 参考：<https://juejin.cn/post/7365679089812865065>    
+
     - 根据模板导出
     > 示例：根据模板导出excel表格 _/easyExcel/exportExcelTemplate_  
   > 示例：根据模板字段填充信息(支持表单、表格【表格字段前需加“.”】、图片) _/easyExcel/exportExcelParamsTemplate_

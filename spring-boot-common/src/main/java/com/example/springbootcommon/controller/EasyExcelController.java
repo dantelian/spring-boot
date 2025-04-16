@@ -74,6 +74,13 @@ public class EasyExcelController {
         easyExcelService.exportExcelParamsTemplate(response);
     }
 
+    /**
+     * easyexcel 导出多 Sheet 页Excel
+     */
+    @GetMapping("/exportManySheet")
+    public void exportManySheet(HttpServletResponse response) throws IOException {
+        easyExcelService.exportManySheet(response);
+    }
 
     /**
      * easyexcel导入数据-根据实体

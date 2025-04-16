@@ -11,10 +11,12 @@ import com.alibaba.excel.write.metadata.fill.FillConfig;
 import com.example.springbootcommon.common.easyExcel.*;
 import com.example.springbootcommon.common.util.EasyExcelUtil;
 import com.example.springbootcommon.common.util.ReflectionUtil;
+import com.example.springbootcommon.model.easyexcel.EasyExcelSheet;
 import com.example.springbootcommon.model.easyexcel.ImageModel;
 import com.example.springbootcommon.model.easyexcel.UserCascadeSelectModel;
 import com.example.springbootcommon.model.easyexcel.UserModel;
 import com.example.springbootcommon.service.EasyExcelService;
+import com.google.common.collect.Lists;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -176,6 +178,38 @@ public class EasyExcelServiceImpl implements EasyExcelService {
 
         //填充完成
         excelWriter.finish();
+    }
+
+    @Override
+    public void exportManySheet(HttpServletResponse response) throws IOException {
+        List<UserModel> contentData = new ArrayList<UserModel>() {{
+            add(new UserModel(1, "夏弥", "女", "13612345678", null));
+            add(new UserModel(2, "夏达", "女", "13912345678", "管理员"));
+        }};
+
+        List<UserModel> contentData1 = new ArrayList<UserModel>() {{
+            add(new UserModel(3, "夏弥", "女", "13612345678", null));
+            add(new UserModel(4, "夏达", "女", "13912345678", "管理员"));
+        }};
+
+        EasyExcelSheet dataSheet = EasyExcelSheet.builder()
+                .sheetIndex(0)
+                .sheetName("用户管理")
+                .headClass(UserModel.class)
+                .dataset(contentData)
+                .build();
+
+        EasyExcelSheet dataSheet1 = EasyExcelSheet.builder()
+                .sheetIndex(1)
+                .sheetName("用户管理1")
+                .headClass(UserModel.class)
+                .dataset(contentData1)
+                .build();
+
+        List<EasyExcelSheet> excelSheets = Lists.newArrayList(dataSheet, dataSheet1);
+
+        EasyExcelUtil.exportManySheet(response, "exportManySheet", excelSheets);
+
     }
 
     @Override
