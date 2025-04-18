@@ -229,4 +229,35 @@ public class EasyExcelServiceImpl implements EasyExcelService {
         return list;
     }
 
+    @Override
+    public Object importManySheet(MultipartFile file) throws IOException {
+        // 方式一
+//        List<UserModel> list1 = EasyExcel.read(file.getInputStream())
+//                .head(UserModel.class)
+//                .sheet(0)
+//                .headRowNumber(1)
+//                .doReadSync();
+//
+//        List<UserModel> list2 = EasyExcel.read(file.getInputStream())
+//                .head(UserModel.class)
+//                .sheet(1)
+//                .headRowNumber(1)
+//                .doReadSync();
+
+        // 方式二
+        List<UserModel> list1 = EasyExcel.read(file.getInputStream())
+                .head(UserModel.class)
+                .sheet("用户管理")
+                .headRowNumber(1)
+                .doReadSync();
+
+        List<UserModel> list2 = EasyExcel.read(file.getInputStream())
+                .head(UserModel.class)
+                .sheet("用户管理1")
+                .headRowNumber(1)
+                .doReadSync();
+
+        return true;
+    }
+
 }

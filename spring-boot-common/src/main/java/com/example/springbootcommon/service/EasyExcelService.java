@@ -60,4 +60,6 @@ public interface EasyExcelService {
 
     List<UserModel> importExcelClass(MultipartFile file) throws IOException;
 
+    Object importManySheet(MultipartFile file) throws IOException;
+
 }

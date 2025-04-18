@@ -90,4 +90,12 @@ public class EasyExcelController {
         return easyExcelService.importExcelClass(file);
     }
 
+    /**
+     * easyexcel导入数据-多 Sheet 页Excel
+     */
+    @PostMapping("/importManySheet")
+    public Object importManySheet(@RequestParam("file") MultipartFile file) throws IOException {
+        return easyExcelService.importManySheet(file);
+    }
+
 }
