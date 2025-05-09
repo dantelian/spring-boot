@@ -189,7 +189,7 @@ public class FormulaUtil {
         if (StringUtils.contains(expression, "()")) {
             throw new RuntimeException("公式不合法，包含空括号");
         }
-        expression = expression.replaceAll("\\)\\(", "\\)*\\(");
+//        expression = expression.replaceAll("\\)\\(", "\\)*\\(");
         expression = expression.replaceAll("\\(\\-", "\\(0-");
         expression = expression.replaceAll("\\(\\+", "\\(0+");
         // 校验变量
