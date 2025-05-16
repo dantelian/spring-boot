@@ -7,6 +7,7 @@ public interface ZipService {
 
     List<String> unzip(String sourceFile, String targetFolder) throws IOException;
 
+    // 文件操作
     void fileOperation() throws IOException;
 
 }
