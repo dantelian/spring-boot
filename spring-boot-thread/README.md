@@ -5,9 +5,9 @@
 ### 继承Thread类
 
 > [ThreadTest.java](src%2Fmain%2Fjava%2Fcom%2Fexample%2Fspringbootthread%2Fcommon%2FbuildThread%2FThreadTest.java)  
-> [ThreadParamTest.java](src%2Fmain%2Fjava%2Fcom%2Fexample%2Fspringbootthread%2Fcommon%2FbuildThread%2FThreadParamTest.java)
-
-
+> [ThreadParamTest.java](src%2Fmain%2Fjava%2Fcom%2Fexample%2Fspringbootthread%2Fcommon%2FbuildThread%2FThreadParamTest.java)  
+> [RunnableTest.java](src%2Fmain%2Fjava%2Fcom%2Fexample%2Fspringbootthread%2Fcommon%2FbuildThread%2FRunnableTest.java)  
+> [CallableParamResultTest.java](src%2Fmain%2Fjava%2Fcom%2Fexample%2Fspringbootthread%2Fcommon%2FbuildThread%2FCallableParamResultTest.java)
 
 
 
