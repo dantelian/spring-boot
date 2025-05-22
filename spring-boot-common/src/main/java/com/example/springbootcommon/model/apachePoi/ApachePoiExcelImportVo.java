@@ -3,6 +3,8 @@ package com.example.springbootcommon.model.apachePoi;
 import com.example.springbootcommon.common.apachePoi.ExcelImport;
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @program: spring-boot-common
  * @description:
@@ -29,5 +31,8 @@ public class ApachePoiExcelImportVo {
 
     @ExcelImport(value = "性别", kv = "1-男;2-女")
     private Integer sex;
+
+//    @ExcelImport(value = "日期")
+//    private Date day;
 
 }

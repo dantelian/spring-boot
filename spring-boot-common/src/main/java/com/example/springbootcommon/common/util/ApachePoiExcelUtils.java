@@ -1,6 +1,7 @@
 package com.example.springbootcommon.common.util;
 
 
+import cn.hutool.core.util.NumberUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.springbootcommon.common.apachePoi.ExcelClassField;
@@ -234,10 +235,14 @@ public class ApachePoiExcelUtils {
             } else if ("BigDecimal".equalsIgnoreCase(fieldClassName)) {
                 field.set(t, new BigDecimal(val));
             } else if ("Date".equalsIgnoreCase(fieldClassName)) {
-                try {
-                    field.set(t, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(val));
-                } catch (Exception e) {
-                    field.set(t, new SimpleDateFormat("yyyy-MM-dd").parse(val));
+                if (NumberUtil.isNumber(val)) {
+                    field.set(t, DateUtil.getJavaDate(Double.parseDouble(val)));
+                } else {
+                    try {
+                        field.set(t, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(val));
+                    } catch (Exception e) {
+                        field.set(t, new SimpleDateFormat("yyyy-MM-dd").parse(val));
+                    }
                 }
             }
         } catch (Exception e) {
