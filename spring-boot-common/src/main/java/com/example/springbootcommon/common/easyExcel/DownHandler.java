@@ -70,7 +70,8 @@ public class DownHandler implements SheetWriteHandler {
         // 从第二个工作簿开始隐藏
         this.index++;
         // 设置隐藏
-        workbook.setSheetHidden(this.index, true);
+//        workbook.setSheetHidden(this.index, true);
+        workbook.setSheetHidden(workbook.getSheetIndex(sheetName),true);
         // 2.循环赋值
         for (int i = 0, length = v.length; i < length; i++) {
             // i:表示你开始的行数 0表示你开始的列数

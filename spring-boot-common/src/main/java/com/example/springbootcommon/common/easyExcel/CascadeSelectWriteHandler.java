@@ -102,15 +102,41 @@ public class CascadeSelectWriteHandler implements SheetWriteHandler, CellWriteHa
         }
         // 创建名称命名器
         Name name = workbook.createName();
-        name.setNameName(dataItem.getMappingKey());
+//        name.setNameName(dataItem.getMappingKey());
+        name.setNameName(getName(dataItem.getMappingKey()));
         name.setRefersToFormula(getFormulaRef(row));
         dataItem.setHiddenFormulaRef(name.getRefersToFormula());
         rowIndex++;
     }
 
+    // 特殊字符处理
+    private String getName(String name) {
+        name = name
+                .replaceAll("\\(", "_").replaceAll("\\)", "_")
+                .replaceAll("（", "_").replaceAll("）", "_")
+                .replaceAll("-", "_");
+        return name;
+    }
+
     private String getInDirectFormulaRef(Integer columnIndex){
         CellReference slectCellReference = new CellReference(1, columnIndex);
-        return "INDIRECT(" + joinFormulaRef(slectCellReference, false) + ")";
+//        return "INDIRECT(" + joinFormulaRef(slectCellReference, false) + ")";
+        /**
+         * 特殊字符转换
+         * =SUBSTITUTE(A1,"&","_")  // 将&替换为下划线
+         * =INDIRECT(SUBSTITUTE(B1,"#","_"))  // 替换后间接引用
+         */
+        return "INDIRECT(" +
+                "SUBSTITUTE(" +
+                "SUBSTITUTE(" +
+                "SUBSTITUTE(" +
+                "SUBSTITUTE(" +
+                "SUBSTITUTE(" + joinFormulaRef(slectCellReference, false) + ", \"-\", \"_\")" +
+                ", \"(\", \"_\")" +
+                ", \")\", \"_\")" +
+                ", \"（\", \"_\")" +
+                ", \"）\", \"_\")" +
+                ")";
     }
 
     @Override
