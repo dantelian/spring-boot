@@ -8,6 +8,7 @@ import com.alibaba.excel.util.DateUtils;
 import com.alibaba.excel.util.ListUtils;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.alibaba.excel.write.metadata.fill.FillConfig;
+import com.alibaba.excel.write.metadata.fill.FillWrapper;
 import com.example.springbootcommon.common.easyExcel.*;
 import com.example.springbootcommon.common.util.EasyExcelUtil;
 import com.example.springbootcommon.common.util.ReflectionUtil;
@@ -155,6 +156,16 @@ public class EasyExcelServiceImpl implements EasyExcelService {
                 put("title3", "t33");
             }});
         }};
+        List<Map<String, Object>> content = new ArrayList<Map<String, Object>>() {{
+            add(new HashMap<String, Object>(3) {{
+                put("content1", "c1");
+                put("content2", "c2");
+            }});
+            add(new HashMap<String, Object>(3) {{
+                put("content1", "c11");
+                put("content2", "c22");
+            }});
+        }};
 
         // 模板文件路径
 //        String templatePath = "C:\\Users\\ddd\\Desktop\\easy_excel_params_temp.xlsx";
@@ -174,7 +185,9 @@ public class EasyExcelServiceImpl implements EasyExcelService {
         // 填充配置，开启组合填充换行
         FillConfig fillConfig = FillConfig.builder().forceNewRow(true).build();
         // 填入表格信息
-        excelWriter.fill(titles, fillConfig, writeSheet);
+//        excelWriter.fill(titles, fillConfig, writeSheet);
+        excelWriter.fill(new FillWrapper("titles", titles), fillConfig, writeSheet);
+        excelWriter.fill(new FillWrapper("content", content), fillConfig, writeSheet);
 
         //填充完成
         excelWriter.finish();
