@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -169,10 +170,12 @@ public class EasyExcelServiceImpl implements EasyExcelService {
 
         // 模板文件路径
 //        String templatePath = "C:\\Users\\ddd\\Desktop\\easy_excel_params_temp.xlsx";
-        String templatePath = this.getClass().getClassLoader().getResource("templates/easy_excel_params_temp.xlsx").getPath();;
+//        String templatePath = this.getClass().getClassLoader().getResource("templates/easy_excel_params_temp.xlsx").getPath();
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("templates/easy_excel_params_temp.xlsx");
         String fileName = "exportExcelParamsTemplate";
         ExcelWriter excelWriter = EasyExcel.write(EasyExcelUtil.getOutputStream(fileName, response))
-                .withTemplate(templatePath)
+//                .withTemplate(templatePath)
+                .withTemplate(inputStream)
                 .build();
 
         WriteSheet writeSheet = EasyExcel.writerSheet()
