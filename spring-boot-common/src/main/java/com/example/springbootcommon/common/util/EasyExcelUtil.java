@@ -3,6 +3,7 @@ package com.example.springbootcommon.common.util;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.EasyExcelFactory;
 import com.alibaba.excel.ExcelWriter;
+import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.alibaba.excel.write.metadata.WriteTable;
@@ -18,11 +19,13 @@ import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
+import org.springframework.util.ObjectUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
@@ -174,6 +177,31 @@ public class EasyExcelUtil {
         response.setCharacterEncoding("utf8");
         response.setHeader("Content-Disposition",  "attachment;filename*=utf-8'zh_cn'" + fileName + ".xlsx");
         return response.getOutputStream();
+    }
+
+    public static <T> void validateEmpty(Class<?> clazz, T bean) {
+        Field[] fields = clazz.getDeclaredFields();
+
+        for (Field field : fields) {
+            field.setAccessible(true);
+            try {
+                if (ObjectUtils.isEmpty(field.get(bean))) {
+                    // 获取字段上的注解
+                    ExcelProperty annotation = field.getAnnotation(ExcelProperty.class);
+                    if (annotation != null) {
+                        if (annotation.value()[0].endsWith("*")) {
+                            throw new RuntimeException("必填字段不能为空: " + annotation.value()[0]);
+                        }
+                    } else {
+                        throw new RuntimeException("必填字段不能为空");
+                    }
+                }
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+
     }
 
 }
