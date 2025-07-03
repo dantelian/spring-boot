@@ -192,8 +192,6 @@ public class EasyExcelUtil {
                         if (annotation.value()[0].endsWith("*")) {
                             throw new RuntimeException("必填字段不能为空: " + annotation.value()[0]);
                         }
-                    } else {
-                        throw new RuntimeException("必填字段不能为空");
                     }
                 }
             } catch (IllegalAccessException e) {
