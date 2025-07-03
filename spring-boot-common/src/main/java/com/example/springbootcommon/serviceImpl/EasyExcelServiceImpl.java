@@ -164,15 +164,33 @@ public class EasyExcelServiceImpl implements EasyExcelService {
             }});
         }};
         List<Map<String, Object>> content = new ArrayList<Map<String, Object>>() {{
-            add(new HashMap<String, Object>(3) {{
+            add(new HashMap<String, Object>(2) {{
                 put("content1", "c1");
                 put("content2", "c2");
             }});
-            add(new HashMap<String, Object>(3) {{
+            add(new HashMap<String, Object>(2) {{
                 put("content1", "c11");
                 put("content2", "c22");
             }});
+            add(new HashMap<String, Object>(2) {{
+                put("content1", "c111");
+                put("content2", "c222");
+            }});
         }};
+
+        // 合并单元格
+        CellWriteHandler mergeStrategy = new AbstractMergeStrategy() {
+            @Override
+            protected void merge(Sheet sheet, Cell cell, Head head, Integer relativeRowIndex) {
+                // 实现自定义合并逻辑
+                if (cell.getRowIndex() == 10 && cell.getColumnIndex() == 1) {
+                    sheet.addMergedRegion(new CellRangeAddress(cell.getRowIndex(), cell.getRowIndex(), 1, 2));
+                }
+                if (cell.getRowIndex() == 11 && cell.getColumnIndex() == 1) {
+                    sheet.addMergedRegion(new CellRangeAddress(cell.getRowIndex(), cell.getRowIndex(), 1, 2));
+                }
+            }
+        };
 
         // 模板文件路径
 //        String templatePath = "C:\\Users\\ddd\\Desktop\\easy_excel_params_temp.xlsx";
@@ -182,22 +200,11 @@ public class EasyExcelServiceImpl implements EasyExcelService {
         ExcelWriter excelWriter = EasyExcel.write(EasyExcelUtil.getOutputStream(fileName, response))
 //                .withTemplate(templatePath)
                 .withTemplate(inputStream)
+                .registerWriteHandler(mergeStrategy) // 注册合并处理器
                 .build();
-
-        // 合并单元格
-//        CellWriteHandler mergeStrategy = new AbstractMergeStrategy() {
-//            @Override
-//            protected void merge(Sheet sheet, Cell cell, Head head, Integer relativeRowIndex) {
-//                // 实现自定义合并逻辑
-//                if (cell.getRowIndex() == 2 && cell.getColumnIndex() == 1) {
-//                    sheet.addMergedRegion(new CellRangeAddress(cell.getRowIndex(), cell.getRowIndex(), 3, 4));
-//                }
-//            }
-//        };
 
         WriteSheet writeSheet = EasyExcel.writerSheet()
                 .registerWriteHandler(new ImageModifyHandler()) // 图片展示处理
-//                .registerWriteHandler(mergeStrategy) // 注册合并处理器
                 .build();
         // 填充普通占位符
         // 填入表单信息 这里 data 使用对象或者 Map 都可以
