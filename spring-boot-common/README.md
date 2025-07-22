@@ -129,10 +129,13 @@
 
 > mysql 生成数据库文档：  
 > [MysqlScrewMain.java](src%2Fmain%2Fjava%2Fcom%2Fexample%2Fspringbootcommon%2Fcommon%2Fdocument%2FMysqlScrewMain.java)  
-> [MysqlScrewMain1.java](src%2Fmain%2Fjava%2Fcom%2Fexample%2Fspringbootcommon%2Fcommon%2Fdocument%2FMysqlScrewMain1.java)  
+> [MysqlScrewMain1.java](src%2Fmain%2Fjava%2Fcom%2Fexample%2Fspringbootcommon%2Fcommon%2Fdocument%2FMysqlScrewMain1.java)
+> [MysqlScrewMain2.java](src%2Fmain%2Fjava%2Fcom%2Fexample%2Fspringbootcommon%2Fcommon%2Fdocument%2FMysqlScrewMain2.java)
 > 支持 MySQL、MariaDB、TIDB、Oracle、SqlServer、PostgreSQL 等主流的关系数据库  
-> 参考：<https://www.jb51.net/article/212076.htm>  
-> <https://www.51cto.com/article/636823.html>
+> 参考：  
+> <https://www.jb51.net/article/212076.htm>  
+> <https://www.51cto.com/article/636823.html>  
+> [word 表格宽度](https://blog.csdn.net/laifu2008613/article/details/126698715)
 
 > 达梦数据库生成文档：  
 > [DmMain.java](src%2Fmain%2Fjava%2Fcom%2Fexample%2Fspringbootcommon%2Fcommon%2Fdocument%2FDmMain.java)
