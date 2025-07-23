@@ -62,4 +62,6 @@ public interface EasyExcelService {
 
     Object importManySheet(MultipartFile file) throws IOException;
 
+    Object importToJSON(MultipartFile file) throws Exception;
+
 }

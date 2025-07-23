@@ -301,4 +301,10 @@ public class EasyExcelServiceImpl implements EasyExcelService {
         return true;
     }
 
+    @Override
+    public Object importToJSON(MultipartFile file) throws Exception {
+        Object o = EasyExcel.read(file.getInputStream()).headRowNumber(1).doReadAllSync();
+        return o;
+    }
+
 }

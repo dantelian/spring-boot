@@ -98,4 +98,15 @@ public class EasyExcelController {
         return easyExcelService.importManySheet(file);
     }
 
+    /**
+     * easyexcel 导入excel数据
+     * @param file
+     * @return
+     * @throws Exception
+     */
+    @PostMapping("/importToJSON")
+    public Object importToJSON(@RequestPart("file") MultipartFile file) throws Exception {
+        return easyExcelService.importToJSON(file);
+    }
+
 }
