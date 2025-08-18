@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: spring-boot-security-jwt
+
+server:
+  port: 9789
+
+jwt:
+  secret: "dGhpcyBpcyBhIHNlY3JldCBrZXkgZm9yIG15IGFwcA==" # Base64编码密钥
+  expiration: 900000 # 15分钟
+

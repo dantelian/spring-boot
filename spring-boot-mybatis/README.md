@@ -10,3 +10,6 @@
 @JsonSerialize(using = ToStringSerializer.class)
 ````
 
+## Mybatis-plus 多租户插件
+
+[多租户]<https://blog.csdn.net/qq_55272229/article/details/145481171>
