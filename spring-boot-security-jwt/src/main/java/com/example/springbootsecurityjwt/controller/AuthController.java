@@ -2,7 +2,6 @@ package com.example.springbootsecurityjwt.controller;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.example.springbootsecurityjwt.config.util.JwtUtils;
-import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +25,9 @@ public class AuthController {
         if (!StringUtils.hasText(username) || !StringUtils.hasText(password)) {
             return ResponseEntity.status(HttpStatus.CREATED).body("用户名或密码为空！");
         }
+        // 执行校验
+
         String token = jwtUtils.generateToken(username);
-//        String token = authService.login(username, password); // 执行登录验证流程
         return ResponseEntity.ok(token);
     }
 
