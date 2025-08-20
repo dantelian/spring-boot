@@ -20,8 +20,8 @@
 
 > 参考：  
 > [Java多线程]<https://www.cnblogs.com/ZhangHao-Study/p/16971276.html>  
-> [Java原生异步编程与Spring异步编程]<https://www.cnblogs.com/TangQF/p/18871568>
-
+> [Java原生异步编程与Spring异步编程]<https://www.cnblogs.com/TangQF/p/18871568>  
+> [线程安全]<https://www.cnblogs.com/12lisu/p/16357205.html>
 
 
 
