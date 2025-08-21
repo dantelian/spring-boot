@@ -12,7 +12,8 @@
 登录类：[AuthController.java](src%2Fmain%2Fjava%2Fcom%2Fexample%2Fspringbootsecurityjwt%2Fcontroller%2FAuthController.java)
 
 参考：  
-[jwt] <https://zhuanlan.zhihu.com/p/1928061979760783935>
-[jwt] <https://blog.csdn.net/Y_xianlin/article/details/142167949>
+[jwt] <https://zhuanlan.zhihu.com/p/1928061979760783935>  
+[jwt] <https://blog.csdn.net/Y_xianlin/article/details/142167949>  
+[spring security5]<https://www.cnblogs.com/lzghyh/p/14744040.html>  
 
 
