@@ -135,6 +135,7 @@ public class EasyExcelServiceImpl implements EasyExcelService {
         EasyExcel.write(EasyExcelUtil.getOutputStream(fileName, response))
                 .withTemplate(templatePath)
                 .sheet(sheetName)
+                .relativeHeadRowIndex(0) // 设置表格头从第几行开始，从0开始计数
                 .registerWriteHandler(new CustomRowHeightStyleStrategy(100))
                 .registerWriteHandler(EasyExcelUtil.getCellStyle())
                 .doWrite(contentData);
